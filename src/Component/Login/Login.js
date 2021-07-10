@@ -25,7 +25,7 @@ class Login extends Component {
     }
 
     handleSubmit = (event) => {
-        alert(`${this.state.firstName} ${this.state.lastName}  Registered Successfully !!!!`)
+        alert(`${this.state.firstName} ${this.state.lastName}  Login Successfully !!!!`)
         console.log(this.state);
         this.setState({
             username: "",
