@@ -77,14 +77,14 @@ function Detailbox(props) {
 
                 
                 <Grid item xs={12} sm={4} md={4} lg={4} xl={4} >
-                <CardsHeader icono={<PersonOutlineIcon className={classes.iconos}/>} titulo="78" texto="Total Customers" color="#096470" font="white"/>
+                <CardsHeader icono={<PersonOutlineIcon className={classes.iconos}/>} titulo="78" texto="Total Customers" color="#41ce4c" font="white"/>
                 
                 </Grid>
                 <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                <CardsHeader icono={<PersonIcon className={classes.iconos}/>} titulo="46" texto="Total Suppliers" color="#358b96" font="white"/>
+                <CardsHeader icono={<PersonIcon className={classes.iconos}/>} titulo="46" texto="Total Suppliers" color="#ca5959" font="white"/>
                 </Grid>
                 <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                <CardsHeader icono={<LocalShippingIcon className={classes.iconos}/>} titulo="27" texto="Total Delivery Persons" color="#569aa3" font="white"/>
+                <CardsHeader icono={<LocalShippingIcon className={classes.iconos}/>} titulo="27" texto="Total Delivery Persons" color="#6d4fb4" font="white"/>
                 </Grid>
 
                 
@@ -93,11 +93,11 @@ function Detailbox(props) {
                     </Grid>
 
                     <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                    <Cards icono={<ShoppingCartIcon className={classes.iconos}/>} titulo="Total Orders" texto="864" color="#806ade"/>
+                    <Cards icono={<ShoppingCartIcon className={classes.iconos}/>} titulo="Total Orders" texto="864" color="#47c261"/>
                     </Grid>
 
                     <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                    <Cards icono={<ShopIcon className={classes.iconos}/>} titulo="Total Products" texto="317" color="#a492f0"/>
+                    <Cards icono={<ShopIcon className={classes.iconos}/>} titulo="Total Products" texto="317" color="#4b3c3f"/>
                     </Grid>
 
                     
