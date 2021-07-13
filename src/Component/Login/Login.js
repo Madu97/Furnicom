@@ -45,6 +45,12 @@ function Login() {
                 else if(response.data[0].userrole == 'supplier'){
                     window.location.href = "/supplier/dashboard";
                 }
+                else if(response.data[0].userrole == 'admin'){
+                    window.location.href = "/admin/dashboard";
+                }
+                else if(response.data[0].userrole == 'deliveryman'){
+                    window.location.href = "/delivery/dashboard";
+                }
             }
                 console.log(response.data);
         })

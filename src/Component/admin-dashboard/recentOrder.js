@@ -4,8 +4,9 @@ import React from 'react';
 const RecentOrders = () => {
     return (
       
-        <div className="col-8  fc-white justify-content-center align-items-center ">Recent Orders
-<table class="table fc-white text-left ">
+        <div className="col-12 justify-content-center align-items-center border ">
+          <div className="d-flex justify-content-center"> <h3>Recent Orders</h3></div>
+<table class="table table-striped text-left ">
   <thead className="fs-30">
     <tr>
       <th scope="col">#</th>

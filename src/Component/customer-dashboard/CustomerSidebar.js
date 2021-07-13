@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import customer from '../../Assets/Images/customer.jpg';
+import customer from '../../Assets/Images/supplier.jpg';
 
 
 const CustomerSidebar = () => {

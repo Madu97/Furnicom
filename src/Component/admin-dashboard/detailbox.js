@@ -89,15 +89,15 @@ function Detailbox(props) {
 
                 
                     <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                    <Cards icono={<MonetizationOnIcon className={classes.iconos}/>} titulo="TotalSales" texto="Rs.3,640,720" color="#6758a8"/>
+                    <Cards icono={<MonetizationOnIcon className={classes.iconos}/>} titulo="TotalSales" texto="Rs.3,640,720" color="#6758a8" font="white"/>
                     </Grid>
 
                     <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                    <Cards icono={<ShoppingCartIcon className={classes.iconos}/>} titulo="Total Orders" texto="864" color="#47c261"/>
+                    <Cards icono={<ShoppingCartIcon className={classes.iconos}/>} titulo="Total Orders" texto="864" color="#47c261" font="white"/>
                     </Grid>
 
                     <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                    <Cards icono={<ShopIcon className={classes.iconos}/>} titulo="Total Products" texto="317" color="#4b3c3f"/>
+                    <Cards icono={<ShopIcon className={classes.iconos}/>} titulo="Total Products" texto="317" color="#4b3c3f" font="white"/>
                     </Grid>
 
                     

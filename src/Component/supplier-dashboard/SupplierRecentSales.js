@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 const SupplierRecentSales = () => {
     return (
-        <div className=" row p-3 table-responsive bg-order-his-color rounded m-2">
-            <table class="table fc-white text-left border ">
+        <div className=" border-w row p-3 table-responsive rounded m-2">
+            <table class="table table-striped text-left border ">
                 <thead className="fs-30">
                     <tr>
                         <th scope="col">#</th>
