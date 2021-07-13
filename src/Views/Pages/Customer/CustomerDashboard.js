@@ -20,11 +20,12 @@ const CustomerDashboard = () => {
                 </div>
             </div>
 
-            <div className="row d-flex justify-content-center">
-                <div className="col bgc-theme">
+            <div className="row">
                 <CustomerNewArrival/>
                 </div>
-                <div className="col ">
+
+            <div className="row d-flex justify-content-start border mt-2">
+                <div className="col-6 mt-3 ">
                 <CustomerReviewTab/>
                 </div>
             </div>
