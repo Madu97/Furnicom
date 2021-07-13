@@ -84,7 +84,7 @@ function Detailbox(props) {
                 <CardsHeader icono={<PersonIcon className={classes.iconos}/>} titulo="46" texto="Total Suppliers" color="#358b96" font="white"/>
                 </Grid>
                 <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-                <CardsHeader icono={<LocalShippingIcon className={classes.iconos}/>} titulo="27" texto="Total Delivery Persons" color="#58c3d1" font="white"/>
+                <CardsHeader icono={<LocalShippingIcon className={classes.iconos}/>} titulo="27" texto="Total Delivery Persons" color="#569aa3" font="white"/>
                 </Grid>
 
                 
