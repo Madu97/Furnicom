@@ -34,8 +34,8 @@ const Navbarr = () => {
             </div>
 
             <div class="col-2  p-2 d-flex justify-content-end align-items-end  ">
-            <Link to="/signup"><button class="btn btn-success btn-sm ml-2 rounded-pill font-weight-bold fs-20"> Sign Up</button></Link>
-            <Link to="/login"><button class="btn btn-info btn-sm ml-2 mr-2 rounded-pill font-weight-bold fs-20"> Log In</button></Link>
+            <Link to="/signup"><button class="btn btn-success btn-sm ml-2 rounded font-weight-bold fs-20"> Sign Up</button></Link>
+            <Link to="/login"><button class="btn btn-info btn-sm ml-2 mr-2 rounded font-weight-bold fs-20"> Log In</button></Link>
             </div>
         </div>
 

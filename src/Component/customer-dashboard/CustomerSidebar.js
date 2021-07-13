@@ -6,8 +6,8 @@ import customer from '../../Assets/Images/customer.jpg';
 const CustomerSidebar = () => {
     return (
         <div className="col-3 sidebar bg-side-bar">
-            <div className="h-25 d-flex p-3 justify-content-center mb-3 ">
-                <img src={customer} class="img-fluid rounded-circle" width="200px" height="200px"></img>
+            <div className="row  d-flex p-3 justify-content-center mb-3 ">
+                <img src={customer} class="img-fluid imgstyle rounded-circle" width="200px" height="200px"></img>
 
             </div>
 

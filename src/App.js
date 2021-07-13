@@ -10,7 +10,10 @@ import About from "./Views/Pages/General/About";
 import ContactUs from "./Views/Pages/General/ContactUs"
 import Login from "./Views/Pages/Login/Login"
 import SignUp from "./Views/Pages/SignUp/SignUp"
+import SupplierSignUp from "./Views/Pages/SignUp/SupplierSignUp"
+import SignUpAs from "./Views/Pages/SignUp/SignUpAs"
 
+import PersonList from './Component/PersonList';
 
 
 import "./Assets/CSS/main.css";
@@ -53,6 +56,12 @@ function App() {
                     </Route>
                     <Route path="/signup">
                         <SignUp />
+                    </Route>
+                    <Route path="/suppliersignup">
+                        <SupplierSignUp />
+                    </Route>
+                    <Route path="/signupas">
+                        <SignUpAs />
                     </Route>
                 </Switch>
             </div>

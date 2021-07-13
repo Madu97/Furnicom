@@ -212,3 +212,7 @@ section .imgBx img{
     background: #34ad3e;
     color: rgb(241, 42, 42);
   }
+
+  .bg-opacity {
+    opacity: 0.9;
+  }

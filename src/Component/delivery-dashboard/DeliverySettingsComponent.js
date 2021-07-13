@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import customer from '../../Assets/Images/customer.jpg';
+import delivery from '../../Assets/Images/delivery.jpg';
 
 
 const DeliverySettings = () => {
@@ -17,7 +17,7 @@ const DeliverySettings = () => {
 
                 <div className="row align-items-center  ">
                     <div className="m-2 ml-4">
-                        <img src={customer} class="rounded-circle" width="100px" height="100px"></img>
+                        <img src={delivery} class="rounded-circle" width="100px" height="100px"></img>
                     </div>
 
                     <div className="">
