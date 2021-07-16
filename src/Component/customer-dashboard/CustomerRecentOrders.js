@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 const CustomerRecentOrders = () => {
     return (
-        <div className=" pb-1 p-1 border-5 border-w">
-            <div className="d-flex  justify-content-center align-items-center border rounded table-responsive">
-                <table class="table table-striped  text-left ">
+        <div className="bg-order-his-color pb-1 p-1">
+            <div className="d-flex fc-white justify-content-center align-items-center border rounded table-responsive">
+                <table class="table fc-white text-left ">
                     <thead className="fs-30">
                         <tr>
                             <th scope="col">#</th>
@@ -54,12 +54,6 @@ const CustomerRecentOrders = () => {
                         </tr>
                     </tbody>
                 </table>
-                
-            </div>
-            <div className="mb-1 mt-2 d-flex justify-content-center">
-                <button class="btn btn-lg col-lg-4 col-md-6 m-2 col-sm-6 col-xs-4 col bg-paleorange d-flex justify-content-center align-items-center fc-white fs-30 h-10 font-weight-bold">
-                    Shop Now<i class="fa  fa-shopping-cart  ml-5 fa-3x mb-4 fc-orange side-bar-icon-size" ></i>
-                </button>
             </div>
         </div>
     );

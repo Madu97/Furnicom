@@ -21,8 +21,8 @@
     margin-top: 10px;
     border-radius: 10px;
     opacity: 0.95;
-    width: 100%;
-    /*left: 25%;*/
+    width: 50%;
+    left: 25%;
     /*right: 90%;
     justify-content: center;*/
     align-items: center;
@@ -120,8 +120,4 @@
         
       }
     
-    }
-
-    .bg-opacity {
-      opacity: 0.9;
     }
