@@ -10,23 +10,22 @@ const CustomerDashboard = () => {
         <div>
             <div className="row">
                 <div className="col">
-                    <OrderStatusComponent />
+                   <CustomerRecentOrdersComponent/>
                 </div>
             </div>
-
 
             <div className="row">
                 <div className="col">
-                    <CustomerRecentOrdersComponent />
+                <OrderStatusComponent/>
                 </div>
             </div>
-            <div className="row">
-                <CustomerNewArrival />
-            </div>
 
-            <div className="row d-flex justify-content-start border mt-2">
-                <div className="col-6 mt-3 ">
-                    <CustomerReviewTab />
+            <div className="row d-flex justify-content-center">
+                <div className="col bgc-theme">
+                <CustomerNewArrival/>
+                </div>
+                <div className="col ">
+                <CustomerReviewTab/>
                 </div>
             </div>
         </div>
