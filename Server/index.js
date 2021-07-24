@@ -26,6 +26,16 @@ app.get('/getit',cors(),(req, res) =>{
 
     })
 })
+
+app.get('/getorder',cors(),(req, res) =>{
+    const sqlInsert = "SELECT * FROM customer_order;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
 app.post('/reg',(req,res)=>{
 
     const username = req.body.username
@@ -95,22 +105,26 @@ app.post("/login",(req,res)=>{
     const password = req.body.password;
     const username = req.body.username;
 
-    //console.log(username)
+ 
 
     db.query(
         "SELECT * FROM users WHERE username = ?;",
         username,
         (err,result) => {
+            console.log(result);
+
             if(err){
                 res.send({err: err});
             }
             if(result.length > 0){
                bcrypt.compare(password,result[0].password,(error, response) =>{
+                   
                    if(response){
                     res.send(result);
                    }
                    else{
                     res.send({message:"Invalid Username or Password"});
+                    console.log(error);
                    }
                })
             }
