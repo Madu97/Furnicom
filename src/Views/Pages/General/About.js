@@ -3,7 +3,6 @@ import '../../../Assets/CSS/main.css';
 import Navbarr from '../../../Component/homepage/About/Navbar'
 import Homepagepic from '../../../Component/homepage/About/Homepagepic';
 import Content from '../../../Component/homepage/About/Content';
-import Data from '../../../Component/PersonList';
 
 export default function About() {
   return (

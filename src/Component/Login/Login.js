@@ -1,31 +1,19 @@
-import React, { Component,useState } from 'react'
+import React, { Component } from 'react'
 import '../../Assets/CSS/login.css';
 import '../../Assets/Images/furni.jpg'
-import Axios from 'axios';
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import {BrowserRouter as Router,Route,Switch,Redirect} from "react-router-dom"
-import Customer from "../../Views/Pages/Customer/CustomerDashboard";
-import { FaUserAlt } from 'react-icons/fa';
 
+class Login extends Component {
+    constructor(props) {
+        super(props)
 
-import * as yup from "yup";
+        this.state = {
+            username: "",
+            password: "",
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
-const schema = yup.object().shape({
-    username: yup.string().required("Enter the Username"),
-    password: yup.string().required("Enter the Password"),
-
-})
-
-
-function Login() {
-
-    const[LoginStatus, setLoginStatus] = useState();
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    });
-
+<<<<<<< HEAD
     const logininfo = (data) => {
         console.log(data);
         Axios.post('http://localhost:3001/login', {
@@ -55,38 +43,58 @@ function Login() {
                 }
             }
                 //console.log(response);
+=======
+    usernamehandler = (event) => {
+        this.setState({
+            username: event.target.value
         })
-        //console.log(data)
-        
     }
-    
+    passwordhandler = (event) => {
+        this.setState({
+            password: event.target.value
+        })
+    }
 
+    handleSubmit = (event) => {
+        alert(`${this.state.firstName} ${this.state.lastName}  Registered Successfully !!!!`)
+        console.log(this.state);
+        this.setState({
+            username: "",
+            password: '',
+>>>>>>> db0a97c3a19db93eadbf12b0e6259a8168e6da58
+        })
+        event.preventDefault()
+    }
+
+    render() {
         return (
-
-            <div className=" row justify-content-center ">
-                <div className="col-lg-4 fc-white border p-2 m-2 rounded fs-20">
-                    <div className="d-flex justify-content-center">
+            /*<div className="aaa" >
+                <img src="furni.jpg" /> 
+            </div>*/
+            <div className="contentBx ">
+                <div className="formBx">
                     <h2>Login</h2>
-                    </div>
-                    <form className="form-group" onSubmit={handleSubmit(logininfo)}>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="inputBx">
-                            <label>Username :</label> <input type="text" name="username" className="form-control"  placeholder="Username..." {...register('username')} /><br />
-                            {errors.username?.message && <p className=" errormessage" >{errors.username?.message}</p>}
-
+                            <label>Username :</label> <input type="text" value={this.state.username} onChange={this.usernamehandler} placeholder="Username..." /><br />
                         </div>
                         <div className="inputBx">
-                            <label>Password :</label> <input type="password" className="form-control" name="password" placeholder="Password..." {...register('password')}/><br />
-                            {errors.password?.message && <p className=" errormessage" >{errors.password?.message}</p>}
-
+                            <label>Password :</label> <input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password..." /><br />
                         </div>
-                        <h7 className="bg-danger fc-white">{LoginStatus}</h7>
-                        <div className="remember mt-3">
+                        <div className="remember">
                             <label>Remember me </label> <input type="checkbox" />
                         </div>
+<<<<<<< HEAD
                         <div className="d-flex justify-content-center">
                             <button type="submit" class="btn w-50 btn-lg btn-primary">Log In</button>
                             </div>
                         <div className="inputBx d-flex justify-content-center p-2">
+=======
+                        <div className="inputBx">
+                            <input type="submit" value="Sign in" name="" />
+                        </div>
+                        <div className="inputBx">
+>>>>>>> db0a97c3a19db93eadbf12b0e6259a8168e6da58
                             <p>Don't have an account? <a href="">Sign up</a></p>
                         </div>
                     </form>
@@ -94,7 +102,7 @@ function Login() {
                 </div>
             </div>
         )
-    
+    }
 }
 
 export default Login
