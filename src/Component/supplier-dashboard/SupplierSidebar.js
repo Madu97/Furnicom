@@ -25,6 +25,14 @@ const SupplierSidebar = () => {
                     </a>
                     </Link>
 
+                    <Link to="/supplier/products">
+                    <a className="row dboard-icon mb-5 fc-white" href="supplier_products"><i class="fa fa-suitcase m-2  fa-2x" ></i>
+                        <div className="dboard-text pb-2">
+                            Products
+                        </div>
+                    </a>
+                    </Link>
+
                     <Link to="/supplier/notification">
                         <a className="row dboard-icon mt-5 mb-5 fc-white" href="Customer_notification"><i class="fa fa-bell m-2 fa-2x" ></i>
                             <div className="dboard-text pb-2">

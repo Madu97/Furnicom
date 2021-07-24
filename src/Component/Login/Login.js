@@ -27,11 +27,12 @@ function Login() {
     });
 
     const logininfo = (data) => {
-
+        console.log(data);
         Axios.post('http://localhost:3001/login', {
             username: data.username,
             password: data.password,
         }).then((response) => {
+                console.log(response);
             if(response.data.message){
                 setLoginStatus(response.data.message)
             }
@@ -46,13 +47,14 @@ function Login() {
                     window.location.href = "/supplier/dashboard";
                 }
                 else if(response.data[0].userrole == 'admin'){
-                    window.location.href = "/admin/dashboard";
+                    //window.location.href = "/admin/dashboard";
+                    alert('j');
                 }
                 else if(response.data[0].userrole == 'deliveryman'){
                     window.location.href = "/delivery/dashboard";
                 }
             }
-                console.log(response.data);
+                //console.log(response);
         })
         //console.log(data)
         
@@ -85,7 +87,7 @@ function Login() {
                             <button type="submit" class="btn w-50 btn-lg btn-primary">Log In</button>
                             </div>
                         <div className="inputBx d-flex justify-content-center p-2">
-                            <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                            <p>Don't have an account? <a href="">Sign up</a></p>
                         </div>
                     </form>
 

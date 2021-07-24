@@ -15,7 +15,7 @@ const CustomerDashboard = () => {
             </div>
 
 
-            <div className="row">
+            <div className="row border-w">
                 <div className="col">
                     <CustomerRecentOrdersComponent />
                 </div>

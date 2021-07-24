@@ -4,7 +4,10 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 const CustomerRecentOrders = () => {
     return (
-        <div className=" pb-1 p-1 border-5 border-w">
+        <div className=" pb-1 p-1 border-5">
+            <div className="d-flex justify-content-center">
+                <h3>Recent Orders</h3>
+            </div>
             <div className="d-flex  justify-content-center align-items-center border rounded table-responsive">
                 <table class="table table-striped  text-left ">
                     <thead className="fs-30">

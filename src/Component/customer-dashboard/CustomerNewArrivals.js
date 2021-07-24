@@ -13,7 +13,7 @@ const CustomerNewArrival = () => {
             <div className="">
                 <p className="d-flex justify-content-center fs-22 font-weight-bold">{item.product_name}</p>
                 <p className="d-flex justify-content-center">{item.description}</p>
-                <p className="price d-flex justify-content-center">{item.price}<span>{item.currency}</span></p>
+                <p className="price d-flex justify-content-center"><span>{item.currency}</span>{item.price}</p>
                 <div className="font-weight-bold d-flex btn btn-sm btn-warning justify-content-center align-items-center">
                                 ADD TO CART 
                                 <div className="pl-2">
