@@ -1,8 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import axios from 'axios';
 
+export default class NotificationList extends React.Component {
+    state = {
+        notifications: []
+    }
 
-const SupplierNotificationComponent = () => {
+    componentDidMount() {
+        axios.get('http://localhost:3001/getSnotify')
+            .then(res => {
+                console.log(res);
+                this.setState({ notifications: res.data });
+            });
+    }
+
+render() {
     return (
         <div className="col-12 d-block bg-theme-pale">
             <div className="container-fluid p-1 ">
@@ -14,77 +27,30 @@ const SupplierNotificationComponent = () => {
                     <div className="m-2">
                         <h3>Recent</h3>
                     </div>
+                    {this.state.notifications.map(notification =>
+
                     <div className="row d-block m-2 justify-content-between fc-white">
                         <div className="col-lg-8 bg-order-his-color fc-white  d-flex justify-content-between align-items-center rounded">
 
                             <div className=" d-flex align-items-center ">
-                                <i class="fa fa-spinner m-2 p-2  fa-2x mr-4 bg-warning fc-white rounded-circle" ></i>The Home chair is preparing...
+                                <i class="fa fa-spinner m-2 p-2  fa-2x mr-4 bg-warning fc-white rounded-circle" ></i>{notification.Title}
                     </div>
 
                             <div className=" d-flex align-items-center  ">
                                 <div className="mr-3 fc-grey">
-                                    9.04 PM
+                                {notification.Time}
                         </div>
                                 <button className="btn btn-info"> View</button>
                             </div>
 
                         </div>
                     </div>
-                    <div className="row d-block m-2 justify-content-between fc-white">
-                        <div className="col-lg-8 bg-order-his-color  fc-white  d-flex justify-content-between align-items-center rounded">
-
-                            <div className=" d-flex align-items-center ">
-                                <i class="fa fa-truck m-2 p-2  fa-2x mr-4 bg-primary fc-white rounded-circle" ></i>The Home chair is on the way....
-                    </div>
-
-                            <div className=" d-flex align-items-center  ">
-                                <div className="mr-3 fc-grey">
-                                    9.04 PM
-                        </div>
-                                <button className="btn btn-info"> View</button>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="row d-block m-2 justify-content-between fc-white">
-                        <div className="col-lg-8 bg-order-his-color  fc-white  d-flex justify-content-between align-items-center rounded">
-
-                            <div className=" d-flex align-items-center ">
-                                <i class="fa fa-check-circle p-2 m-2  fa-2x mr-4 bg-success fc-white rounded-circle" ></i>The Home chair is Delivered.
-                    </div>
-
-                            <div className=" d-flex align-items-center  ">
-                                <div className="mr-3 fc-grey">
-                                    9.04 PM
-                        </div>
-                                <button className="btn btn-info"> View</button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div className="row d-block m-2 justify-content-between fc-white">
-                        <div className="col-lg-8 bg-order-his-color  fc-white  d-flex justify-content-between align-items-center rounded">
-
-                            <div className=" d-flex align-items-center ">
-                                <i class="fa fa-spinner m-2 p-2 fa-2x mr-4 bg-warning fc-white rounded-circle" ></i>The Home chair is preparing...
-                    </div>
-
-                            <div className=" d-flex align-items-center  ">
-                                <div className="mr-3 fc-grey">
-                                    9.04 PM
-                        </div>
-                                <button className="btn btn-info"> View</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                    )}
+              </div>
 
             </div>
 
         </div>
     );
-};
-
-export default SupplierNotificationComponent;
+                    }
+                }

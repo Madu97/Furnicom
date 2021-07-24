@@ -45,6 +45,14 @@ app.get('/getSales',cors(),(req, res) =>{
     })
 })
 
+app.get('/getSnotify',cors(),(req, res) =>{
+    const sqlInsert = "SELECT * FROM supplier_notification;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
 app.post('/reg',(req,res)=>{
 
     const username = req.body.username
