@@ -6,8 +6,8 @@ import supplier from '../../Assets/Images/supplier.jpg';
 const SupplierSidebar = () => {
     return (
         <div className="col-3 sidebar bg-side-bar">
-            <div className="h-25 d-flex p-3 justify-content-center mb-3 ">
-                <img src={supplier} class="img-fluid rounded-circle " width="200px" height="200px"></img>
+            <div className="d-flex p-3 justify-content-center mb-3 ">
+                <img src={supplier} class="img-fluid imgstyle rounded-circle " width="200px" height="200px"></img>
 
             </div>
 
@@ -21,14 +21,6 @@ const SupplierSidebar = () => {
                     <a className="row dboard-icon mb-5 fc-white" href="CustomerDashboard"><i class="fa fa-home m-2  fa-2x" ></i>
                         <div className="dboard-text pb-2">
                             Dashboard
-                        </div>
-                    </a>
-                    </Link>
-
-                    <Link to="/supplier/products">
-                    <a className="row dboard-icon mb-5 fc-white" href="supplier_products"><i class="fa fa-suitcase m-2  fa-2x" ></i>
-                        <div className="dboard-text pb-2">
-                            Products
                         </div>
                     </a>
                     </Link>

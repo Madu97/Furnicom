@@ -5,18 +5,16 @@ import Footer from "./Component/shared-components/Footer";
 import Customer from "./Views/Customer";
 import Supplier from "./Views/Supplier";
 import Delivery from "./Views/Delivery";
+import Admin from "./Views/Admin";
 import Home from "./Views/Pages/General/Home";
 import About from "./Views/Pages/General/About";
 import ContactUs from "./Views/Pages/General/ContactUs"
 import Login from "./Views/Pages/Login/Login"
 import SignUp from "./Views/Pages/SignUp/SignUp"
+import SupplierSignUp from "./Views/Pages/SignUp/SupplierSignUp"
+import SignUpAs from "./Views/Pages/SignUp/SignUpAs"
 
-<<<<<<< HEAD
 import PersonList from './Component/PersonList';
-=======
-
-
->>>>>>> db0a97c3a19db93eadbf12b0e6259a8168e6da58
 import "./Assets/CSS/main.css";
 
 
@@ -43,6 +41,9 @@ function App() {
                     <Route path="/delivery">
                         <Delivery />
                     </Route>
+                    <Route path="/admin">
+                        <Admin />
+                    </Route>
                     <Route path="/" exact>
                         <Home />
                     </Route>
@@ -58,6 +59,12 @@ function App() {
                     </Route>
                     <Route path="/signup">
                         <SignUp />
+                    </Route>
+                    <Route path="/suppliersignup">
+                        <SupplierSignUp />
+                    </Route>
+                    <Route path="/signupas">
+                        <SignUpAs />
                     </Route>
                 </Switch>
             </div>

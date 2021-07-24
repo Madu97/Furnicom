@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
+
 const Navbarr = () => {
+
     return (
 
         <div class="row  d-flex  justify-content-center align-items-center">
@@ -28,18 +30,21 @@ const Navbarr = () => {
             </div>
 
             <div class="col-4 p-2 d-flex justify-content-end align-items-end">
-                <input type="text" placeholder="Search Furniture"/>
+                <input type="text" placeholder="Search Furniture" />
                 <button class="btn btn-secondary btn-sm ml-2 "> Search</button>
             </div>
 
             <div class="col-2  p-2 d-flex justify-content-end align-items-end  ">
-            <Link to="/signup"><button class="btn btn-success btn-sm ml-2 rounded-pill font-weight-bold fs-20"> Sign Up</button></Link>
-            <Link to="/login"><button class="btn btn-info btn-sm ml-2 mr-2 rounded-pill font-weight-bold fs-20"> Log In</button></Link>
+                <Link to="/signupas"><button class="btn bg-success fc-white btn-sm ml-2 rounded font-weight-bold fs-20 popup "> Sign Up</button></Link>
+                <Link to="/login"><button class="btn bg-info fc-white btn-sm ml-2 mr-2 rounded font-weight-bold fs-20"> Log In</button></Link>
             </div>
+
+
         </div>
 
 
     );
+
 
 }
 

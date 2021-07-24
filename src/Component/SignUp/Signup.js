@@ -1,146 +1,125 @@
-import React, { Component } from 'react'
-import '../../Assets/CSS/signup.css'
-
-class Signup extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            firstName: "",
-            lastName: "",
-            address: "",
-            id: "",
-            phone: "",
-            email: "",
-            username: "",
-            password: "",
-            retypepassword: "",
-            gender: "",
+import React, { Component, useState } from 'react';
+import Axios from 'axios';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import '../../Assets/CSS/signup.css';
 
 
-        }
-        this.handleSubmit=this.handleSubmit.bind(this)
-    }
 
-    firsthandler = (event) => {
-        this.setState({
-            firstName: event.target.value
-        })
-    }
-    lasthandler = (event) => {
-        this.setState({
-            lastName: event.target.value
-        })
-    }
-    addresshandler = (event) => {
-        this.setState({
-            address: event.target.value
-        })
-    }
-    idhandler = (event) => {
-        this.setState({
-            id: event.target.value
-        })
-    }
-    phonehandler = (event) => {
-        this.setState({
-            phone: event.target.value
-        })
-    }
-    emailhandler = (event) => {
-        this.setState({
-            email: event.target.value
-        })
-    }
-    usernamehandler = (event) => {
-        this.setState({
-            username: event.target.value
-        })
-    }
-    passwordhandler = (event) => {
-        this.setState({
-            password: event.target.value
-        })
-    }
-    retypepasswordhandler = (event) => {
-        this.setState({
-            retypepassword: event.target.value
-        })
-    }
+const schema = yup.object().shape({
+    firstname: yup.string().required(),
+    lastname: yup.string().required(),
+    username: yup.string().required(),
+    email: yup.string().email().required(),
+    gender: yup.string().required(),
+    address: yup.string().required(),
+    ic: yup.string().max(10, "Must be 10 Characters.").min(10, "Must be 10 Characters."),
+    phone: yup.string().max(10, "Must be 10 Digits.").min(10, "Must be 10 Digits."),
 
-    genderhandler = (event) => {
-        this.setState({
-            gender: event.target.value
-        })
-    }
+    password: yup.string().required().min(8).max(15),
+    confirmpassword: yup.string().when('password', (password, schema) => {
+        if (password) return schema.required('Confirm Password is required');
+    })
+        .oneOf([yup.ref('password')], 'Passwords must match')
+})
 
-    handleSubmit = (event) => {
-        alert(`${this.state.firstName} ${this.state.lastName}  Registered Successfully !!!!`)
-        console.log(this.state);
-        this.setState({
-            firstName: "",
-            lastName: "",
-            address: "",
-            id: "",
-            phone: "",
-            email: "",
-            username: "",
-            password: '',
-            retypepassword: '',
-            gender: "",
+function Signup() {
+
+    const[LoginStatus, setLoginStatus] = useState();
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+    });
+
+
+    const registerform = (data) => {
+        Axios.post('http://localhost:3001/reg', {
+            username: data.username,
+            password: data.password,
+            firstname: data.firstname,
+            lastname: data.lastname,
+            address: data.address,
+            ic: data.ic,
+            phone: data.phone,
+            email: data.email,
+            gender: data.gender,
+        }).then((response) => {
+            if(response.data.message){
+                setLoginStatus(response.data.message)
+                document.getElementById("custmer-signup").reset();
+            }
         })
-     event.preventDefault()
-        
+        console.log(data)
+        //alert('Registration was successful...');
     }
 
 
 
-
-    render() {
-        return (
-            <div className="signup d-flex justify-content-center">
-                <div className="row  ">
-                    <div className="col-log-3"></div>
-                    <div className="col-log-6">
-                        <div className="ui">
-                        <form onSubmit={this.handleSubmit}>
-                            <h1>User Registration</h1>
+    return (
+        <div className=" d-flex justify-content-center">
+            <div className="row  ">
+                <div className="col-lg-12 fc-white border rounded p-5 m-2 rounded  ">
+                    <div className="ui">
+                        <form  id="custmer-signup" className="form-group" onSubmit={handleSubmit(registerform)}>
+                            <div className=" d-flex justify-content-center">
+                            <h2>Customer Registration</h2>
+                            </div>
+                            <h5 className="d-flex bg-success fc-white  justify-content-center">{LoginStatus}</h5>
                             <div className="row">
                                 <div className="col-lg-6">
-                                    <label>FirstName :</label> <input type="text" value={this.state.firstName} onChange={this.firsthandler} placeholder="FirstName..." /><br />
+                                    <label>FirstName :</label> <input type="text" className="form-control" placeholder="FirstName..." name="firstname" {...register('firstname')} /><br />
+                                    {errors.firstname?.message && <p className=" errormessage" >{errors.firstname?.message}</p>}
+
                                 </div>
                                 <div className="col-lg-6">
-                                    <label>LastName :</label> <input type="text" value={this.state.lastName} onChange={this.lasthandler} placeholder="LastName..." /><br />
+                                    <label>LastName :</label> <input type="text" className="form-control" placeholder="LastName..." name="lastname" {...register('lastname')} /><br />
+                                    {errors.lastname?.message && <p className=" errormessage" >{errors.lastname?.message}</p>}
                                 </div>
                             </div>
-                            <label>Address :</label> <input type="text" value={this.state.address} onChange={this.addresshandler} placeholder="Address..." /><br />
-                            <label>Id Number :</label> <input type="text" value={this.state.id} onChange={this.idhandler} placeholder="Id Number..." /><br />
-                            <label>Phone No :</label> <input type="text" value={this.state.phone} onChange={this.phonehandler} placeholder="Phone No..." /><br />
-                            <label>Email :</label> <input type="text" value={this.state.email} onChange={this.emailhandler} placeholder="Email..." /><br />
-                            <label>Username :</label> <input type="text" value={this.state.username} onChange={this.usernamehandler} placeholder="Username..." /><br />
+
+                            <label>Address :</label> <input type="text" className="form-control" placeholder="Address..." name="address" {...register('address')} /><br />
+                            {errors.address?.message && <p className=" errormessage" >{errors.address?.message}</p>}
+
+                            <label>Id Number :</label> <input type="text" className="form-control" placeholder="Id Number..." name="ic"  {...register('ic')} /><br />
+                            {errors.ic?.message && <p className=" errormessage" >{errors.ic?.message}</p>}
+
+                            <label>Phone No :</label> <input type="text" className="form-control" placeholder="Phone No..." name="phone" {...register('phone')} o /><br />
+                            {errors.phone?.message && <p className=" errormessage" >{errors.phone?.message}</p>}
+
+                            <label>Email :</label> <input type="text" className="form-control" name="email" placeholder="Email..." {...register('email')} /><br />
+                            {errors.email?.message && <p className=" errormessage" >{errors.email?.message}</p>}
+
+                            <label>Username :</label> <input type="text" className="form-control" name="username" placeholder="Username..." {...register('username')} /><br />
+                            {errors.username?.message && <p className=" errormessage" >{errors.username?.message}</p>}
+
                             <div className="row">
                                 <div className="col-lg-6">
-                                    <label>Password :</label> <input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password..." /><br />
+                                    <label>Password :</label> <input type="password" className="form-control" name="password" {...register('password')} placeholder="Password..." /><br />
+                                    {errors.password?.message && <p className=" errormessage" >{errors.password?.message}</p>}
                                 </div>
                                 <div className="col-lg-6">
-                                    <label>Re-type Password :</label> <input type="password" value={this.state.retypepassword} onChange={this.retypepasswordhandler} placeholder="Password..." /><br />
+                                    <label>Re-type Password :</label> <input type="password" className="form-control" name="confirmpassword" {...register('confirmpassword')} placeholder="Password..." /><br />
+                                    {errors.confirmpassword?.message && <p className=" errormessage" >{errors.confirmpassword?.message}</p>}
                                 </div>
                             </div>
-                            <label>Gender :</label><select onChange={this.genderhandler} defaultValue="Select Gender">
+                            <label>Gender :</label><select defaultValue="Select Gender" className="form-control" name="gender" id="gender" {...register('gender')} >
                                 <option defaultValue>Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select><br />
-                            <input type="submit" value="Submit" class="btn btn-primary btn-lg " />
+                            <div className="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                            </div>
                         </form>
-                        </div>
                     </div>
-                    <div className="col-lg-3"></div>
                 </div>
+                <div className="col-lg-3"></div>
             </div>
-            
-        )
-    }
+        </div>
+
+    )
+
 }
 
 export default Signup

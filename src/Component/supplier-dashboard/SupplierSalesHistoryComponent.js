@@ -13,8 +13,8 @@ const SupplierSalesHistoryComponent = () => {
             <table class="table fc-white text-left ">
                 <thead className="fs-30 text-left">
                     <tr>
-                        <th scope="col">Order No</th>
-                        <th scope="col">Item</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Order</th>
                         <th scope="col">Buyer</th>
                         <th scope="col">Status</th>
                         <th scope="col">View</th>

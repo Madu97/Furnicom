@@ -1,10 +1,7 @@
 .a{
     font-size: 150px;
-    color: #fc6c5b;
-    font-weight: 600;
-    font-style: italic;
-    text-shadow: 3px 3px 3px #3a3a3a;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:wheat;
+    font-weight: 600; 
 }
 .pic-bg{
     /* background: linear-gradient(to right,#3204fdba, #9907facc); */
@@ -16,7 +13,7 @@
 }
 .root1{
     /* background-color: #32BCA3; */
-    background: linear-gradient(to bottom, #32BCA3 0%, #32BCA3 50%, #568980 50%, #568980 50%);
+    background: linear-gradient(to bottom, #02353C 0%, #02353C 50%, #568980 50%, #568980 50%);
     color: antiquewhite;
     height: 600px;
 }
