@@ -4,7 +4,7 @@ import SupplierSalesHistory from "./Pages/Supplier/SupplierSalesHistory";
 import SupplierSettings from "./Pages/Supplier/SupplierSettings";
 
 import SupplierSidebar from "../Component/supplier-dashboard/SupplierSidebar";
-
+import SupplierProducts from "../Component/supplier-dashboard/SupplierProducts";
 import { Route, Switch } from "react-router-dom";
 
 
@@ -16,6 +16,10 @@ const Supplier = () => {
                 <Switch>
                     <Route path="/supplier/dashboard">
                         <SupplierDashboard/>
+                    </Route>
+
+                    <Route path="/supplier/products">
+                        <SupplierProducts/>
                     </Route>
 
                     <Route path="/supplier/notification">
