@@ -36,6 +36,15 @@ app.get('/getorder',cors(),(req, res) =>{
     })
 })
 
+app.get('/getSales',cors(),(req, res) =>{
+    const sqlInsert = "SELECT * FROM completed_order;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
 app.post('/reg',(req,res)=>{
 
     const username = req.body.username
