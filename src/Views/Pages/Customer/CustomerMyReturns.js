@@ -1,18 +1,18 @@
 import React from "react";
 import CustomerOrderHistoryComponent from "../../../Component/customer-dashboard/CustomerOrderHistoryComponent";
+import CustomerMyReturn from "../../../Component/customer-dashboard/CustomerMyReturn";
 
 
 
-const CustomerOrderHistory = (userData) => {
-    const data = userData.userData;
+const CustomerMyReturns = () => {
     return (
         <div>
             <div className="row">
-                   <CustomerOrderHistoryComponent userData={data}/>
+                   <CustomerMyReturn/>
 
             </div>
         </div>
     );
 };
 
-export default CustomerOrderHistory;
+export default CustomerMyReturns;
