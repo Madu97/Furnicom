@@ -3,12 +3,36 @@ const app = express();
 var cors = require('cors')
 const mysql = require("mysql");
 
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
 const bcrypt = require('bcrypt');
 const { response } = require('express');
 const saltRounds = 10
 
-app.use(cors());
 app.use(express.json());
+app.use(
+    cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+
+}
+));
+
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(session({
+    key:"userId",
+    secret: "youtube",
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        //expires: 60 * 60 *24
+    },
+}))
 
 const db = mysql.createPool({
     host:"localhost",
@@ -53,6 +77,101 @@ app.get('/getSnotify',cors(),(req, res) =>{
 
     })
 })
+
+app.get('/getproducts',(req, res) =>{
+    const sqlInsert = "SELECT * FROM products;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
+
+
+app.get('/productsdetails',(req, res) =>{
+    db.query("SELECT * FROM products WHERE id=?",[req.query.id],(err, result)=>{
+        console.log(req.query.id);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/ordersbycustomer_id',(req, res) =>{
+    db.query("SELECT * FROM orders JOIN order_items ON orders.order_id = order_items.order_id JOIN products ON order_items.product_id = products.id WHERE orders.customer_id=?;",[req.query.id],(err, result)=>{
+        //console.log(req.query.id);
+        res.send(result);
+
+    })
+
+})
+
+
+app.get('/getuser',(req, res) =>{
+    //console.log('sfd');
+    db.query("SELECT * FROM customer WHERE username=?",[req.query.name],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/getcart',(req, res) =>{
+    db.query("SELECT shoppingcart.id,shoppingcart.customer_id,shoppingcart.product_id,shoppingcart.quantity,shoppingcart.data_added,products.name,products.description,products.price,products.thumb FROM shoppingcart INNER JOIN products ON shoppingcart.product_id = products.id WHERE shoppingcart.customer_id=?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+/**/
+
+app.get('/increasequantity',(req, res) =>{
+   console.log(req.query.cid)
+   console.log(req.query.pid)
+    db.query("UPDATE shoppingcart SET quantity = quantity +1 WHERE customer_id = ? AND product_id = ?;",[req.query.cid , req.query.pid],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/decreasequantity',(req, res) =>{
+    console.log(req.query.cid)
+    console.log(req.query.pid)
+     db.query("UPDATE shoppingcart SET quantity = quantity -1 WHERE customer_id = ? AND product_id = ?;",[req.query.cid , req.query.pid],(err, result)=>{
+         console.log(result);
+         res.send(result);
+ 
+     })
+ 
+ })
+
+ app.get('/removeitem',(req, res) =>{
+    console.log(req.query.cid)
+    console.log(req.query.pid)
+     db.query("DELETE FROM shoppingcart WHERE customer_id = ? AND product_id =?;",[req.query.cid , req.query.pid],(err, result)=>{
+         console.log(result);
+         res.send(result);
+ 
+     })
+ 
+ })
+
+ app.get('/addtocart',(req, res) =>{
+    //console.log(req.query.cid)
+    //console.log(req.query.pid)
+     db.query("INSERT INTO `shoppingcart`(`customer_id`, `product_id`, `quantity`, `data_added`) VALUES (?,?,1,NOW());",[req.query.cid , req.query.pid],(err, result)=>{
+         console.log(result);
+         res.send(result);
+ 
+     })
+ 
+ })
 app.post('/reg',(req,res)=>{
 
     const username = req.body.username
@@ -117,6 +236,14 @@ app.post('/supreg',(req,res)=>{
 
 })
 
+app.get("/login",(req,res)=>{
+    if (req.session.user){
+        res.send({loggedIn: true, user: req.session.user})
+    }else{
+        res.send({loggedIn: false});
+    }
+})
+
 app.post("/login",(req,res)=>{
 
     const password = req.body.password;
@@ -137,21 +264,35 @@ app.post("/login",(req,res)=>{
                bcrypt.compare(password,result[0].password,(error, response) =>{
                    
                    if(response){
+                    req.session.user = result;
+                    //console.log(req.session.user);
                     res.send(result);
+                    return;
                    }
                    else{
                     res.send({message:"Invalid Username or Password"});
                     console.log(error);
+                    return;
                    }
                })
             }
             else{
                 res.send({message:"Invalid Username or Password"});
+                return;
             }
         }
     );
 });
 
+app.post("/logout",(req,res)=>{
+    req.session.destroy((err) =>{
+         if(err) throw err;
+         res.send({info:'success'});
+         return
+     })
+ 
+ 
+ })
 
 
 app.listen(3001,() =>{

@@ -1,4 +1,4 @@
-import React, { Component,useState } from 'react'
+import React, { Component,useState, useEffect } from 'react'
 import '../../Assets/CSS/login.css';
 import '../../Assets/Images/furni.jpg'
 import Axios from 'axios';
@@ -17,6 +17,7 @@ const schema = yup.object().shape({
 
 })
 
+Axios.defaults.withCredentials = true
 
 function Login() {
 
@@ -47,8 +48,7 @@ function Login() {
                     window.location.href = "/supplier/dashboard";
                 }
                 else if(response.data[0].userrole == 'admin'){
-                    //window.location.href = "/admin/dashboard";
-                    alert('j');
+                    window.location.href = "/admin/dashboard";
                 }
                 else if(response.data[0].userrole == 'deliveryman'){
                     window.location.href = "/delivery/dashboard";
@@ -56,9 +56,15 @@ function Login() {
             }
                 //console.log(response);
         })
-        //console.log(data)
+        console.log(data)
         
     }
+
+    useEffect(() =>{
+        Axios.get("http://localhost:3001/login").then((response)=>{
+            console.log(response);
+        })
+    },[])
     
 
         return (

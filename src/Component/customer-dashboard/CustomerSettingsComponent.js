@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import customer from '../../Assets/Images/customer.jpg';
 
 
-const CustomerSettings = () => {
+const CustomerSettings = (userData) => {
+    //console.log(userData.userData)
     return (
-        <div className="col-12 pb-3 d-block bg-theme-pale">
+        <div className="col-12 pb-3 d-block border">
             <div className="row m-2 p-2 ">
                 <h3>Account</h3>
             </div>
-
             <div className="d-block">
                 <div className="ml-5 font-weight-bold">
                     <p>Peter</p>
@@ -31,12 +31,12 @@ const CustomerSettings = () => {
             <div className="row m-2">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">First Name</label>
-                    <input type="text" className="form-control" placeholder="First Name" />
+                    <input type="text" className="form-control" placeholder={userData.userData.firstname} />
                 </div>
 
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12">
                     <label htmlFor="">Last Name</label>
-                    <input type="text" className="form-control" placeholder="Last Name" />
+                    <input type="text" className="form-control" placeholder={userData.userData.lastname} />
                 </div>
 
             </div>
@@ -44,12 +44,12 @@ const CustomerSettings = () => {
             <div className="row m-2 mt-4">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">Email</label>
-                    <input type="text" className="form-control" placeholder="Email" />
+                    <input type="text" className="form-control" placeholder={userData.userData.email} />
                 </div>
 
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12">
                     <label htmlFor="">Phone Number</label>
-                    <input type="text" className="form-control" placeholder="Phone Number" />
+                    <input type="text" className="form-control" placeholder={userData.userData.phone_no} />
                 </div>
 
             </div>
@@ -57,7 +57,7 @@ const CustomerSettings = () => {
             <div className="row m-2 mt-4">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">Password</label>
-                    <input type="password" className="form-control" placeholder="Password" />
+                    <input type="password" className="form-control" placeholder="*********" />
                 </div>
 
             </div>
@@ -65,7 +65,7 @@ const CustomerSettings = () => {
             <div className="row m-2 mt-4">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">Address</label>
-                    <textarea name="Address" id="" cols="30" rows="5" className="form-control"> Address</textarea>
+    <textarea name="Address" id="" cols="30" rows="5" className="form-control">{userData.userData.address}</textarea>
                 </div>
 
             </div>

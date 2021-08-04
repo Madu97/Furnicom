@@ -1,18 +1,19 @@
 import React from "react";
 import CustomerOrderHistoryComponent from "../../../Component/customer-dashboard/CustomerOrderHistoryComponent";
+import CustomerMyReview from "../../../Component/customer-dashboard/CustomerMyReview";
 
 
 
-const CustomerOrderHistory = (userData) => {
+const CustomerMyReviews = (userData) => {
     const data = userData.userData;
     return (
         <div>
             <div className="row">
-                   <CustomerOrderHistoryComponent userData={data}/>
+                   <CustomerMyReview userData={data}/>
 
             </div>
         </div>
     );
 };
 
-export default CustomerOrderHistory;
+export default CustomerMyReviews;

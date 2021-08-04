@@ -33,6 +33,11 @@ header {
     font-size: 60px;
 }
 
+.fs-35{
+    font-size: 35px;
+
+}
+
 .fs-30{
     font-size: 30px;
 }
@@ -96,6 +101,9 @@ header {
 
 .fc-white{
     color: white;
+}
+.fc-blue{
+    color: darkblue;
 }
 
 .border-hmpg{
@@ -168,7 +176,7 @@ header {
 }
 
 .bg-palegreen{
-    background-color: #6BA462;
+    background-color: #50C878;
 }
 
 .bg-theme-light{
@@ -271,9 +279,40 @@ header {
     
 }
 
+.imgstyle2 {
+    width: 600px; 
+    height: 500px;
+    
+}
+
 .border-w{
     border-width: 2px;
     border-style: solid ;
     border-radius: 3px;
 }
 
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    padding: 5px 8px;
+    border-radius: 35px;
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+}
+
+
+
+.bbutton {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .bon {
+    color:gold;
+  }
+  .boff {
+    color:gray;
+  }

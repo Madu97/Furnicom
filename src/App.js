@@ -5,6 +5,7 @@ import Footer from "./Component/shared-components/Footer";
 import Customer from "./Views/Customer";
 import Supplier from "./Views/Supplier";
 import Delivery from "./Views/Delivery";
+import Product from "./Views/Product";
 import Admin from "./Views/Admin";
 import Home from "./Views/Pages/General/Home";
 import About from "./Views/Pages/General/About";
@@ -40,6 +41,9 @@ function App() {
                     </Route>
                     <Route path="/delivery">
                         <Delivery />
+                    </Route>
+                    <Route path="/product">
+                        <Product />
                     </Route>
                     <Route path="/admin">
                         <Admin />
