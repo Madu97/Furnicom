@@ -78,9 +78,8 @@ app.get('/getorder',cors(),(req, res) =>{
     })
 })
 
-app.get('/getSales',cors(),(req, res) =>{
-    const sqlInsert = "SELECT * FROM completed_order;"
-    db.query(sqlInsert,(err, result)=>{
+app.get('/suppliersales',(req, res) =>{
+    db.query("SELECT * FROM order_items JOIN products ON order_items.product_id = products.id WHERE order_items.supplier_id=?;",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 

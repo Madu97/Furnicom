@@ -62,7 +62,7 @@ const Supplier = () => {
                     </Route>
 
                     <Route path="/supplier/saleshistory">
-                        <SupplierSalesHistory/>
+                        <SupplierSalesHistory userData={response1.data[0]}/>
                     </Route>
                     
                     <Route path="/supplier/settings">

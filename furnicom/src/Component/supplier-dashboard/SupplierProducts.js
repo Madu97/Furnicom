@@ -40,7 +40,7 @@ const SupplierProducts = (userData) => {
                     <img src={person.thumb} class="imgstyle img-thumbnail"></img>
                     <div className="m-2">
                         <div class="fc-darkblue font-weight-bold">{person.name}</div>
-                        <div class="fc-theme ">{person.price}</div>
+                        <div class="fc-theme ">Rs.{person.price}</div>
                         <button className="btn btn-info"><i class="fa fa-edit fc-white mr-1" ></i>Edit</button>
                         <button className="btn btn-success mx-1">More Details</button>
                     </div>

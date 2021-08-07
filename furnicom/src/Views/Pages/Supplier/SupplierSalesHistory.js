@@ -1,13 +1,13 @@
 import React from "react";
 import SupplierSalesHistoryComponent from "../../../Component/supplier-dashboard/SupplierSalesHistoryComponent";
-import Data from "../../../Component/supplier-dashboard/SupplierSalesHistoryComponent";
 
 
-const SupplierSalesHistory = () => {
+const SupplierSalesHistory = (userData) => {
+        const data = userData.userData;
     return (
         <div>
             <div className="row">
-                   <SupplierSalesHistoryComponent/>
+                   <SupplierSalesHistoryComponent userData={data}/>
 
             </div>
         </div>
