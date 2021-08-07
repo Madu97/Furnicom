@@ -1,13 +1,14 @@
 import React from "react";
 import SupplierNotificationComponent from "../../../Component/supplier-dashboard/SupplierNotificationComponent";
-import Data from "../../../Component/supplier-dashboard/SupplierNotificationComponent";
 
 
-const SupplierNotification = () => {
+
+const SupplierNotification = (userData) => {
+    const data = userData.userData;
     return (
         <div>
             <div className="row bg-danger">
-                <SupplierNotificationComponent/>
+                <SupplierNotificationComponent userData={data}/>
             </div>
 
 

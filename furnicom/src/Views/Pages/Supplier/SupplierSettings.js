@@ -3,11 +3,12 @@ import SupplierSettingsComponent from "../../../Component/supplier-dashboard/Sup
 
 
 
-const SupplierSettings = () => {
+const SupplierSettings = (userData) => {
+    const data = userData.userData;
     return (
         <div>
             <div className="row">
-                   <SupplierSettingsComponent/>
+                   <SupplierSettingsComponent userData={data}/>
             </div>
         </div>
     );

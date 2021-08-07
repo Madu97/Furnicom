@@ -51,6 +51,24 @@ app.get('/getit',cors(),(req, res) =>{
     })
 })
 
+app.get('/getsupplier',(req, res) =>{
+    db.query("SELECT * FROM supplier WHERE username=?",[req.query.name],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/supplierproduct',(req, res) =>{
+    db.query("SELECT * FROM products WHERE supplier_id=?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
 app.get('/getorder',cors(),(req, res) =>{
     const sqlInsert = "SELECT * FROM customer_order;"
     db.query(sqlInsert,(err, result)=>{
@@ -69,9 +87,8 @@ app.get('/getSales',cors(),(req, res) =>{
     })
 })
 
-app.get('/getSnotify',cors(),(req, res) =>{
-    const sqlInsert = "SELECT * FROM supplier_notification;"
-    db.query(sqlInsert,(err, result)=>{
+app.get('/getSnotify',(req, res) =>{
+    db.query("SELECT * FROM supplier_notification WHERE Supplier_id=?",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
