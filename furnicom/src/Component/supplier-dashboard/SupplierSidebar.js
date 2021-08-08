@@ -69,13 +69,13 @@ const SupplierSidebar = (userData) => {
                     </a>
                     </Link>
 
-                    <Link to="/supplier/notification">
+                    {/* <Link to="/supplier/notification">
                         <a className="row dboard-icon mt-5 mb-5 fc-white" href="Customer_notification"><i class="fa fa-bell m-2 fa-2x" ></i>
                             <div className="dboard-text pb-2">
                                 Notifications
                             </div>
                         </a>
-                    </Link>
+                    </Link> */}
 
                     <Link to="/supplier/saleshistory">
                     <a className="row dboard-icon mt-5 mb-5 fc-white" href="Customer_order_history"><i class="fa fa-history m-2 fa-2x" ></i>
