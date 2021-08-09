@@ -47,7 +47,8 @@ const SupplierSales = (userData) => {
                             <th scope="col">Order No</th>
                             <th scope="col">Item</th>
                             <th scope="col">Item Name</th>
-                            <th scope="col">View</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
                         </tr>
                     </thead>
 
@@ -61,10 +62,12 @@ const SupplierSales = (userData) => {
                                     </div>
                                 </td>
                                 <td className=" align-middle">{person.name}</td>
-                                <td className=" align-middle"> <button onClick={() => toggle(person.id)} className="btn btn-warning fc-white font-weight-bold">More Details</button></td>
+                                <td className=" align-middle">Rs.{person.price}</td>
+                                <td className=" align-middle">{person.quantity}</td>
+                                                            
                             </tr>
 
-                            <tr className="bg-theme-pale" >
+                            {/* <tr className="bg-theme-pale" >
                                 {((idd == person.id) && isOpened) && (
 
                                     <td colSpan="4" className="text-left  " >
@@ -100,7 +103,7 @@ const SupplierSales = (userData) => {
 
 
                                 )}
-                            </tr>
+                            </tr> */}
                         </tbody>
                     )}
                 </table>
