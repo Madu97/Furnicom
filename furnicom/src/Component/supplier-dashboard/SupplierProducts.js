@@ -1,6 +1,14 @@
 import React, { Component, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Link, useParams} from "react-router-dom";
 import axios from 'axios';
+import { FaUserTie } from 'react-icons/fa';
+import { AiOutlineTag } from 'react-icons/ai';
+import { AiOutlineFieldNumber } from 'react-icons/ai';
+import { MdDescription } from 'react-icons/md';
+import { RiShoppingBag3Fill } from 'react-icons/ri';
+import { GiCash } from 'react-icons/gi';
+
+
 
     
 const SupplierProducts = (userData) => {
@@ -22,31 +30,68 @@ const SupplierProducts = (userData) => {
         fetchData();
     }, [userid]);
 
+    const [isOpened, setIsOpened] = useState(false);
+    const [idd, setIdd] = useState();
+
+    function toggle(id) {
+        setIsOpened(wasOpened => !wasOpened);
+        //kk = id;
+        setIdd(id);
+
+    }
+
     return (
-        <div className="bg-theme-pale d-block  justify-content-center pb-3 p-3">
-            
-            <div className="row justify-content-center fc-white">
-            {Productdata.map((person) =>
-                <div className="col-md-4 col-sm-7 d-block text-center">
-                    <img src={person.thumb} class="imgstyle img-thumbnail"></img>
-                    <div className="m-2">
-                        <div class="fc-darkblue font-weight-bold">{person.name}</div>
-                        <div class="fc-theme ">Rs.{person.price}</div>
-                        <button className="btn btn-success mx-1">More Details</button>
-                    </div>
-                </div> 
-                 )}
-            </div> 
-            
 
-            <div className=" m-2 d-flex justify-content-center">
-                <button className="btn btn-danger mx-1">Show all</button>
-            </div>
+        <div className="col-12  d-block pl-1 pr-1 ">
+                <table className="table table-striped text-center">
+                    
+                    {Productdata.map((person) =>
+                    <tbody>
+                        <tr>
+                            <td className=" align-middle"> <img src={person.thumb} width="100px" height="100px" className="m-2 rounded"></img></td>
+                            <td >{person.name}</td>
+                            <td><button onClick={() => toggle(person.id)} className="btn btn-success mx-1">More Details</button></td>
+                        </tr>
 
-            
-        </div>
+                        <tr className="bg-theme-pale" >
+                                {((idd == person.id) && isOpened) && (
 
-        
+                                    <td colSpan="4" className="text-left  " >
+                                        <div className="d-flex fs-12 ">
+                                            <img src={person.thumb} width="300px" height="300px" className="m-2 rounded d-flex"></img>
+                                            <div className="align-items-center m-2 bg-light border rounded p-5 fc-blue">
+                                                <div className="fs-16">
+                                                    <div className="d-flex align-items-center">
+                                                        <p className="d-flex font-weight-bold"><AiOutlineFieldNumber size={25} /><span>&nbsp;</span>Product ID :<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                        <p>{person.id}</p>
+                                                    </div>
+                                                    <div className="d-flex align-items-center">
+                                                        <p className="d-flex font-weight-bold"><AiOutlineTag size={25} /><span>&nbsp;</span>Product Name :<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                        <p>{person.name}</p>
+                                                    </div>
+                                                    <div className="d-flex align-items-center">
+                                                        <p className="d-flex font-weight-bold"><MdDescription size={25} /><span>&nbsp;</span>Description :<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                        <p>{person.description}</p>
+                                                    </div>
+                                                    <div className="d-flex align-items-center">
+                                                        <p className="d-flex font-weight-bold"><GiCash size={25} /><span>&nbsp;</span>Price :<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                        <p>Rs.{person.price}</p>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                )}
+                            </tr>
+                            
+                      </tbody>
+                    )}
+                </table>
+
+                </div>
     );
     
 };
