@@ -86,7 +86,7 @@ app.get('/customizedorder',(req, res) =>{
 })
 
 app.get('/changeorderstatus',(req, res) =>{
-    console.log(req.query.sid)
+    // console.log(req.query.sid)
      db.query("UPDATE customized_order SET status = ? WHERE supplier_id = ?;",[req.query.status , req.query.sid],(err, result)=>{
          console.log(result);
          res.send(result);

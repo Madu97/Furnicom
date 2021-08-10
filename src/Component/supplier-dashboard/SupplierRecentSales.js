@@ -14,6 +14,7 @@ import { GiCash } from 'react-icons/gi';
 const SupplierRecentSales = (userData) => {
     const userid = userData.userData.id
     const [Salesdata, setSalesdata] = useState([])
+    const [status, setStatus] = useState([]);
 
 
     useEffect(() => {
@@ -113,7 +114,7 @@ const SupplierRecentSales = (userData) => {
                                                 </div>
                                                 <div class="container my-3 bg-light">
                                                     <div class="col-md-12 text-center">
-                                                        <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(person.supplier_id)}>Save</button>
+                                                        <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status,person.supplier_id)}>Save</button>
                                                     </div>
                                                 </div>
 
