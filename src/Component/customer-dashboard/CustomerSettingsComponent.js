@@ -31,12 +31,12 @@ const CustomerSettings = (userData) => {
             <div className="row m-2">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">First Name</label>
-                    <input type="text" className="form-control" placeholder={userData.userData.firstname} />
+                    <input type="text" className="form-control" value={userData.userData.firstname} />
                 </div>
 
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12">
                     <label htmlFor="">Last Name</label>
-                    <input type="text" className="form-control" placeholder={userData.userData.lastname} />
+                    <input type="text" className="form-control" value={userData.userData.lastname} />
                 </div>
 
             </div>
@@ -44,12 +44,12 @@ const CustomerSettings = (userData) => {
             <div className="row m-2 mt-4">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">Email</label>
-                    <input type="text" className="form-control" placeholder={userData.userData.email} />
+                    <input type="text" className="form-control" value="" value={userData.userData.email} />
                 </div>
 
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12">
                     <label htmlFor="">Phone Number</label>
-                    <input type="text" className="form-control" placeholder={userData.userData.phone_no} />
+                    <input type="text" className="form-control" value={userData.userData.phone_no} />
                 </div>
 
             </div>
@@ -57,7 +57,7 @@ const CustomerSettings = (userData) => {
             <div className="row m-2 mt-4">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">Password</label>
-                    <input type="password" className="form-control" placeholder="*********" />
+                    <input type="password" className="form-control" value="*********" />
                 </div>
 
             </div>
