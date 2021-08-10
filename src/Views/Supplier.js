@@ -50,7 +50,7 @@ const Supplier = () => {
             <div className="col-9 p-5">
                 <Switch>
                     <Route path="/supplier/dashboard">
-                        <SupplierDashboard/>
+                        <SupplierDashboard userData={response1.data[0]}/>
                     </Route>
 
                     <Route path="/supplier/products">

@@ -51,32 +51,56 @@ app.get('/getit',cors(),(req, res) =>{
     })
 })
 
-app.get('/getorder',cors(),(req, res) =>{
-    const sqlInsert = "SELECT * FROM customer_order;"
-    db.query(sqlInsert,(err, result)=>{
+app.get('/getsupplier',(req, res) =>{
+    db.query("SELECT * FROM supplier WHERE username=?",[req.query.name],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/supplierproduct',(req, res) =>{
+    db.query("SELECT * FROM products WHERE supplier_id=?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/suppliersales',(req, res) =>{
+    db.query("SELECT * FROM order_items JOIN products ON order_items.product_id = products.id WHERE order_items.supplier_id=?;",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
     })
 })
 
-app.get('/getSales',cors(),(req, res) =>{
-    const sqlInsert = "SELECT * FROM completed_order;"
-    db.query(sqlInsert,(err, result)=>{
+app.get('/customizedorder',(req, res) =>{
+    db.query("SELECT * FROM customized_order JOIN customer ON customized_order.customer_id = customer.id WHERE customized_order.supplier_id=?;",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
     })
 })
 
-app.get('/getSnotify',cors(),(req, res) =>{
-    const sqlInsert = "SELECT * FROM supplier_notification;"
-    db.query(sqlInsert,(err, result)=>{
-        console.log(result);
-        res.send(result);
+app.get('/changeorderstatus',(req, res) =>{
+    console.log(req.query.sid)
+     db.query("UPDATE customized_order SET status = (SELECT status from customized_order ) WHERE supplier_id = ?;",[req.query.cid , req.query.pid],(err, result)=>{
+         console.log(result);
+         res.send(result);
+ 
+     })
+ 
+ })
+// app.get('/getSnotify',(req, res) =>{
+//     db.query("SELECT * FROM supplier_notification WHERE Supplier_id=?",[req.query.id],(err, result)=>{
+//         console.log(result);
+//         res.send(result);
 
-    })
-})
+//     })
+// })
 
 app.get('/getproducts',(req, res) =>{
     const sqlInsert = "SELECT * FROM products;"

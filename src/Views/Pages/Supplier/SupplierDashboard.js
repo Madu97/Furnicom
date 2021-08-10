@@ -9,7 +9,8 @@ import Data from "../../../Component/supplier-dashboard/SupplierRecentSales";
 
 
 
-const SupplierDashboard = () => {
+const SupplierDashboard = (userData) => {
+    const data = userData.userData;
     return (
         <div>
             <div className="row">
@@ -17,7 +18,7 @@ const SupplierDashboard = () => {
             </div>
             <br></br>
             <div className="row">
-                <SupplierRecentSales/>
+                <SupplierRecentSales userData={data}/>
             </div>
 
             {/* <div className="row">
