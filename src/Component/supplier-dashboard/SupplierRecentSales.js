@@ -39,11 +39,12 @@ const SupplierRecentSales = (userData) => {
 
     }
 
-    function UpdateStatus(supplier_id) {
+    function UpdateStatus(status,supplier_id) {
 
         axios.get('http://localhost:3001/changeorderstatus', {
             params: {
                 sid: supplier_id,
+                status : status,
             }
         }).then((response) => {
             window.location.reload();
