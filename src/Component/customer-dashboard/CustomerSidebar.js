@@ -6,6 +6,7 @@ import { AiOutlineHome } from 'react-icons/ai';
 import {TiDeleteOutline} from 'react-icons/ti';
 import {AiOutlineSetting} from 'react-icons/ai'
 import {AiOutlineLogout} from 'react-icons/ai'
+import { TiShoppingCart } from 'react-icons/ti';
 import customer from '../../Assets/Images/supplier.jpg';
 import Axios from 'axios';
 import { useParams } from "react-router-dom";
@@ -59,48 +60,48 @@ const CustomerSidebar = (userData) => {
             <div className="mt-2">
 
                     <Link to="/customer/dashboard">
-                    <a className="row dboard-icon mb-5 fc-white" href="CustomerDashboard"><div className="m-2"><AiOutlineHome size={35}/></div>
-                        <div className="dboard-text pb-2">
+                    <a className="row dboard-icon mb-5 fc-white align-items-center" href="CustomerDashboard"><div className="m-2"><AiOutlineHome size={32}/></div>
+                        <div className="dboard-text ">
                             Dashboard
                         </div>
                     </a>
                     </Link>
 
                     <Link to="/customer/cart">
-                    <a className="row dboard-icon mb-5 fc-white" href="CustomerDashboard"><div className="m-2"><AiOutlineHome size={35}/></div>
-                        <div className="dboard-text pb-2">
+                    <a className="row dboard-icon mb-5 fc-white align-items-center" href="CustomerDashboard"><div className="m-2"><TiShoppingCart size={35}/></div>
+                        <div className="dboard-text ">
                             My Cart
                         </div>
                     </a>
                     </Link>
 
                     <Link to="/customer/orderhistory">
-                        <a className="row dboard-icon mt-5 mb-5 fc-white" href=""><div className="m-2"><AiOutlineInbox size={35}/></div>
-                            <div className="dboard-text pb-2">
+                        <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><AiOutlineInbox size={32}/></div>
+                            <div className="dboard-text ">
                                 My Orders
                             </div>
                         </a>
                     </Link>
 
                     <Link to="/customer/myreviews">
-                    <a className="row dboard-icon mt-5 mb-5 fc-white" href=""><div className="m-2"><AiOutlineStar size={35}/></div>
-                        <div className=" dboard-text pb-2">
-                            My Reviews
+                    <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><AiOutlineStar size={32}/></div>
+                        <div className=" dboard-text ">
+                            My Ratings
                     </div>
                     </a>
                     </Link>
 
                     <Link to="/customer/myreturns">
-                    <a className="row dboard-icon mt-5 mb-5 fc-white" href=""><div className="m-2"><TiDeleteOutline size={38}/></div>
-                        <div className=" dboard-text pb-2">
+                    <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><TiDeleteOutline size={35}/></div>
+                        <div className=" dboard-text ">
                             My Returns
                     </div>
                     </a>
                     </Link>
 
                     <Link to="/customer/settings">
-                    <a className="row dboard-icon  mt-5 mb-5 fc-white" href=""><div className="m-2 "><AiOutlineSetting size={34}/></div>
-                        <div className="dboard-text pb-2">
+                    <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2 pl-1 "><AiOutlineSetting size={30}/></div>
+                        <div className="dboard-text ">
                             Settings
                     </div>
                     </a>

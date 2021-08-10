@@ -186,6 +186,17 @@ app.get('/decreasequantity',(req, res) =>{
  
  })
 
+  app.get('/updaterating',(req, res) =>{
+    //console.log(req.query.cid)
+    //console.log(req.query.pid)
+     db.query("UPDATE order_items SET rating=? WHERE product_id = ? AND order_id=? AND item_number=?;",[req.query.rating , req.query.pid, req.query.oid, req.query.item_no],(err, result)=>{
+         console.log(result);
+         res.send(result);
+ 
+     })
+ 
+ })
+
  app.get('/addtocart',(req, res) =>{
     //console.log(req.query.cid)
     //console.log(req.query.pid)
