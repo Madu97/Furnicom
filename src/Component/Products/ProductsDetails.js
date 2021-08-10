@@ -1,7 +1,9 @@
 import React, { Component, useState, useEffect } from 'react'
 import axios from 'axios';
 import { TiShoppingCart } from 'react-icons/ti';
+import {BiCube} from 'react-icons/bi'
 import { CartProvider, useCart } from "react-use-cart"
+import Dviewer from '../Products/3Dviewer'
 
 import { BrowserRouter as Router, Route, Switch, Link, useParams } from "react-router-dom";
 
@@ -16,6 +18,12 @@ function ProductDetails() {
     const [Customerid, setCustomerid] = useState();
 
     const [msg, setmsg] = useState();
+
+    const [isOpened, setIsOpened] = useState(false);
+
+    function toggle() {
+        setIsOpened(wasOpened => !wasOpened);
+    }
 
 
     useEffect(() => {
@@ -84,8 +92,11 @@ function ProductDetails() {
         <div className="row d-flex justify-content-center align-items-center ">
             <div className="col-lg-8 col-md-7 m-3 justify-content-center border rounded d-flex">
 
-                <div className="d-flex pt-3 pb-3 justify-content-center">
+                <div className="d-block pt-3 pb-3 justify-content-center">
                     <img src={Dt.thumb} className="imgstyle2 img-fluid border p-2" />
+                    <div className="row m-1 p-1 d-flex justify-content-center">
+                        <button onClick={() => toggle()} className="row btn btn-sm m-0 btn-primary align-items-center font-weight-bold "><BiCube size={30}/><span>&nbsp;</span>3D VIEW</button>
+                    </div>
                 </div>
 
                 <div className="col-lg-5 col-md-5 ml-5 fs-20 d-flex align-items-center  ">
@@ -98,13 +109,22 @@ function ProductDetails() {
                             <p className="d-flex justify-content-start">{Dt.description}</p>
                             <p className="price d-flex justify-content-start"><span>Rs.</span>{Dt.price}</p>
                         </div>
-                        <div className="row d-flex justify-content-start align-items-center p-1">
+                        <div className="row d-flex justify-content-start align-items-center">
                             <button className="btn btn-lg btn-warning font-weight-bold d-flex" onClick={() => doit()}> ADD TO CART <TiShoppingCart size={30} /></button>
                             <Link to=""><button className="btn btn-lg btn-info m-2 font-weight-bold d-flex"> BUY IT NOW <TiShoppingCart size={30} /></button></Link>
                         </div>
                     </div>
                 </div>
             </div>
+            {isOpened && (
+                <div className="border">
+                    <div className="d-flex justify-content-center align-items-center fs-30 bgc-theme fc-white font-weight-bold">
+                    View in 3D
+                    </div>
+                    <Dviewer/>
+                </div>
+
+            )}
         </div>
     )
 

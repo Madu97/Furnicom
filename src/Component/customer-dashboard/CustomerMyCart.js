@@ -8,6 +8,8 @@ const CustomerMyCart = (userData) => {
     const [Cartdata, setCartdata] = useState([])
     const [Productdata, setProductdata] = useState([])
 
+    const[ch , setch] = useState(0);
+
     const userid = userData.userData.id
 
     useEffect(() => {
@@ -44,7 +46,9 @@ const CustomerMyCart = (userData) => {
             }
         }).then((response) => {
             window.location.reload();
+            
         })
+        
     }
 
     function removeItem(customer_id, product_id) {
@@ -73,27 +77,27 @@ const CustomerMyCart = (userData) => {
                 <p>< TiShoppingCart size={55}/>Cart:({cart})  Total Items:({totalitems})</p>
                     
             </div>
+            <table className="table table-light table-hover m-0">
             {Cartdata.map((person, index) =>
-                <div className="border">
-                    <table className="table table-light table-hover m-0">
+                    
                         <tbody>
                             <tr >
-                                <td>
+                                <td >
                                     <img src={person.thumb} style={{ height: '6rem', width: '8rem' }} />
                                 </td>
-                                <td className=" align-middle">{person.name}</td>
-                                <td className=" align-middle">{person.price}.00</td>
-                                <td className=" align-middle">Quantity: {person.quantity}</td>
-                                <td className=" align-middle">
+                                <td className=" align-middle text-center">{person.name}</td>
+                                <td className=" align-middle text-center">{person.price}.00</td>
+                                <td className=" align-middle text-center">Quantity: {person.quantity}</td>
+                                <td className=" align-middle text-center">
                                     <button className="btn bgc-theme  fc-white btn-circle font-weight-bold  m-2 " onClick={() => decreaseQuantity(person.customer_id, person.product_id)} >-</button>
                                     <button className="btn bgc-theme fc-white btn-circle m-2 font-weight-bold fs-22" onClick={() => increaseQuantity(person.customer_id, person.product_id)}>+</button>
                                     <button className="btn btn-danger btn-md rounded-pill m-2 ml-5" onClick={() => removeItem(person.customer_id, person.product_id)}>Remove Item</button>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
-                </div>
+
             )}
+             </table>
             <div className="container-fluid mt-2  bg-warning mb-1 font-weight-bold p-1 d-flex mr-5 justify-content-end">
                 <p className="fs-30">Total Price: Rs.{totalprice}.00</p>
             </div>
