@@ -105,11 +105,11 @@ const SupplierRecentSales = (userData) => {
                                                 <div className="d-flex align-items-center">
                                                     <p className="d-flex font-weight-bold"><span>&nbsp;</span>Status:<span>&nbsp;&nbsp;&nbsp;</span></p>
 
-                                                    <select className="browser-default custom-select">
-                                                        <option value="volvo">Pending</option>
-                                                        <option value="saab">Accepted</option>
-                                                        <option value="mercedes">Preparing</option>
-                                                        <option value="audi">Delivered</option>
+                                                    <select className="browser-default custom-select" onChange={e=>setStatus(e.target.value)}>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Accepted">Accepted</option>
+                                                        <option value="Preparing">Preparing</option>
+                                                        <option value="Delivered">Delivered</option>
                                                     </select>
                                                 </div>
                                                 <div class="container my-3 bg-light">
