@@ -69,6 +69,15 @@ app.get('/supplierproduct',(req, res) =>{
 
 })
 
+// app.get('/getCustomOrder',(req, res) =>{
+//     db.query("SELECT * FROM customized_order WHERE supplier_id=? AND status = 'Delivered';",[req.query.id],(err, result)=>{
+//         console.log(result);
+//         res.send(result);
+
+//     })
+
+// })
+
 app.get('/suppliersales',(req, res) =>{
     db.query("SELECT * FROM order_items JOIN products ON order_items.product_id = products.id WHERE order_items.supplier_id=?;",[req.query.id],(err, result)=>{
         console.log(result);
@@ -79,7 +88,7 @@ app.get('/suppliersales',(req, res) =>{
 
 app.get('/customizedorder',(req, res) =>{
     db.query("SELECT * FROM customized_order JOIN customer ON customized_order.customer_id = customer.id WHERE customized_order.supplier_id=?;",[req.query.id],(err, result)=>{
-        console.log(result);
+        console.log(result); 
         res.send(result);
 
     })
