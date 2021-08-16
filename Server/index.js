@@ -38,7 +38,7 @@ const db = mysql.createPool({
     host:"localhost",
     user:"root",
     password:"",
-    database:"test",
+    database:"test123",
     multipleStatements:true
 });
 
@@ -95,7 +95,7 @@ app.get('/customizedorder',(req, res) =>{
 })
 
 app.get('/changeorderstatus',(req, res) =>{
-     db.query("UPDATE customized_order SET status = ? WHERE supplier_id = ?;",[req.query.status , req.query.sid],(err, result)=>{
+     db.query("UPDATE customized_order SET status_code = ? WHERE supplier_id = ?;",[req.query.status , req.query.sid],(err, result)=>{
          console.log(result);
          res.send(result);
  

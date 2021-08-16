@@ -40,12 +40,12 @@ const SupplierRecentSales = (userData) => {
 
     }
 
-    function UpdateStatus(status,supplier_id) {
+    function UpdateStatus(status_code, supplier_id) {
 
         axios.get('http://localhost:3001/changeorderstatus', {
             params: {
                 sid: supplier_id,
-                status : status,
+                status: status_code,
             }
         }).then((response) => {
             window.location.reload();
@@ -60,7 +60,8 @@ const SupplierRecentSales = (userData) => {
                         <th scope="col">Item</th>
                         <th scope="col">Buyer</th>
                         <th scope="col">Status</th>
-                        <th scope="col">View</th>
+                        <th scope="col"></th>
+
                     </tr>
                 </thead>
                 {Salesdata.map((person) =>
@@ -70,8 +71,26 @@ const SupplierRecentSales = (userData) => {
                             <th scope="row">{person.order_id}</th>
                             <td>{person.name}</td>
                             <td>{person.firstname} {person.lastname}</td>
-                            <td>{person.status}</td>
-                            <td className=" align-middle"><Button onClick={() => toggle(person.id)}>More Details</Button></td>
+                            <td>
+                            {(person.status_code == 1) ? (
+                            <div>
+                               <p>Pending</p>
+                            </div> ): ''}
+                            {(person.status_code == 2) ? (
+                            <div>
+                               <p>Accepted</p>
+                            </div> ): ''}
+                            {(person.status_code == 3) ? (
+                            <div>
+                               <p>Preparing</p>
+                            </div> ): ''}
+                            
+                            </td>
+                            <td className=" align-middle">
+                                    <Button onClick={() => toggle(person.id)}>
+                                        More Details
+                                    </Button>
+                            </td>
                         </tr>
 
                         <tr>
@@ -105,16 +124,15 @@ const SupplierRecentSales = (userData) => {
                                                 <div className="d-flex align-items-center">
                                                     <p className="d-flex font-weight-bold"><span>&nbsp;</span>Status:<span>&nbsp;&nbsp;&nbsp;</span></p>
 
-                                                    <select className="browser-default custom-select" onChange={e=>setStatus(e.target.value)}>
-                                                        <option value="Pending">Pending</option>
-                                                        <option value="Accepted">Accepted</option>
-                                                        <option value="Preparing">Preparing</option>
-                                                        <option value="Delivered">Delivered</option>
+                                                    <select className="browser-default custom-select" onChange={e => setStatus(e.target.value)}>
+                                                        <option></option>
+                                                        <option value="2">Accepted</option>
+                                                        <option value="3">Preparing</option>
                                                     </select>
                                                 </div>
                                                 <div class="container my-3 bg-light">
                                                     <div class="col-md-12 text-center">
-                                                        <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status,person.supplier_id)}>Save</button>
+                                                        <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status, person.supplier_id)}>Save</button>
                                                     </div>
                                                 </div>
 
