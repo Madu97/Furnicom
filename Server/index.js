@@ -38,7 +38,7 @@ const db = mysql.createPool({
     host:"localhost",
     user:"root",
     password:"",
-    database:"test123",
+    database:"test",
     multipleStatements:true
 });
 
@@ -69,14 +69,14 @@ app.get('/supplierproduct',(req, res) =>{
 
 })
 
-// app.get('/getCustomOrder',(req, res) =>{
-//     db.query("SELECT * FROM customized_order WHERE supplier_id=? AND status = 'Delivered';",[req.query.id],(err, result)=>{
-//         console.log(result);
-//         res.send(result);
+app.get('/getCustomOrder',(req, res) =>{
+    db.query("SELECT * FROM customized_order WHERE supplier_id=? AND status_code = '4';",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result);
 
-//     })
+    })
 
-// })
+})
 
 app.get('/suppliersales',(req, res) =>{
     db.query("SELECT * FROM order_items JOIN products ON order_items.product_id = products.id WHERE order_items.supplier_id=?;",[req.query.id],(err, result)=>{
