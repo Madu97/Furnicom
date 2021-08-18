@@ -14,7 +14,7 @@ const SupplierDashboard = (userData) => {
     return (
         <div>
             <div className="row">
-                <SupplierStatusBar/>
+                <SupplierStatusBar userData={data}/>
             </div>
             <br></br>
             <div className="row">

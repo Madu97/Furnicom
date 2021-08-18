@@ -60,6 +60,24 @@ app.get('/getsupplier',(req, res) =>{
 
 })
 
+app.get('/productcount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS rowcount FROM products WHERE supplier_id= ?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/ordercount',(req, res) =>{
+    db.query("SELECT COUNT(DISTINCT order_id)AS count FROM order_items WHERE supplier_id= ?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
 app.get('/supplierproduct',(req, res) =>{
     db.query("SELECT * FROM products WHERE supplier_id=?",[req.query.id],(err, result)=>{
         console.log(result);
@@ -102,13 +120,6 @@ app.get('/changeorderstatus',(req, res) =>{
      })
  
  })
-// app.get('/getSnotify',(req, res) =>{
-//     db.query("SELECT * FROM supplier_notification WHERE Supplier_id=?",[req.query.id],(err, result)=>{
-//         console.log(result);
-//         res.send(result);
-
-//     })
-// })
 
 app.get('/getproducts',(req, res) =>{
     const sqlInsert = "SELECT * FROM products;"
