@@ -66,8 +66,8 @@ const SupplierProducts = (userData) => {
                                                     <p>{person.id}</p>
                                                 </div>
                                                 <div className="d-flex align-items-center">
-                                                    <p className="d-flex font-weight-bold"><AiOutlineTag size={25} /><span>&nbsp;</span>Product Name :<span>&nbsp;&nbsp;&nbsp;</span></p>
-                                                    <p>{person.name}</p>
+                                                    <p className="d-flex font-weight-bold"><AiOutlineTag size={25} /><span>&nbsp;</span>Available Quantity :<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                    <p>{person.available_quantity}</p>
                                                 </div>
                                                 <div className="d-flex align-items-center">
                                                     <p className="d-flex font-weight-bold"><MdDescription size={25} /><span>&nbsp;</span>Description :<span>&nbsp;&nbsp;&nbsp;</span></p>
