@@ -78,6 +78,15 @@ app.get('/ordercount',(req, res) =>{
 
 })
 
+app.get('/customizedordercount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS orders FROM customized_order WHERE supplier_id = ?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
 app.get('/supplierproduct',(req, res) =>{
     db.query("SELECT * FROM products WHERE supplier_id=?",[req.query.id],(err, result)=>{
         console.log(result);
