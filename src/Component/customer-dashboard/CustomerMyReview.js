@@ -83,7 +83,7 @@ const CustomerMyReview = (userData) => {
                                 </div>
                             ) : (
                                     <div>
-                                        <button className="btn btn-info btn-lg font-weight-bold" onClick={() => getId(person.id, person.order_id)}>Rate now</button>
+                                        <button className="btn btn-info font-weight-bold" onClick={() => getId(person.id, person.order_id)}>Rate now</button>
                                         {((Productid == person.id) && (Orderid == person.order_id)) ? (
                                             <div className="d-flex justify-content-center justify-content-center align-items-center">
                                                 {[...Array(5)].map((star, index) => {

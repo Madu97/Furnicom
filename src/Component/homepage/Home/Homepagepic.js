@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
 import homepagepic from '../../../Assets/Images/homepagepic.jpg';
 
 
@@ -11,7 +13,7 @@ export default function Homepagepic() {
             </div>
 
             <div class="text-above-button">
-            <button class="btn btn-info btn-lg w-10 h-10 fs-60 font-weight-bold">Join Now</button>
+            <Link to="/signupas"><button class="btn btn-info btn-lg w-10 h-10 fs-60 font-weight-bold">Join Now</button></Link>
             </div>
         </div>
 
