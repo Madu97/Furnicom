@@ -130,6 +130,15 @@ app.get('/changeorderstatus',(req, res) =>{
  
  })
 
+ app.get('/updatesupplierinfo',(req, res) =>{
+    db.query("UPDATE supplier SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;",[req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.sup_id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
 app.get('/getproducts',(req, res) =>{
     const sqlInsert = "SELECT * FROM products;"
     db.query(sqlInsert,(err, result)=>{

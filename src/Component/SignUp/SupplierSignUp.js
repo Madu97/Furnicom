@@ -24,7 +24,8 @@ const schema = yup.object().shape({
 
 function Supplier_Signup() {
 
-    const[LoginStatus, setLoginStatus] = useState();
+    const [LoginStatus, setLoginStatus] = useState();
+    const [usernamemsg, setusernamemsg] = useState();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -32,94 +33,100 @@ function Supplier_Signup() {
 
 
     const registerform = (data) => {
-        Axios.post('http://localhost:3001/supreg', {
-            username: data.username,
-            password: data.password,
-            firstname: data.firstname,
-            lastname: data.lastname,
-            address: data.address,
-            ic: data.ic,
-            phone: data.phone,
-            email: data.email,
-            gender: data.gender,
-        }).then((response) => {
-            if(response.data.message){
-                setLoginStatus(response.data.message)
-                document.getElementById("supplier-signup").reset();
+        Axios.get('http://localhost:3001/checkusername', {
+            params: {
+                username: data.username,
+            }
+        }).then((response1) => {
+            if (response1.data[0]) {
+                setusernamemsg("Username Already taken...");
+            }
+            else {
+                setusernamemsg("");
+                Axios.post('http://localhost:3001/supreg', {
+                    username: data.username,
+                    password: data.password,
+                    firstname: data.firstname,
+                    lastname: data.lastname,
+                    address: data.address,
+                    ic: data.ic,
+                    phone: data.phone,
+                    email: data.email,
+                    gender: data.gender,
+                }).then((response) => {
+                    if (response.data.message) {
+                        setLoginStatus(response.data.message)
+                        document.getElementById("supplier-signup").reset();
+                    }
+                })
+                console.log(data)
+                //alert('Registration was successful...');
+           
             }
         })
-        console.log(data)
-        //alert('Registration was successful...');
     }
 
+            return (
+                <div className="fc-white d-flex justify-content-center">
+                    <div className="row  ">
+                        <div className="col-log-3 "></div>
+                        <div className="col-log-6 fc-white border rounded p-5 m-2 rounded ">
+                            <div className="ui">
+                                <form id="supplier-signup" className="form-group" onSubmit={handleSubmit(registerform)}>
+                                    <div className="d-flex justify-content-center">
+                                        <h1 className="fc-white">Supplier Registration</h1>
+                                    </div>
+                                    <h5 className="d-flex bg-success fc-white justify-content-center">{LoginStatus}</h5>
 
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <label>FirstName <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="FirstName..." name="firstname" {...register('firstname')} /><br />
+                                            {errors.firstname?.message && <p className=" errormessage" >{errors.firstname?.message}</p>}
 
-    return (
-        <div className="fc-white d-flex justify-content-center">
-            <div className="row  ">
-                <div className="col-log-3 "></div>
-                <div className="col-log-6 fc-white border rounded p-5 m-2 rounded ">
-                    <div className="ui">
-                        <form id="supplier-signup" className="form-group" onSubmit={handleSubmit(registerform)}>
-                            <div className="d-flex justify-content-center">
-                            <h1 className="fc-white">Supplier Registration</h1>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <label>LastName :</label> <input type="text" className="form-control" placeholder="LastName..." name="lastname" {...register('lastname')} /><br />
+                                            {errors.lastname?.message && <p className=" errormessage" >{errors.lastname?.message}</p>}
+                                        </div>
+                                    </div>
+
+                                    <label>Address <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="Address..." name="address" {...register('address')} /><br />
+                                    {errors.address?.message && <p className=" errormessage" >{errors.address?.message}</p>}
+
+                                    <label>Id Number <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="Id Number..." name="ic"  {...register('ic')} /><br />
+                                    {errors.ic?.message && <p className=" errormessage" >{errors.ic?.message}</p>}
+
+                                    <label>Phone No <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="Phone No..." name="phone" {...register('phone')} o /><br />
+                                    {errors.phone?.message && <p className=" errormessage" >{errors.phone?.message}</p>}
+
+                                    <label>Email <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" name="email" className="form-control" placeholder="Email..." {...register('email')} /><br />
+                                    {errors.email?.message && <p className=" errormessage" >{errors.email?.message}</p>}
+
+                                    <label>Username <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" name="username" className="form-control" placeholder="Username..." {...register('username')} /><br />
+                                    {errors.username?.message && <p className=" errormessage" >{errors.username?.message}</p>}
+
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <label>Password <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="password" className="form-control" name="password" {...register('password')} placeholder="Password..." /><br />
+                                            {errors.password?.message && <p className=" errormessage" >{errors.password?.message}</p>}
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <label>Re-type Password <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="password" className="form-control" name="confirmpassword" {...register('confirmpassword')} placeholder="Password..." /><br />
+                                            {errors.confirmpassword?.message && <p className=" errormessage" >{errors.confirmpassword?.message}</p>}
+                                        </div>
+                                    </div>
+                                    <div className="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-                            <h5 className="d-flex bg-success fc-white justify-content-center">{LoginStatus}</h5>
-
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <label>FirstName :</label> <input type="text" className="form-control" placeholder="FirstName..." name="firstname" {...register('firstname')} /><br />
-                                    {errors.firstname?.message && <p className=" errormessage" >{errors.firstname?.message}</p>}
-
-                                </div>
-                                <div className="col-lg-6">
-                                    <label>LastName :</label> <input type="text" className="form-control" placeholder="LastName..."  name="lastname" {...register('lastname')} /><br />
-                                    {errors.lastname?.message && <p className=" errormessage" >{errors.lastname?.message}</p>}
-                                </div>
-                            </div>
-
-                            <label>Address :</label> <input type="text" className="form-control" placeholder="Address..." name="address" {...register('address')} /><br />
-                            {errors.address?.message && <p className=" errormessage" >{errors.address?.message}</p>}
-
-                            <label>Id Number :</label> <input type="text" className="form-control" placeholder="Id Number..." name="ic"  {...register('ic')} /><br />
-                            {errors.ic?.message && <p className=" errormessage" >{errors.ic?.message}</p>}
-
-                            <label>Phone No :</label> <input type="text" className="form-control" placeholder="Phone No..." name="phone" {...register('phone')} o /><br />
-                            {errors.phone?.message && <p className=" errormessage" >{errors.phone?.message}</p>}
-
-                            <label>Email :</label> <input type="text" name="email" className="form-control" placeholder="Email..." {...register('email')} /><br />
-                            {errors.email?.message && <p className=" errormessage" >{errors.email?.message}</p>}
-
-                            <label>Username :</label> <input type="text" name="username" className="form-control" placeholder="Username..." {...register('username')} /><br />
-                            {errors.username?.message && <p className=" errormessage" >{errors.username?.message}</p>}
-
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <label>Password :</label> <input type="password" className="form-control" name="password" {...register('password')} placeholder="Password..." /><br />
-                                    {errors.password?.message && <p className=" errormessage" >{errors.password?.message}</p>}
-                                </div>
-                                <div className="col-lg-6">
-                                    <label>Re-type Password :</label> <input type="password" className="form-control" name="confirmpassword" {...register('confirmpassword')} placeholder="Password..." /><br />
-                                    {errors.confirmpassword?.message && <p className=" errormessage" >{errors.confirmpassword?.message}</p>}
-                                </div>
-                            </div>
-                            <label>Gender :</label><select defaultValue="Select Gender" className="form-control" name="gender" {...register('gender')} >
-                                <option defaultValue>Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select><br />
-                            <div className="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-lg btn-primary">Submit</button>
-                            </div>
-                        </form>
+                        </div>
+                        <div className="col-lg-3"></div>
                     </div>
                 </div>
-                <div className="col-lg-3"></div>
-            </div>
-        </div>
 
-    )
+            )
 
-}
+        }
 
 export default Supplier_Signup
