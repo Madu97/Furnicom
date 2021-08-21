@@ -6,19 +6,20 @@ import CustomerNewArrival from "../../../Component/customer-dashboard/CustomerNe
 import CustomerReviewTab from "../../../Component/customer-dashboard/CustomerReviewTab";
 import CustomerRecentReviews from "../../../Component/customer-dashboard/CustomerRecentReview"
 
-const CustomerDashboard = () => {
+const CustomerDashboard = (userData) => {
+    const data = userData.userData;
     return (
         <div>
 
             <div className="row ">
                 <div className="col">
-                    <CustomerRecentOrdersComponent />
+                    <CustomerRecentOrdersComponent userData={data} />
                 </div>
             </div>
-
+            
             <div className="row ">
                 <div className="col">
-                    <CustomerRecentReviews />
+                    <CustomerRecentReviews userData={data} />
                 </div>
             </div>
         </div>

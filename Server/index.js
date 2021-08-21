@@ -159,6 +159,15 @@ app.get('/ordersbycustomer_id',(req, res) =>{
 
 })
 
+app.get('/recentordersbycustomer_id',(req, res) =>{
+    db.query("SELECT * FROM orders JOIN order_items ON orders.order_id = order_items.order_id JOIN products ON order_items.product_id = products.id WHERE orders.customer_id=? LIMIT 2;",[req.query.id],(err, result)=>{
+        //console.log(req.query.id);
+        res.send(result);
+
+    })
+
+})
+
 
 app.get('/getuser',(req, res) =>{
     //console.log('sfd');
@@ -171,7 +180,7 @@ app.get('/getuser',(req, res) =>{
 })
 
 app.get('/getcart',(req, res) =>{
-    db.query("SELECT shoppingcart.id,shoppingcart.customer_id,shoppingcart.product_id,shoppingcart.quantity,shoppingcart.data_added,products.name,products.description,products.price,products.thumb FROM shoppingcart INNER JOIN products ON shoppingcart.product_id = products.id WHERE shoppingcart.customer_id=?",[req.query.id],(err, result)=>{
+    db.query("SELECT shoppingcart.id,shoppingcart.customer_id,shoppingcart.product_id,shoppingcart.quantity,shoppingcart.data_added,products.name,products.description,products.price,products.available_quantity,products.thumb FROM shoppingcart INNER JOIN products ON shoppingcart.product_id = products.id WHERE shoppingcart.customer_id=?",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
@@ -203,6 +212,8 @@ app.get('/decreasequantity',(req, res) =>{
  
  })
 
+ 
+
  app.get('/removeitem',(req, res) =>{
     console.log(req.query.cid)
     console.log(req.query.pid)
@@ -214,10 +225,10 @@ app.get('/decreasequantity',(req, res) =>{
  
  })
 
-  app.get('/updaterating',(req, res) =>{
+ app.get('/updaterating',(req, res) =>{
     //console.log(req.query.cid)
     //console.log(req.query.pid)
-     db.query("UPDATE order_items SET rating=? WHERE product_id = ? AND order_id=? AND item_number=?;",[req.query.rating , req.query.pid, req.query.oid, req.query.item_no],(err, result)=>{
+     db.query("UPDATE order_items SET rating=? WHERE product_id = ? AND order_id=? AND item_number=?;UPDATE products SET total_ratings = total_ratings + ?, total_people_rated = total_people_rated + 1 WHERE id=?;",[req.query.rating , req.query.pid, req.query.oid, req.query.item_no,req.query.rating,req.query.pid],(err, result)=>{
          console.log(result);
          res.send(result);
  
@@ -235,6 +246,34 @@ app.get('/decreasequantity',(req, res) =>{
      })
  
  })
+
+ app.get('/updatecustomerinfo',(req, res) =>{
+    db.query("UPDATE customer SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;",[req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.cust_id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/checkusername',(req, res) =>{
+   db.query("SELECT username FROM users WHERE username=?;",[req.query.username],(err, result)=>{
+       res.send(result);
+
+   })
+
+})
+
+app.get('/searchproducts',(req, res) =>{
+   //console.log(req.query.word)
+   qr = "SELECT * FROM products WHERE name LIKE '"+req.query.word+"%' OR name LIKE '%"+req.query.word+"%';";
+   db.query(qr,(err, result)=>{
+       res.send(result);
+
+   })
+
+})
+
 app.post('/reg',(req,res)=>{
 
     const username = req.body.username

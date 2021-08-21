@@ -57,11 +57,11 @@ const CustomerSidebar = (userData) => {
                 <h4>{User.username}</h4>
             </div>
 
-            <div className="mt-2">
+            <div className="mt-2 fs-20">
 
                     <Link to="/customer/dashboard">
                     <a className="row dboard-icon mb-5 fc-white align-items-center" href="CustomerDashboard"><div className="m-2"><AiOutlineHome size={32}/></div>
-                        <div className="dboard-text ">
+                        <div className="dboard-text ml-2 ">
                             Dashboard
                         </div>
                     </a>
@@ -69,7 +69,7 @@ const CustomerSidebar = (userData) => {
 
                     <Link to="/customer/cart">
                     <a className="row dboard-icon mb-5 fc-white align-items-center" href="CustomerDashboard"><div className="m-2"><TiShoppingCart size={35}/></div>
-                        <div className="dboard-text ">
+                        <div className="dboard-text ml-2 ">
                             My Cart
                         </div>
                     </a>
@@ -77,7 +77,7 @@ const CustomerSidebar = (userData) => {
 
                     <Link to="/customer/orderhistory">
                         <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><AiOutlineInbox size={32}/></div>
-                            <div className="dboard-text ">
+                            <div className="dboard-text ml-2 ">
                                 My Orders
                             </div>
                         </a>
@@ -85,7 +85,7 @@ const CustomerSidebar = (userData) => {
 
                     <Link to="/customer/myreviews">
                     <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><AiOutlineStar size={32}/></div>
-                        <div className=" dboard-text ">
+                        <div className=" dboard-text ml-2 ">
                             My Ratings
                     </div>
                     </a>
@@ -93,7 +93,7 @@ const CustomerSidebar = (userData) => {
 
                     <Link to="/customer/myreturns">
                     <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><TiDeleteOutline size={35}/></div>
-                        <div className=" dboard-text ">
+                        <div className=" dboard-text ml-2 ">
                             My Returns
                     </div>
                     </a>
@@ -101,7 +101,7 @@ const CustomerSidebar = (userData) => {
 
                     <Link to="/customer/settings">
                     <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2 pl-1 "><AiOutlineSetting size={30}/></div>
-                        <div className="dboard-text ">
+                        <div className="dboard-text ml-2 ">
                             Settings
                     </div>
                     </a>

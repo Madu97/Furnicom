@@ -6,12 +6,15 @@ import { CartProvider, useCart } from "react-use-cart"
 import Dviewer from '../Products/3Dviewer'
 
 import { BrowserRouter as Router, Route, Switch, Link, useParams } from "react-router-dom";
+import { GrStar } from 'react-icons/gr'
+const stylenone = { color: "grey", margin: "2px" }
+const stylegold = { color: "gold", margin: "2px" }
 
 function ProductDetails() {
 
     const [Dt, setDt] = useState([])
 
-    const { id } = useParams();
+    const { id } = useParams();console.log(id)
 
     const { addItem } = useCart();
 
@@ -108,10 +111,18 @@ function ProductDetails() {
                             <p className="d-flex justify-content-start mb-3 fs-35 font-weight-bold">{Dt.name}</p>
                             <p className="d-flex justify-content-start">{Dt.description}</p>
                             <p className="price d-flex justify-content-start"><span>Rs.</span>{Dt.price}</p>
+                            <p className="price d-flex justify-content-start">Available quantity :{Dt.available_quantity}</p>
+                            <p>
+                                <GrStar size={35} style={(Dt.total_ratings / Dt.total_people_rated) > 0 ? (stylegold) : stylenone} />
+                                <GrStar size={35} style={(Dt.total_ratings / Dt.total_people_rated) - 1 > 0 ? (stylegold) : stylenone} />
+                                <GrStar size={35} style={(Dt.total_ratings / Dt.total_people_rated) - 2 > 0 ? (stylegold) : stylenone} />
+                                <GrStar size={35} style={(Dt.total_ratings / Dt.total_people_rated) - 3 > 0 ? (stylegold) : stylenone} />
+                                <GrStar size={35} style={(Dt.total_ratings / Dt.total_people_rated) - 4 > 0 ? (stylegold) : stylenone} />
+                            </p>
                         </div>
                         <div className="row d-flex justify-content-start align-items-center">
                             <button className="btn btn-lg btn-warning font-weight-bold d-flex" onClick={() => doit()}> ADD TO CART <TiShoppingCart size={30} /></button>
-                            <Link to=""><button className="btn btn-lg btn-info m-2 font-weight-bold d-flex"> BUY IT NOW <TiShoppingCart size={30} /></button></Link>
+                            <Link to="/customer/cart"><button className="btn btn-lg btn-info m-2 font-weight-bold d-flex"> MY CART <TiShoppingCart size={30} /></button></Link>
                         </div>
                     </div>
                 </div>

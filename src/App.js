@@ -16,6 +16,7 @@ import SupplierSignUp from "./Views/Pages/SignUp/SupplierSignUp"
 import SignUpAs from "./Views/Pages/SignUp/SignUpAs"
 
 import PersonList from './Component/PersonList';
+import AllProducts from './Component/homepage/Home/searchProducts'
 import "./Assets/CSS/main.css";
 
 
@@ -57,6 +58,9 @@ function App() {
                     </Route>
                     <Route path="/contact">
                         <ContactUs />
+                    </Route>
+                    <Route path="/allproducts">
+                        <AllProducts />
                     </Route>
                     <Route path="/login">
                         <Login />

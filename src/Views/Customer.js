@@ -34,15 +34,10 @@ const Customer = () => {
             
             const response = await Axios.get("http://localhost:3001/login");
 
-            //console.log(response.data.user[0].username);
-
-
-            //setUser(response1.data[0]);
-            //console.log(response1.data[0]);
-
             if (response.data.loggedIn) {
-
+               
                 const nm = response.data.user[0].username;
+                console.log(nm)
 
                 const response1 = await Axios.get('http://localhost:3001/getuser', {
                     params: {
@@ -59,7 +54,7 @@ const Customer = () => {
                         <div className="col-9 p-5">
                             <Switch>
                                 <Route path="/customer/dashboard">
-                                    <CustomerDashboard />
+                                    <CustomerDashboard userData={response1.data[0]} />
                                 </Route>
                                 <Route path="/customer/notification">
                                     <CustomerNotification />

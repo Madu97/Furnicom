@@ -1,5 +1,7 @@
 import React from 'react';
 import furnicom from '../../Assets/Images/furnicom.jpg';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
 import '../../Assets/CSS/main.css';
 
 const Header = () => {
@@ -8,7 +10,7 @@ const Header = () => {
             <div className="container-fluid mb-1">
                 <div className="row header-row theme-color justify-content-between align-items-center pl-1 ">
                     <div className="d-flex align-items-center">
-                        <img src={furnicom} width="80" height="50" class="rounded-sm"></img>
+                    <Link to="/"><img src={furnicom} width="80" height="50" class="rounded-sm"></img></Link>
                         <div className="fs-30 pl-3">
                             FurniCom
                         </div>
