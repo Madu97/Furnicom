@@ -9,7 +9,7 @@ import '../../Assets/CSS/signup.css';
 
 const schema = yup.object().shape({
     firstname: yup.string().required(),
-    lastname: yup.string().required(),
+    lastname: yup.string(),
     username: yup.string().required(),
     email: yup.string().email().required(),
     ic: yup.string().max(10, "Must be 10 Characters.").min(10, "Must be 10 Characters."),
@@ -52,7 +52,7 @@ function Supplier_Signup() {
                     ic: data.ic,
                     phone: data.phone,
                     email: data.email,
-                    gender: data.gender,
+                    // gender: data.gender,
                 }).then((response) => {
                     if (response.data.message) {
                         setLoginStatus(response.data.message)
@@ -104,6 +104,7 @@ function Supplier_Signup() {
 
                                     <label>Username <span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" name="username" className="form-control" placeholder="Username..." {...register('username')} /><br />
                                     {errors.username?.message && <p className=" errormessage" >{errors.username?.message}</p>}
+                                    {(usernamemsg) ? (<p className="errormessage">{usernamemsg}</p>) : ('')}
 
                                     <div className="row">
                                         <div className="col-lg-6">

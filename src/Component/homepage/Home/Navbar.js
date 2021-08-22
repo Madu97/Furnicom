@@ -55,15 +55,16 @@ const Navbarr = () => {
                     <Link to="/signupas"><button class="btn bg-success fc-white btn-sm ml-2 rounded font-weight-bold fs-20 popup "> Sign Up</button></Link>
                     <Link to="/login"><button class="btn bg-info fc-white btn-sm ml-2 mr-2 rounded font-weight-bold fs-20"> Log In</button></Link>
                 </div>
-            ) : 
+            ) :
             (
                 <div class="col-2  p-2 d-flex justify-content-center align-items-center  ">
                     <Link to="/customer/dashboard"><div classname="btn bg-success fc-white btn-sm rounded font-weight-bold fs-20 "> <FaUserCircle size={40}/></div></Link>
                 </div>
             )
-            }
 
+             }
 
+            
         </div>
 
 
