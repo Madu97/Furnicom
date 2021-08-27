@@ -39,7 +39,7 @@ const SupplierSales = (userData) => {
     }
 
     return (
-        
+
         <div className="col-12  d-block pl-1 pr-1 ">
             <div className="d-flex justify-content-center">
                 <h3>Customized Order</h3>
@@ -68,7 +68,7 @@ const SupplierSales = (userData) => {
                                 <td className=" align-middle">{person.name}</td>
                                 <td className=" align-middle">{person.features}</td>
                                 <td className=" align-middle">{person.quantity}</td>
-                                                            
+
                             </tr>
                         </tbody>
                     )}

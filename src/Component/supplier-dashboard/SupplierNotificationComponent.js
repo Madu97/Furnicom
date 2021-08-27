@@ -5,7 +5,7 @@ import axios from 'axios';
 const SupplierNotification = (userData) => {
     const userid = userData.userData.id
     const [Notifydata, setNotifydata] = useState([])
-    
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,32 +31,32 @@ const SupplierNotification = (userData) => {
                     <div className="m-2">
                         <h3>Recent</h3>
                     </div>
-                    
+
                     <div className="row d-block m-2 justify-content-between fc-white">
-                    {Notifydata.map((person) =>
-                        <div className="col-lg-8 bg-order-his-color fc-white  d-flex justify-content-between align-items-center rounded">
+                        {Notifydata.map((person) =>
+                            <div className="col-lg-8 bg-order-his-color fc-white  d-flex justify-content-between align-items-center rounded">
 
-                            <div className=" d-flex align-items-center ">
-                                <i class="fa fa-spinner m-2 p-2  fa-2x mr-4 bg-warning fc-white rounded-circle" ></i>{person.Title}
-                    </div>
+                                <div className=" d-flex align-items-center ">
+                                    <i class="fa fa-spinner m-2 p-2  fa-2x mr-4 bg-warning fc-white rounded-circle" ></i>{person.Title}
+                                </div>
 
-                            <div className=" d-flex align-items-center  ">
-                                <div className="mr-3 fc-grey">
-                                {person.Time}
-                        </div>
-                                <button className="btn btn-info"> View</button>
+                                <div className=" d-flex align-items-center  ">
+                                    <div className="mr-3 fc-grey">
+                                        {person.Time}
+                                    </div>
+                                    <button className="btn btn-info"> View</button>
+                                </div>
+
                             </div>
-
-                        </div>
-                         )}
+                        )}
                     </div>
-                   
-              </div>
+
+                </div>
 
             </div>
 
         </div>
     );
-                    };
-                
+};
+
 export default SupplierNotification;
