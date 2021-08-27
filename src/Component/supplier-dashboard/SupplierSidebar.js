@@ -54,7 +54,7 @@ const SupplierSidebar = (userData) => {
             <div className="mt-2">
 
                     <Link to="/supplier/dashboard">
-                    <a className="row dboard-icon mb-5 fc-white" href="CustomerDashboard"><i class="fa fa-home m-2  fa-2x" ></i>
+                    <a className="row dboard-icon mb-3 fc-white" href="CustomerDashboard"><i class="fa fa-home m-2  fa-lg" ></i>
                         <div className="dboard-text pb-2">
                             Dashboard
                         </div>
@@ -62,7 +62,7 @@ const SupplierSidebar = (userData) => {
                     </Link>
 
                     <Link to="/supplier/products">
-                    <a className="row dboard-icon mb-5 fc-white" href="supplier_products"><i class="fa fa-suitcase m-2  fa-2x" ></i>
+                    <a className="row dboard-icon mb-3 fc-white" href="supplier_products"><i class="fa fa-suitcase m-2  fa-lg" ></i>
                         <div className="dboard-text pb-2">
                             Products
                         </div>
@@ -78,7 +78,7 @@ const SupplierSidebar = (userData) => {
                     </Link> */}
 
                     <Link to="/supplier/saleshistory">
-                    <a className="row dboard-icon mt-5 mb-5 fc-white" href="Customer_order_history"><i class="fa fa-history m-2 fa-2x" ></i>
+                    <a className="row dboard-icon mb-3 fc-white" href="Customer_order_history"><i class="fa fa-history m-2 fa-lg" ></i>
                         <div className=" dboard-text pb-2">
                             Sales History
                     </div>
@@ -86,7 +86,7 @@ const SupplierSidebar = (userData) => {
                     </Link>
 
                     <Link to="/supplier/settings">
-                    <a className="row dboard-icon  mt-5 mb-5 fc-white" href="customer_settings"><i class="fa fa-cog m-2 fa-2x" ></i>
+                    <a className="row dboard-icon  mb-3 fc-white" href="customer_settings"><i class="fa fa-cog m-2 fa-lg" ></i>
                         <div className="dboard-text pb-2">
                             Settings
                     </div>
@@ -96,7 +96,7 @@ const SupplierSidebar = (userData) => {
             </div>
 
                 <div className="row bg-theme d-flex justify-content-center fc-white  bgc-theme p-2 mb-2">
-                    <button class="btn d-flex justify-content-center fc-white align-items-center bgc-theme font-weight-bold" onClick={function(){logout()}}><i class="fa fa-sign-out m-2  fa-2x" aria-hidden="true" ></i>
+                    <button class="btn d-flex justify-content-center fc-white align-items-center bgc-theme font-weight-bold" onClick={function(){logout()}}><i class="fa fa-sign-out m-2  fa-lg" aria-hidden="true" ></i>
                         <div className="dboard-text">
                             Log Out
                     </div>
