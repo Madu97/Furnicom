@@ -1,11 +1,12 @@
 import React from "react";
 import DeliveryHistoryComponent from "../../../Component/delivery-dashboard/DeliveryHistoryComponent";
 
-const DeliveryDashboard = () => {
+const DeliveryDashboard = (userData) => {
+    const data = userData.userData;
     return (
         <div className="row mt-5">
             <div className="col">
-                <DeliveryHistoryComponent />
+                <DeliveryHistoryComponent userData={data}/>
             </div>
         </div>
     );

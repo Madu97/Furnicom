@@ -3,11 +3,12 @@ import DeliverySettingsComponent from "../../../Component/delivery-dashboard/Del
 
 
 
-const DeliverySettings = () => {
+const DeliverySettings = (userData) => {
+    const data = userData.userData;
     return (
         <div>
             <div className="row">
-                   <DeliverySettingsComponent/>
+                   <DeliverySettingsComponent userData={data}/>
             </div>
         </div>
     );
