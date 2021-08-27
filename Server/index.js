@@ -38,7 +38,7 @@ const db = mysql.createPool({
     host:"localhost",
     user:"root",
     password:"",
-    database:"test",
+    database:"test123",
     multipleStatements:true
 });
 
@@ -59,6 +59,80 @@ app.get('/getsupplier',(req, res) =>{
     })
 
 })
+
+app.get('/getdelivery',(req, res) =>{
+    db.query("SELECT * FROM delivery_person WHERE username=?",[req.query.name],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/deliveryhistory',(req, res) =>{
+    db.query("SELECT * FROM status_code JOIN delivery_person ON status_code.dperson_id = delivery_person.id WHERE status_code.dperson_id=?;",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
+app.get('/deliverycount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS delivercount FROM delivery WHERE dperson_id= ?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/pendingcount',(req, res) =>{
+    db.query("SELECT COUNT(DISTINCT order_id)AS pendingcount FROM status_code WHERE status='Pending' AND dperson_id= ?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+
+app.get('/cancelcount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS cancelcount FROM canceled_order WHERE dperson_id = ?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/deliverydata',(req, res) =>{
+    db.query("SELECT * FROM status_code JOIN customer ON status_code.customer_id = customer.id WHERE status_code.dperson_id=?;",[req.query.id],(err, result)=>{
+        console.log(result); 
+        res.send(result);
+
+    })
+})
+
+
+app.get('/changedeliverystatus',(req, res) =>{
+     db.query("UPDATE status_code SET status = ? WHERE dperson_id = ?;",[req.query.status , req.query.dperson_id],(err, result)=>{
+         console.log(result);
+         res.send(result);
+ 
+     })
+ 
+})
+ 
+app.get('/getdeliverynotification',(req, res) =>{
+    db.query("SELECT * FROM delivery_notification WHERE order_id=?",[req.query.id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+
 
 app.get('/productcount',(req, res) =>{
     db.query("SELECT COUNT(*)AS rowcount FROM products WHERE supplier_id= ?",[req.query.id],(err, result)=>{
@@ -130,15 +204,6 @@ app.get('/changeorderstatus',(req, res) =>{
  
  })
 
- app.get('/updatesupplierinfo',(req, res) =>{
-    db.query("UPDATE supplier SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;",[req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.sup_id],(err, result)=>{
-        console.log(result);
-        res.send(result);
-
-    })
-
-})
-
 app.get('/getproducts',(req, res) =>{
     const sqlInsert = "SELECT * FROM products;"
     db.query(sqlInsert,(err, result)=>{
@@ -168,15 +233,6 @@ app.get('/ordersbycustomer_id',(req, res) =>{
 
 })
 
-app.get('/recentordersbycustomer_id',(req, res) =>{
-    db.query("SELECT * FROM orders JOIN order_items ON orders.order_id = order_items.order_id JOIN products ON order_items.product_id = products.id WHERE orders.customer_id=? LIMIT 2;",[req.query.id],(err, result)=>{
-        //console.log(req.query.id);
-        res.send(result);
-
-    })
-
-})
-
 
 app.get('/getuser',(req, res) =>{
     //console.log('sfd');
@@ -189,7 +245,7 @@ app.get('/getuser',(req, res) =>{
 })
 
 app.get('/getcart',(req, res) =>{
-    db.query("SELECT shoppingcart.id,shoppingcart.customer_id,shoppingcart.product_id,shoppingcart.quantity,shoppingcart.data_added,products.name,products.description,products.price,products.available_quantity,products.thumb FROM shoppingcart INNER JOIN products ON shoppingcart.product_id = products.id WHERE shoppingcart.customer_id=?",[req.query.id],(err, result)=>{
+    db.query("SELECT shoppingcart.id,shoppingcart.customer_id,shoppingcart.product_id,shoppingcart.quantity,shoppingcart.data_added,products.name,products.description,products.price,products.thumb FROM shoppingcart INNER JOIN products ON shoppingcart.product_id = products.id WHERE shoppingcart.customer_id=?",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
@@ -221,8 +277,6 @@ app.get('/decreasequantity',(req, res) =>{
  
  })
 
- 
-
  app.get('/removeitem',(req, res) =>{
     console.log(req.query.cid)
     console.log(req.query.pid)
@@ -234,10 +288,10 @@ app.get('/decreasequantity',(req, res) =>{
  
  })
 
- app.get('/updaterating',(req, res) =>{
+  app.get('/updaterating',(req, res) =>{
     //console.log(req.query.cid)
     //console.log(req.query.pid)
-     db.query("UPDATE order_items SET rating=? WHERE product_id = ? AND order_id=? AND item_number=?;UPDATE products SET total_ratings = total_ratings + ?, total_people_rated = total_people_rated + 1 WHERE id=?;",[req.query.rating , req.query.pid, req.query.oid, req.query.item_no,req.query.rating,req.query.pid],(err, result)=>{
+     db.query("UPDATE order_items SET rating=? WHERE product_id = ? AND order_id=? AND item_number=?;",[req.query.rating , req.query.pid, req.query.oid, req.query.item_no],(err, result)=>{
          console.log(result);
          res.send(result);
  
@@ -255,99 +309,69 @@ app.get('/decreasequantity',(req, res) =>{
      })
  
  })
-
- app.get('/updatecustomerinfo',(req, res) =>{
-    db.query("UPDATE customer SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;",[req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.cust_id],(err, result)=>{
-        console.log(result);
-        res.send(result);
-
-    })
-
-})
-
-app.get('/checkusername',(req, res) =>{
-   db.query("SELECT username FROM users WHERE username=?;",[req.query.username],(err, result)=>{
-       res.send(result);
-
-   })
-
-})
-
-app.get('/searchproducts',(req, res) =>{
-   //console.log(req.query.word)
-   qr = "SELECT * FROM products WHERE name LIKE '"+req.query.word+"%' OR name LIKE '%"+req.query.word+"%';";
-   db.query(qr,(err, result)=>{
-       res.send(result);
-
-   })
-
-})
-
 app.post('/reg',(req,res)=>{
 
-        const username = req.body.username
-        const password = req.body.password
-        const firstname = req.body.firstname
-        const lastname = req.body.lastname
-        const address = req.body.address
-        const ic = req.body.ic
-        const phone = req.body.phone
-        const email = req.body.email
-       
-    
-        bcrypt.hash(password,saltRounds,(err,hash)=>{
-           
-            if(err){
-                console.log(err);
-            }
-           
-            db.query("INSERT INTO `customer`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
-                console.log(err);
-    
-                if(result){
-                    res.send({message: "Successfully Registered..."});
-                }
-               
-            })
-        })
-    
-    
-    
-    
+    const username = req.body.username
+    const password = req.body.password
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    const address = req.body.address
+    const ic = req.body.ic
+    const phone = req.body.phone
+    const email = req.body.email
+    const gender = req.body.gender
+
+    bcrypt.hash(password,saltRounds,(err,hash)=>{
+        
+        if(err){
+            console.log(err);
+        }
+        
+        db.query("INSERT INTO `customer`(`firstname`, `lastname`, `gender`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,gender,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
+            console.log(err);
+
+            if(result){
+                res.send({message: "Successfully Registered..."});
+            }
+           
+        })
     })
+
+
+
+
+})
 
 app.post('/supreg',(req,res)=>{
 
-        const username = req.body.username
-        const password = req.body.password
-        const firstname = req.body.firstname
-        const lastname = req.body.lastname
-        const address = req.body.address
-        const ic = req.body.ic
-        const phone = req.body.phone
-        const email = req.body.email
-       
-    
-        bcrypt.hash(password,saltRounds,(err,hash)=>{
-           
-            if(err){
-                console.log(err);
-            }
-           
-            db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
-                console.log(err);
-    
-                if(result){
-                    res.send({message: "Successfully Registered..."});
-                }
-               
-            })
-        })
-    
-    
-    
-    
+    const username = req.body.username
+    const password = req.body.password
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    const address = req.body.address
+    const ic = req.body.ic
+    const phone = req.body.phone
+    const email = req.body.email
+    const gender = req.body.gender
+
+    bcrypt.hash(password,saltRounds,(err,hash)=>{
+        
+        if(err){
+            console.log(err);
+        }
+        
+        db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `gender`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');",[firstname,lastname,gender,ic,phone,email, username, password,address,username,hash],(err,result)=>{
+            console.log(result);
+
+            if(result){
+                res.send({message: "Successfully Registered..."});
+            }
+           
+        })
     })
+
+
+})
 
 app.get("/login",(req,res)=>{
     if (req.session.user){
