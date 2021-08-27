@@ -72,24 +72,24 @@ const SupplierRecentSales = (userData) => {
                             <td>{person.name}</td>
                             <td>{person.firstname} {person.lastname}</td>
                             <td>
-                            {(person.status_code == 1) ? (
-                            <div>
-                               <p>Pending</p>
-                            </div> ): ''}
-                            {(person.status_code == 2) ? (
-                            <div>
-                               <p>Accepted</p>
-                            </div> ): ''}
-                            {(person.status_code == 3) ? (
-                            <div>
-                               <p>Preparing</p>
-                            </div> ): ''}
-                            
+                                {(person.status_code == 1) ? (
+                                    <div>
+                                        <p>Pending</p>
+                                    </div>) : ''}
+                                {(person.status_code == 2) ? (
+                                    <div>
+                                        <p>Accepted</p>
+                                    </div>) : ''}
+                                {(person.status_code == 3) ? (
+                                    <div>
+                                        <p>Preparing</p>
+                                    </div>) : ''}
+
                             </td>
                             <td className=" align-middle">
-                                    <Button onClick={() => toggle(person.id)}>
-                                        More Details
-                                    </Button>
+                                <Button onClick={() => toggle(person.id)}>
+                                    More Details
+                                </Button>
                             </td>
                         </tr>
 

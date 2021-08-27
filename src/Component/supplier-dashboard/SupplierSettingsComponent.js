@@ -13,30 +13,30 @@ const SupplierSettings = (userData) => {
         phone: userData.userData.phone_no,
         address: userData.userData.address
 
-      });
+    });
 
-      const handleChange = event => {
+    const handleChange = event => {
         setInfo({
-          ...Info,
-          [event.target.name]: event.target.value
+            ...Info,
+            [event.target.name]: event.target.value
         });
-      };
+    };
 
-      function updateSupplierInfo(id){
+    function updateSupplierInfo(id) {
         axios.get('http://localhost:3001/updatesupplierinfo', {
             params: {
-                fname: Info.fname ,
-                lname: Info.lname ,
-                email: Info.email ,
+                fname: Info.fname,
+                lname: Info.lname,
+                email: Info.email,
                 phone: Info.phone,
-                address: Info.address ,
+                address: Info.address,
                 sup_id: id
             }
         }).then((response) => {
             window.location.reload();
-            
+
         })
-      }
+    }
     return (
         <div className="col-12 pb-3 d-block bg-theme-pale">
             <div className="row m-2 p-2 ">
@@ -60,12 +60,12 @@ const SupplierSettings = (userData) => {
             <div className="row m-2">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">First Name</label>
-                    <input type="text" className="form-control" name="fname" value={Info.fname} onChange={handleChange}  />
+                    <input type="text" className="form-control" name="fname" value={Info.fname} onChange={handleChange} />
                 </div>
 
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12">
                     <label htmlFor="">Last Name</label>
-                    <input type="text" className="form-control" name="lname"value={Info.lname} onChange={handleChange} />
+                    <input type="text" className="form-control" name="lname" value={Info.lname} onChange={handleChange} />
                 </div>
 
             </div>

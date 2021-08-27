@@ -79,7 +79,7 @@ const SupplierStatusBar = (userData) => {
                                 Orders
                             </div>
                             <div className="  text-center fs-30 fc-white">
-                            {person.count}
+                                {person.count}
                             </div>
                         </div>
                     </div>
