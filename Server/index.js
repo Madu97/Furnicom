@@ -38,7 +38,7 @@ const db = mysql.createPool({
     host:"localhost",
     user:"root",
     password:"",
-    database:"test123",
+    database:"test",
     multipleStatements:true
 });
 
