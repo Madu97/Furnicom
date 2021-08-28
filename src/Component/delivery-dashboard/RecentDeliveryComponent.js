@@ -8,7 +8,7 @@ import { GoListOrdered } from 'react-icons/go';
 import { MdDescription } from 'react-icons/md';
 import { CgCalendarDates } from 'react-icons/cg';
 //import { AiOutlineBranches } from 'react-icons/ai';
-import { GrDeliver } from 'react-icons/gr';
+//import { GrDeliver } from 'react-icons/gr';
 
 
 const RecentDeliveryComponent = (userData) => {
