@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2021 at 07:44 AM
+-- Generation Time: Aug 28, 2021 at 09:29 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -61,25 +61,23 @@ CREATE TABLE `customer` (
   `address` varchar(100) NOT NULL,
   `street` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
-  `district` varchar(50) NOT NULL,
-  `gender` varchar(50) NOT NULL
+  `district` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`, `street`, `city`, `district`, `gender`) VALUES
-(100001, 'Customer', '1', '1111111111', 776715896, 'fdasf@gmail.com', 'Customer1', '$2b$10$lMgHhCMNHldaHXvzH2/AiOfkAiC2g4Ao6nGrQI6d9mWbPYhTOr4dO', 'colombo', '', '', '', ''),
-(100003, 'Fredrick', 'Fredrick', '782394857v', 771945036, 'fredrickpaul@gmail.com', 'Fredrick', '$2b$10$jSXGBoHS5omEFzCc9EZYP.3/PyfW2SfTie/fHzGNF1Rqk3Nui35f2', 'Colombo West', '', '', '', ''),
-(100004, 'George', 'Glen', '769347518v', 758304728, 'georgeglen@gmail.com', 'George', '$2b$10$lVqa6yERzYEioK1ttZ9wMevQLN.8CWEGDk47yTSrxwYGwYyR/nOkK', 'Kandy', '', '', '', ''),
-(100005, 'Madu', 'Mahendran', '1234567889', 712568974, 'madu@gmail.com', 'Madu', '$2b$10$lTN4eQ4uMkdkTaMrUrfR8eRvICECOWIXwN4VlQWiRCy6qkk2.4RRO', 'Kandy', '', '', '', ''),
-(100006, 'abctesting', '', '907405762v', 776715896, 'abctesting@gmail.com', 'abctt', '$2b$10$DKFhzC/HSUPHzp/gP.RGE..4Mm.IiT0I9QLR75xdIEx1NxbL5bZAa', 'colombo', '', '', '', ''),
-(100007, 'abctesting', 'dd', '1111111111', 776715896, 'abctest2@gmail.com', 'abtt2', '$2b$10$cFrtVEI0wMHhiMw/YDX9POtTpeafzY3XKYPkxyCY40T0fE162aKu2', 'colombo', '', '', '', ''),
-(100009, 'abc3', '', '907405762v', 776715896, 'abc3@gmail.com', 'abc3', '$2b$10$iyR.0dG5Rrp6Eu5Mn./uW.ISrfyqOnucBageIWZV9vLeaKm9zNqu6', 'colombo', '', '', '', ''),
-(100010, 'Henry', '', '878724596v', 776715896, 'abc5@gmail.com', 'Henry', '$2b$10$Jz2zkOcCuQofosCBF5ZsJ.wrM2FFPPzQz89s4CYCWQocodLNdkaZi', 'colombo', '', '', '', ''),
-(100011, 'Dedunu', 'De Silva', '199349041v', 116349012, 'dedunu@gmail.com', 'dedunu', '$2b$10$3EU32ji9i47f7dYMh/TJuexv5Iqg6Yo3uzj2/csqeaz1yOnd83qYS', 'No:67/7B, Matara Rd, Kamburupitiya', '', '', '', 'female'),
-(100012, 'Milinda ', 'Sadaruwan', '199969901v', 717328458, 'milinda@gmail.com', 'milinda', '$2b$10$9Jp91eSlpUlvx2UDUbGGneoKG.NLXnTXIA2H2issvbzU5UxVv/Mq2', 'No:34/67B, Panadura Road, Horana', '', '', '', 'male');
+INSERT INTO `customer` (`id`, `firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`, `street`, `city`, `district`) VALUES
+(100001, 'Customer', '1', '1111111111', 776715896, 'fdasf@gmail.com', 'Customer1', '$2b$10$lMgHhCMNHldaHXvzH2/AiOfkAiC2g4Ao6nGrQI6d9mWbPYhTOr4dO', 'colombo', '', '', ''),
+(100003, 'Fredrick', 'Paul', '782394857v', 771945036, 'fredrickpaul@gmail.com', 'Fredrick', '$2b$10$jSXGBoHS5omEFzCc9EZYP.3/PyfW2SfTie/fHzGNF1Rqk3Nui35f2', 'Colombo West', '', '', ''),
+(100004, 'George', 'Glen', '769347518v', 758304728, 'georgeglen@gmail.com', 'George', '$2b$10$lVqa6yERzYEioK1ttZ9wMevQLN.8CWEGDk47yTSrxwYGwYyR/nOkK', 'Kandy', '', '', ''),
+(100005, 'Madusha', 'Mahe', '1234567889', 775689741, 'madu97@gmail.com', 'Madu', '$2b$10$lTN4eQ4uMkdkTaMrUrfR8eRvICECOWIXwN4VlQWiRCy6qkk2.4RRO', 'Colombo', '', '', ''),
+(100006, 'abctesting', '', '907405762v', 776715896, 'abctesting@gmail.com', 'abctt', '$2b$10$DKFhzC/HSUPHzp/gP.RGE..4Mm.IiT0I9QLR75xdIEx1NxbL5bZAa', 'colombo', '', '', ''),
+(100007, 'abctesting', 'dd', '1111111111', 776715896, 'abctest2@gmail.com', 'abtt2', '$2b$10$cFrtVEI0wMHhiMw/YDX9POtTpeafzY3XKYPkxyCY40T0fE162aKu2', 'colombo', '', '', ''),
+(100009, 'abc3', '', '907405762v', 776715896, 'abc3@gmail.com', 'abc3', '$2b$10$iyR.0dG5Rrp6Eu5Mn./uW.ISrfyqOnucBageIWZV9vLeaKm9zNqu6', 'colombo', '', '', ''),
+(100010, 'Henry', '', '878724596v', 776715896, 'abc5@gmail.com', 'Henry', '$2b$10$Jz2zkOcCuQofosCBF5ZsJ.wrM2FFPPzQz89s4CYCWQocodLNdkaZi', 'colombo', '', '', ''),
+(100011, 'Kasun', 'Perera', '977725541V', 715628974, 'kasun@gmail.com', 'Kasun', '$2b$10$LpcWVZQPvShAWec11.XzFeMBVp1UMuR0km6rtHhFI6e8q//Isszj.', 'Kandy', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -95,6 +93,7 @@ CREATE TABLE `customized_order` (
   `timber_type` varchar(100) NOT NULL,
   `timber_quality` varchar(50) NOT NULL,
   `features` varchar(500) NOT NULL,
+  `quantity` int(20) NOT NULL,
   `status_code` varchar(100) NOT NULL,
   `thumb` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -103,9 +102,10 @@ CREATE TABLE `customized_order` (
 -- Dumping data for table `customized_order`
 --
 
-INSERT INTO `customized_order` (`order_id`, `name`, `customer_id`, `supplier_id`, `timber_type`, `timber_quality`, `features`, `status_code`, `thumb`) VALUES
-(1, 'Wood table', 100005, 14, 'Jak', 'Number 2', 'Add a drawer to the table', '', '/Img/item6.jpg'),
-(2, 'School chair', 100003, 7, 'Teak', 'Number 2', '', 'Preparing', '/Img/item5.jpg');
+INSERT INTO `customized_order` (`order_id`, `name`, `customer_id`, `supplier_id`, `timber_type`, `timber_quality`, `features`, `quantity`, `status_code`, `thumb`) VALUES
+(1, 'Wood table', 100005, 14, 'Jak', 'Number 2', 'Add a drawer to the table', 1, '3', '/Img/item6.jpg'),
+(2, 'School chair', 100003, 7, 'Teak', 'Number 2', '', 0, '2', '/Img/item4.jpg'),
+(3, 'Wood chair', 100003, 10, 'Jak', 'Number 2', 'Add handles. ', 5, '1', '/Img/item2.jpg');
 
 -- --------------------------------------------------------
 
@@ -141,8 +141,8 @@ CREATE TABLE `delivery_notification` (
   `order_id` int(10) NOT NULL,
   `customer_name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `telephone` int(11) NOT NULL,
-  `description` varchar(255) NOT NULL
+  `telephone` int(20) NOT NULL,
+  `description` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -151,9 +151,9 @@ CREATE TABLE `delivery_notification` (
 
 INSERT INTO `delivery_notification` (`id`, `customer_id`, `order_id`, `customer_name`, `address`, `telephone`, `description`) VALUES
 (1, 100003, 800001, 'Fredrick Paul', 'Colombo West', 771945036, 'Nothing'),
-(2, 100003, 800002, 'Fredrick Paul', 'Colombo West', 771945036, 'This is urgent order'),
+(2, 100003, 800001, 'Fredrick Paul', 'Colombo West', 771945036, 'This is an urgent order'),
 (3, 100005, 800003, 'Madu Mahendran', 'Kandy', 712568974, 'I want this order within two weeks'),
-(4, 100010, 800004, 'Henry', 'colombo', 776715896, 'I waiting for my order.');
+(4, 100010, 800004, 'Henry', 'Colombo', 776715896, 'I am waiting for my order.');
 
 -- --------------------------------------------------------
 
@@ -190,6 +190,33 @@ INSERT INTO `delivery_person` (`id`, `firstname`, `lastname`, `ic_no`, `phone_no
 (3008, 'Thilina', 'Malshan', '199569967v', '717328957', 'No:34/5B, Akuressa Rd, Matara', 'thilina@gmail.com', 'FGH4523', 'DP3008', '12345678', 0),
 (3009, 'Kushan', 'Udara', '199469918v', '717328957', '\"Sarani\", Katutholla, kamburupitiya', 'kushan@gmail.com', 'LKD8978', 'DP3009', '12345678', 0),
 (3010, 'Vidura', 'Deshan', '197967903v', '717328958', 'No:4/20b, Horana Road, Panadura', 'vidura@gmail.com', 'FGH9045', 'DP3010', '12345678', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dperson_status`
+--
+
+CREATE TABLE `dperson_status` (
+  `deliver_id` int(20) NOT NULL,
+  `dperson_id` int(20) NOT NULL,
+  `customer_id` varchar(20) NOT NULL,
+  `order_id` int(20) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `telephone` int(20) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `delivery_charges` int(255) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dperson_status`
+--
+
+INSERT INTO `dperson_status` (`deliver_id`, `dperson_id`, `customer_id`, `order_id`, `customer_name`, `address`, `telephone`, `status`, `delivery_charges`, `date`) VALUES
+(1, 3001, '100003', 800001, 'Fredrick Paul', 'Colombo West', 771945036, '2', 5600, '2021-08-03'),
+(2, 3001, '100003', 800002, 'Fredrick Paul', 'Colombo West', 771045036, '2', 6200, '2021-08-18');
 
 -- --------------------------------------------------------
 
@@ -237,7 +264,7 @@ CREATE TABLE `order_items` (
 
 INSERT INTO `order_items` (`order_id`, `item_number`, `product_id`, `supplier_id`, `quantity`, `rating`) VALUES
 (800001, 1, 500002, 14, 2, 2),
-(800001, 2, 500003, 10, 1, 5),
+(800001, 2, 500003, 14, 1, 5),
 (800002, 1, 500007, 14, 1, 0),
 (800003, 1, 500003, 0, 1, 4),
 (800003, 2, 500006, 0, 1, 0),
@@ -278,7 +305,7 @@ INSERT INTO `products` (`id`, `name`, `supplier_id`, `description`, `timber_type
 (500006, 'Square Table', 0, 'Good for school', '', '', 4560, 7, 'Rs', '/Img/item6.jpg', 0, 0),
 (500007, 'Wood Bench', 14, 'Made with Teak', 'Teak', 'Number 2', 4700, 20, 'Rs', '/Img/item4.jpg', 2, 1),
 (500008, 'Round Table', 0, 'Good for school', '', '', 2800, 11, 'Rs', '/Img/item3.png', 0, 0),
-(500009, 'Wood Chair', 0, 'Made with Teak', '', '', 3000, 16, 'Rs', '/Img/item2.jpg', 0, 0);
+(500009, 'Wood Chair', 5, 'Made with Teak', '', '', 3000, 16, 'Rs', '/Img/item2.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -307,7 +334,7 @@ INSERT INTO `shoppingcart` (`id`, `customer_id`, `product_id`, `quantity`, `data
 (400020, 100004, 500004, 1, '2021-08-01 19:51:21'),
 (400022, 100004, 500009, 1, '2021-08-01 19:51:39'),
 (400028, 100003, 500003, 1, '2021-08-04 12:16:05'),
-(400031, 100005, 500001, 10, '2021-08-06 19:25:52'),
+(400031, 100005, 500001, 9, '2021-08-06 19:25:52'),
 (400032, 100005, 500004, 1, '2021-08-06 23:47:25'),
 (400033, 100005, 500003, 1, '2021-08-16 11:10:25');
 
@@ -318,26 +345,20 @@ INSERT INTO `shoppingcart` (`id`, `customer_id`, `product_id`, `quantity`, `data
 --
 
 CREATE TABLE `status_code` (
-  `deliver_id` varchar(10) NOT NULL,
-  `dperson_id` int(50) NOT NULL,
-  `customer_id` varchar(50) NOT NULL,
-  `order_id` int(20) NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `telephone` int(20) NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `delivery_charges` int(255) NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id` int(20) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `code` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `status_code`
 --
 
-INSERT INTO `status_code` (`deliver_id`, `dperson_id`, `customer_id`, `order_id`, `customer_name`, `address`, `telephone`, `status`, `delivery_charges`, `date`, `time`) VALUES
-('1', 3001, '100003', 800001, 'Fredrick Paul', 'Colombo West', 771945036, '2', 5600, '2021-08-03', '15:11:44'),
-('2', 3001, '100003', 800002, 'Fredrick Paul', 'Colombo West', 771945036, '2', 6200, '2021-08-18', '12:15:58');
+INSERT INTO `status_code` (`id`, `status`, `code`) VALUES
+(1, 'Pending', 1),
+(2, 'Accepted', 2),
+(3, 'Preparing', 3),
+(4, 'Delivered', 4);
 
 -- --------------------------------------------------------
 
@@ -373,7 +394,8 @@ INSERT INTO `supplier` (`id`, `firstname`, `lastname`, `gender`, `ic_no`, `phone
 (11, 'hein', 'gg', 'male', '1111111111', 776715896, 'fdasf@gmail.com', 'hein', 'aaaaaaaa', 'asfd', '', '', ''),
 (12, 'ram', 'don', 'male', '1111111111', 776715896, 'fdasf@gmail.com', 'dsfg', 'aaaaaaaa', 'colombo', '', '', ''),
 (13, 'ram', 'don', 'male', '1111111111', 776715896, 'fdasf@gmail.com', 'dsfg', 'bbbbbbbb', 'colombo', '', '', ''),
-(14, 'Manoj', 'Mahendran', 'male', '1234567821', 1564872565, 'manoj@gmail.com', 'md', '12345678', 'No 45/8', '', '', '');
+(14, 'Harshana', 'Perera', 'male', '1234567821', 712568974, 'hd@gmail.com', 'md', '12345678', 'Kandy', '', '', ''),
+(15, 'Pasidu', 'Lakmal', '', '987721132V', 765426301, 'pasidu@gmail.com', 'Pasidu', '$2b$10$Ugbex5v5MpTrWsMqn1lsweE5DAD9LtKA6WPESAO17SYefJDiHoC6q', 'Badulla', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -407,17 +429,17 @@ INSERT INTO `users` (`id`, `username`, `password`, `userrole`) VALUES
 (20, 'dsfg', '$2b$10$LBqwKab1E3kZ9oO2kA3NVOffnijQpM5l/xektPxK57Qkq0VkqASyu', 'supplier'),
 (21, 'dsfg', '$2b$10$H8cvCK1qoIVe1REifK4x0uRdf39c.yQyYM.ubQ56Y9SFL8Sgx5F6.', 'supplier'),
 (22, 'Beedon', '$2b$10$SvatZ9quCjxNK7qzsc6g0.u1p4orpnkqwmp2p.faCYG4ynlVXcM8G', 'customer'),
-(23, 'Madu', '$2b$10$lTN4eQ4uMkdkTaMrUrfR8eRvICECOWIXwN4VlQWiRCy6qkk2.4RRO', 'deliveryman'),
+(23, 'Madu', '$2b$10$lTN4eQ4uMkdkTaMrUrfR8eRvICECOWIXwN4VlQWiRCy6qkk2.4RRO', 'customer'),
 (24, 'md', '$2b$10$Wvtt4Hts9JdvsGKX2YRCFepndAl.XwqFjmRs6aE.1MBznTOjvJnf6', 'supplier'),
 (25, 'abctt', '$2b$10$DKFhzC/HSUPHzp/gP.RGE..4Mm.IiT0I9QLR75xdIEx1NxbL5bZAa', 'customer'),
 (26, 'abtt2', '$2b$10$cFrtVEI0wMHhiMw/YDX9POtTpeafzY3XKYPkxyCY40T0fE162aKu2', 'customer'),
 (28, 'abc3', '$2b$10$iyR.0dG5Rrp6Eu5Mn./uW.ISrfyqOnucBageIWZV9vLeaKm9zNqu6', 'customer'),
 (29, 'Henry', '$2b$10$Jz2zkOcCuQofosCBF5ZsJ.wrM2FFPPzQz89s4CYCWQocodLNdkaZi', 'customer'),
+(31, 'DP3002', '$2b$10$80B.Sx1F.DV/iY/sVMSjiOHZkUH8U.nhw8ECVm1bfsQFRb0hxH6N.', 'deliveryman'),
+(30, 'DP3001', '$2b$10$y51xkGGW75EK70d3cdEzwOixC0jpGb7sb4CVmXwARKzBLWAUG48de', 'deliveryman'),
 (34, 'DP3005', '$2b$10$iT4JmnfpINzmu4FZ4yIc1OrS1NvhJJho9Pe3bkw6osjQlENIv/2sK', 'deliveryman'),
 (32, 'DP3003', '$2b$10$vlqxXHa5UVOreNsLLhKYC.uaKVTloySKnCy1H8h1OoGBVmvEybfRC', 'deliveryman'),
 (33, 'DP3004', '$2b$10$1tZbno9Wdiw.obFrw/DpxObL/SlSYPYrNxUA4Ff.pJssXsz.eB7L6', 'deliveryman'),
-(30, 'DP3001', '$2b$10$y51xkGGW75EK70d3cdEzwOixC0jpGb7sb4CVmXwARKzBLWAUG48de', 'deliveryman'),
-(31, 'DP3002', '$2b$10$80B.Sx1F.DV/iY/sVMSjiOHZkUH8U.nhw8ECVm1bfsQFRb0hxH6N.', 'deliveryman'),
 (35, 'DP3006', '$2b$10$IF4HV1kWpTu39aeQf40hFe6h1cxyXhG0huj8l9xnfbtiJH0HT2hDG', 'deliveryman'),
 (36, 'DP3007', '$2b$10$okcGzAQXsaUC9pdZquVw8ey1.BIemA09ZjbjydN1pt.gewgkihW5G', 'deliveryman'),
 (37, 'DP3008', '$2b$10$n/G5F7yQAdwmcNGHsVkqtOEFuMdiHL7HpsacCsJxz0ctH/xBSpLR.', 'deliveryman'),
@@ -463,15 +485,17 @@ ALTER TABLE `delivery`
 -- Indexes for table `delivery_notification`
 --
 ALTER TABLE `delivery_notification`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `order_id` (`order_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `delivery_person`
+-- Indexes for table `dperson_status`
 --
-ALTER TABLE `delivery_person`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `dperson_status`
+  ADD PRIMARY KEY (`deliver_id`),
+  ADD KEY `dperson_id` (`dperson_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `customer_name` (`customer_name`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `orders`
@@ -505,10 +529,7 @@ ALTER TABLE `shoppingcart`
 -- Indexes for table `status_code`
 --
 ALTER TABLE `status_code`
-  ADD PRIMARY KEY (`deliver_id`),
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `customer_name` (`customer_name`),
-  ADD KEY `dperson_id` (`dperson_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `supplier`
@@ -542,7 +563,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `customized_order`
 --
 ALTER TABLE `customized_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `delivery`
@@ -554,13 +575,7 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT for table `delivery_notification`
 --
 ALTER TABLE `delivery_notification`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `delivery_person`
---
-ALTER TABLE `delivery_person`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3013;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -584,7 +599,7 @@ ALTER TABLE `shoppingcart`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`

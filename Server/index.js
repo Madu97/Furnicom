@@ -70,7 +70,7 @@ app.get('/getdelivery',(req, res) =>{
 })
 
 app.get('/deliveryhistory',(req, res) =>{
-    db.query("SELECT * FROM status_code JOIN delivery_person ON status_code.dperson_id = delivery_person.id WHERE status_code.dperson_id=?;",[req.query.id],(err, result)=>{
+    db.query("SELECT * FROM dperson_status JOIN delivery_person ON dperson_status.dperson_id = delivery_person.id WHERE dperson_status.dperson_id=?;",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
@@ -87,7 +87,7 @@ app.get('/deliverycount',(req, res) =>{
 })
 
 app.get('/pendingcount',(req, res) =>{
-    db.query("SELECT COUNT(DISTINCT order_id)AS pendingcount FROM status_code WHERE status='Pending' AND dperson_id= ?",[req.query.id],(err, result)=>{
+    db.query("SELECT COUNT(DISTINCT order_id)AS pendingcount FROM dperson_status WHERE status='Pending' AND dperson_id= ?",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result); 
 
@@ -106,7 +106,7 @@ app.get('/cancelcount',(req, res) =>{
 })
 
 app.get('/deliverydata',(req, res) =>{
-    db.query("SELECT * FROM status_code JOIN customer ON status_code.customer_id = customer.id WHERE status_code.dperson_id=?;",[req.query.id],(err, result)=>{
+    db.query("SELECT * FROM dperson_status JOIN customer ON dperson_status.customer_id = customer.id WHERE dperson_status.dperson_id=?;",[req.query.id],(err, result)=>{
         console.log(result); 
         res.send(result);
 
@@ -115,7 +115,7 @@ app.get('/deliverydata',(req, res) =>{
 
 
 app.get('/changedeliverystatus',(req, res) =>{
-     db.query("UPDATE status_code SET status = ? WHERE dperson_id = ?;",[req.query.status , req.query.dperson_id],(err, result)=>{
+     db.query("UPDATE dperson_status SET status = ? WHERE dperson_id = ?;",[req.query.status , req.query.dperson_id],(err, result)=>{
          console.log(result);
          res.send(result);
  
