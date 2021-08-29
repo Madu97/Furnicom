@@ -19,10 +19,10 @@ const SupplierSidebar = (userData) => {
     const logout = () => {
 
         Axios.post("http://localhost:3001/logout").then((response) => {
-            //console.log(response.data.info);
-            /*if(response.data.info == 'success'){
+            console.log(response.data.info);
+            if(response.data.info == 'success'){
                 window.location.href = "/login";
-            }*/
+            }
         })
     }
 

@@ -45,10 +45,10 @@ const RecentDeliveryComponent = (userData) => {
     console.log(Deliverdata)
     return (
         <div className="col-12  d-block pl-1 pr-1 ">
+             <h2>Recent Deliveries</h2>
             <div className="d-flex justify-content-center table-responsive bg-order-his-color rounded">
-                <h2>Recent Deliveries</h2>
                 <table class="table fc-white text-center ">
-                    <thead className="fs-30 text-center">
+                    <thead className="fs-29 text-center">
                         <tr>
                             <th scope="col">Delivery No:</th>
                             {/*<th scope="col">Order</th> */}
