@@ -93,7 +93,7 @@ function Login() {
                             <button type="submit" class="btn w-50 btn-lg btn-primary">Log In</button>
                             </div>
                         <div className="inputBx d-flex justify-content-center p-2">
-                            <p>Don't have an account? <a href="">Sign up</a></p>
+                            <p>Don't have an account? <a href=" ">Sign up</a></p>
                         </div>
                     </form>
 
