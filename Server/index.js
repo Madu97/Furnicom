@@ -42,7 +42,7 @@ const db = mysql.createPool({
     multipleStatements:true
 });
 
-app.get('/getit',cors(),(req, res) =>{
+app.get('/getit',(req, res) =>{
     const sqlInsert = "SELECT * FROM customer;"
     db.query(sqlInsert,(err, result)=>{
         console.log(result);
@@ -309,69 +309,85 @@ app.get('/decreasequantity',(req, res) =>{
      })
  
  })
-app.post('/reg',(req,res)=>{
 
-    const username = req.body.username
-    const password = req.body.password
-    const firstname = req.body.firstname
-    const lastname = req.body.lastname
-    const address = req.body.address
-    const ic = req.body.ic
-    const phone = req.body.phone
-    const email = req.body.email
-    const gender = req.body.gender
+ app.get('/checkusername',(req, res) =>{
 
-    bcrypt.hash(password,saltRounds,(err,hash)=>{
-        
-        if(err){
-            console.log(err);
-        }
-        
-        db.query("INSERT INTO `customer`(`firstname`, `lastname`, `gender`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,gender,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
-            console.log(err);
-
-            if(result){
-                res.send({message: "Successfully Registered..."});
-            }
-           
-        })
+       db.query("SELECT username FROM users WHERE username=?;",[req.query.username],(err, result)=>{
+    
+           res.send(result);
+    
+    
+       })
+    
+    
     })
 
+ app.post('/reg',(req,res)=>{
 
-
-
-})
-
-app.post('/supreg',(req,res)=>{
-
-    const username = req.body.username
-    const password = req.body.password
-    const firstname = req.body.firstname
-    const lastname = req.body.lastname
-    const address = req.body.address
-    const ic = req.body.ic
-    const phone = req.body.phone
-    const email = req.body.email
-    const gender = req.body.gender
-
-    bcrypt.hash(password,saltRounds,(err,hash)=>{
-        
-        if(err){
-            console.log(err);
-        }
-        
-        db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `gender`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');",[firstname,lastname,gender,ic,phone,email, username, password,address,username,hash],(err,result)=>{
-            console.log(result);
-
-            if(result){
-                res.send({message: "Successfully Registered..."});
-            }
-           
-        })
+        const username = req.body.username
+        const password = req.body.password
+        const firstname = req.body.firstname
+        const lastname = req.body.lastname
+        const address = req.body.address
+        const ic = req.body.ic
+        const phone = req.body.phone
+        const email = req.body.email
+       
+    
+        bcrypt.hash(password,saltRounds,(err,hash)=>{
+           
+            if(err){
+                console.log(err);
+               
+            }
+           
+            db.query("INSERT INTO `customer`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
+                console.log(err);
+    
+                if(result){
+                    res.send({message: "Successfully Registered..."});
+                }
+               
+            })
+        })
+    
+    
+    
+    
     })
 
+    app.post('/supreg',(req,res)=>{
 
-})
+            const username = req.body.username
+            const password = req.body.password
+            const firstname = req.body.firstname
+            const lastname = req.body.lastname
+            const address = req.body.address
+            const ic = req.body.ic
+            const phone = req.body.phone
+            const email = req.body.email
+           
+        
+            bcrypt.hash(password,saltRounds,(err,hash)=>{
+               
+                if(err){
+                    console.log(err);
+                }
+               
+                db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');",[firstname,lastname,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
+                    console.log(err);
+        
+                    if(result){
+                        res.send({message: "Successfully Registered..."});
+                    }
+                   
+                })
+            })
+        
+        
+        
+        
+        })
 
 app.get("/login",(req,res)=>{
     if (req.session.user){

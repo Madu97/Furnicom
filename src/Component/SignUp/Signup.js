@@ -63,7 +63,7 @@ function Signup() {
                         document.getElementById("custmer-signup").reset();
                     }
                 })
-                //console.log(data)
+                // console.log(data)
 
             }
         })
