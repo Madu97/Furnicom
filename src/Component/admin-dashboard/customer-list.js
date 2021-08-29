@@ -1,172 +1,69 @@
-import React from 'react';
-//import './main.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const CustomerList = ({ contact, handleEditClick, handleDeleteClick }) => {
-    return (
-        
-      
-        <div className="col-12  fc-white justify-content-center align-items-center border rounded">
-<table class="table table-striped text-left ">
-  <thead className="fs-30">
-    <tr>
-      <th scope="col">Id Number</th>
-      <th scope="col">Name</th>
-      <th scope="col">Address</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone No</th>
-      <th scope="col">Update</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">01</th>
-      <td>Amal</td>
-      <td>colombo</td>
-      <td>amal123@gmail.com</td>
-      <td>0112245789</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">02</th>
-      <td>Kamal</td>
-      <td>Gall</td>
-      <td>kamal178@gmail.com</td>
-      <td>0771245963</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">03</th>
-      <td>Saman</td>
-      <td>Kandy</td>
-      <td>saman356@gmail.com</td>
-      <td>0701542896</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">04</th>
-      <td>Nuwan</td>
-      <td>Gampaha</td>
-      <td>nuwan890@gmail.com</td>
-      <td>0716354912</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">05</th>
-      <td>Nimal</td>
-      <td>Mathara</td>
-      <td>nimal984@gmail.com</td>
-      <td>0724569852</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-        
-    </tr>
+const CustomerList = () => {
+  const [customer, setCustomer] = useState([]);
 
+  useEffect(() => {
+    loadCustomer();
+  }, []);
 
-    <tr>
-      <th scope="row">06</th>
-      <td>Amal</td>
-      <td>colombo</td>
-      <td>amal123@gmail.com</td>
-      <td>0112245789</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">07</th>
-      <td>Kamal</td>
-      <td>Gall</td>
-      <td>kamal178@gmail.com</td>
-      <td>0771245963</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">08</th>
-      <td>Saman</td>
-      <td>Kandy</td>
-      <td>saman356@gmail.com</td>
-      <td>0701542896</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">09</th>
-      <td>Nuwan</td>
-      <td>Gampaha</td>
-      <td>nuwan890@gmail.com</td>
-      <td>0716354912</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">10</th>
-      <td>Nimal</td>
-      <td>Mathara</td>
-      <td>nimal984@gmail.com</td>
-      <td>0724569852</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
+  const loadCustomer = async () => {
+    const result = await axios.get("http://localhost:3001/getit");
+  
+    setCustomer(result.data.reverse());
+  };
+
+  const deleteCustomer = async id => {
+    await axios.delete(`http://localhost:3001/customer/${id}`);
+    loadCustomer();
+  };
+
+  return (
+    
+    <div className="container">
+      <Link class="btn btn-primary" to={`/admin/addcustomer/`}>Add Customer</Link>
+      <div className="py-4">
         
-    </tr>
-  </tbody>
-</table>
-        </div>
-        
-        
-    )
-}
+        <table class="table border shadow">
+          <thead class="thead-dark">
+            <tr>
+              
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">IC</th>
+              <th scope="col">Phone No</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {customer.map((customer) => (
+              <tr>
+              
+                <th scope="row">{customer.id}</th>
+                <td>{customer.firstname}</td>
+                <td>{customer.lastname}</td>
+                <td>{customer.ic_no}</td>
+                <td>{customer.phone_no}</td>
+                <td>{customer.email}</td>
+                <td>{customer.address}</td>
+                
+                <td>
+                  <Link class="btn btn-outline-primary mr-2" to={`/admin/editcustomer/${customer.id}`}>Edit</Link>
+                  <Link class="btn btn-danger" onClick={() => deleteCustomer(customer.id)}>Delete</Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
 
 export default CustomerList;
