@@ -56,8 +56,8 @@ const CustomerRecentOrders = (userData) => {
 
     return (
         <div className="col-12  d-block pl-1 pr-1 ">
-            <div className="d-flex justify-content-center fc-blue">
-                <h3>Recent Orders</h3>
+            <div className="d-flex justify-content-center  fc-white">
+                <h3 className="bg-dark border rounded p-2 mt-2">Recent Orders</h3>
             </div>
             <div className="d-flex justify-content-center table-responsive  rounded">
 
