@@ -61,10 +61,10 @@ const CustomerRecentReview = (userData) => {
 
     console.log(userData.userData);
     return (
-        <div className="col-12  d-block pl-1 pr-1 mt-3 pt-3">
+        <div className="col-12  d-block pl-1 pr-1 mt-3 ">
             
-            <div className="d-flex mt-3 pt-3 justify-content-center fc-blue">
-            <h3>Recent Reviews</h3> 
+            <div className="d-flex mt-2 justify-content-center fc-white">
+            <h3 className="bg-dark p-2 border rounded">Recent Reviews</h3> 
             </div>
             {Orderdata.map((person, index) =>
                 <div className="m-2">

@@ -11,6 +11,10 @@ const bcrypt = require('bcrypt');
 const { response } = require('express');
 const saltRounds = 10
 
+const multer = require('multer')
+
+require("dotenv").config();
+
 app.use(express.json());
 app.use(
     cors({
@@ -41,6 +45,8 @@ const db = mysql.createPool({
     database:"test",
     multipleStatements:true
 });
+
+app.get("/config/paypal", (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
 
 app.get('/getit',(req, res) =>{
     const sqlInsert = "SELECT * FROM customer;"
@@ -225,7 +231,7 @@ app.get('/productsdetails',(req, res) =>{
 })
 
 app.get('/ordersbycustomer_id',(req, res) =>{
-    db.query("SELECT * FROM orders JOIN order_items ON orders.order_id = order_items.order_id JOIN products ON order_items.product_id = products.id WHERE orders.customer_id=?;",[req.query.id],(err, result)=>{
+    db.query("SELECT * FROM orders JOIN order_items ON orders.payment_id = order_items.payment_id JOIN products ON order_items.product_id = products.id WHERE orders.customer_id=?;",[req.query.id],(err, result)=>{
         //console.log(req.query.id);
         res.send(result);
 
@@ -233,6 +239,14 @@ app.get('/ordersbycustomer_id',(req, res) =>{
 
 })
 
+app.get('/recentordersbycustomer_id',(req, res) =>{
+    db.query("SELECT * FROM orders JOIN order_items ON orders.payment_id = order_items.payment_id JOIN products ON order_items.product_id = products.id WHERE orders.customer_id=? LIMIT 2;",[req.query.id],(err, result)=>{
+        //console.log(req.query.id);
+        res.send(result);
+
+    })
+
+})
 
 app.get('/getuser',(req, res) =>{
     //console.log('sfd');
@@ -245,7 +259,7 @@ app.get('/getuser',(req, res) =>{
 })
 
 app.get('/getcart',(req, res) =>{
-    db.query("SELECT shoppingcart.id,shoppingcart.customer_id,shoppingcart.product_id,shoppingcart.quantity,shoppingcart.data_added,products.name,products.description,products.price,products.thumb FROM shoppingcart INNER JOIN products ON shoppingcart.product_id = products.id WHERE shoppingcart.customer_id=?",[req.query.id],(err, result)=>{
+    db.query("SELECT shoppingcart.id,shoppingcart.customer_id,shoppingcart.product_id,shoppingcart.quantity,shoppingcart.data_added,products.name,products.description,products.price,products.available_quantity,products.thumb FROM shoppingcart INNER JOIN products ON shoppingcart.product_id = products.id WHERE shoppingcart.customer_id=?",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
@@ -310,6 +324,43 @@ app.get('/decreasequantity',(req, res) =>{
  
  })
 
+ app.get('/addtoorder',(req, res) =>{
+
+    db.query("INSERT INTO `orders`(`payment_id`, `customer_id`, `ship_method`, `date`,`status`,`status_code`) VALUES (?,?,'VISA',NOW(),'Preparing','0');",[req.query.order_id , req.query.customer_id],(err, result)=>{
+        res.send(result);
+
+    })
+
+})
+
+app.get('/addToorderItems',(req, res) =>{
+
+   db.query("INSERT INTO `order_items`(`payment_id`, `item_number`, `product_id`, `supplier_id`,`quantity`,`rating`) VALUES (?,?,?,'19',?,'0');UPDATE products SET available_quantity = available_quantity -? WHERE id = ?;",[req.query.payment_id , req.query.item_number, req.query.product_id, req.query.qtn, req.query.qtn, req.query.product_id],(err, result)=>{
+       res.send(result);
+
+   })
+
+})
+
+app.get('/deletecart',(req, res) =>{
+
+    db.query("DELETE FROM shoppingcart WHERE customer_id = ?;",[req.query.customer_id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
+app.get('/updatecustomerinfo',(req, res) =>{
+    db.query("UPDATE customer SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;",[req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.cust_id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
  app.get('/checkusername',(req, res) =>{
 
        db.query("SELECT username FROM users WHERE username=?;",[req.query.username],(err, result)=>{
@@ -319,6 +370,68 @@ app.get('/decreasequantity',(req, res) =>{
     
        })
     
+    
+    })
+
+    app.get('/searchproducts',(req, res) =>{
+        //console.log(req.query.word)
+        range1 = req.query.range1;
+        range2 =req.query.range2;
+        sortbyrating = req.query.sortbyrating;
+    
+        qr = "SELECT * FROM products WHERE name LIKE '"+req.query.word+"%' OR name LIKE '%"+req.query.word+"%';";
+        
+        if(range1 && range2){
+            if(sortbyrating){
+                qr = "SELECT * FROM products WHERE (price BETWEEN "+range1+" AND "+range2+ ") AND (name LIKE '"+req.query.word+"%' OR name LIKE '%"+req.query.word+"%') ORDER BY (total_ratings / total_people_rated) DESC;";
+            }else{
+            qr = "SELECT * FROM products WHERE (price BETWEEN "+range1+" AND "+range2+ ") AND (name LIKE '"+req.query.word+"%' OR name LIKE '%"+req.query.word+"%');";
+            }
+        }
+        else{
+            if(sortbyrating){
+                qr = "SELECT * FROM products WHERE name LIKE '"+req.query.word+"%' OR name LIKE '%"+req.query.word+"%' ORDER BY (total_ratings / total_people_rated) DESC;";
+            }else{
+                qr = "SELECT * FROM products WHERE name LIKE '"+req.query.word+"%' OR name LIKE '%"+req.query.word+"%';";
+            }
+        }
+    
+        db.query(qr,(err, result)=>{
+            res.send(result);
+    
+        })
+    
+    })
+    
+    
+      app.post('/uploadpp', (req, res) => {
+    
+        const storage = multer.diskStorage({
+            destination: function (req, file, cb) {
+              cb(null, '../src/Assets/Images')
+            },
+            filename: (req, file, cb) => {
+              cb(null, Date.now() + '-' +file.originalname)
+            }
+          })
+          
+          const upload = multer({ storage: storage }).single('file')
+        
+        upload(req, res, (err) => {
+          if (err) {console.log(err)
+            res.sendStatus(500);
+          }
+          res.send(req.file);
+        });
+        //app.use(express.static('../Client/src/Assets/Images'));
+      });
+    
+      app.get('/updateprofilepic',(req, res) =>{
+        db.query("UPDATE customer SET profile_picture=? WHERE id=?;",[req.query.name, req.query.id],(err, result)=>{
+            console.log(result);
+            res.send(result);
+    
+        })
     
     })
 

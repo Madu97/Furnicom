@@ -17,10 +17,10 @@ const CustomerSidebar = (userData) => {
     const[Usernm, setUsernm] = useState();
     const[User, setUser] =useState([]);
 
-        //console.log(userData.userData[0].username);
+       
         //setUsernm(userData.userData[0].username)
 
-        const nm = userData.userData[0].username;
+        //const nm = userData.userData[0].username;
 
     const logout = () => {
         
@@ -32,7 +32,7 @@ const CustomerSidebar = (userData) => {
         })
     }
 
-    useEffect(() => {
+   /* useEffect(() => {
         const fetchData = async () => {
             const response = await Axios.get('http://localhost:3001/getuser', {
                 params: {
@@ -44,23 +44,24 @@ const CustomerSidebar = (userData) => {
 
         };
         fetchData();
-    }, [id]);
+    }, [id]);*/
 
+    console.log(User.profile_picture);
     return (
         <div className="col-3 rounded sidebar bg-side-bar">
             <div className="row  d-flex p-3 justify-content-center mb-3 ">
-                <img src={customer} class="img-fluid imgstyle rounded-circle" width="200px" height="200px"></img>
+                <img src={require('../../Assets/Images/'+ userData.userData.profile_picture).default} class="img-fluid imgstyle rounded-circle" width="200px" height="200px"></img>
 
             </div>
 
             <div className="p-2 row bgc-theme justify-content-center font-weight-bold fc-white ">
-                <h4>{User.username}</h4>
+                <h4>{userData.userData.username}</h4>
             </div>
 
             <div className="mt-2 fs-20">
 
                     <Link to="/customer/dashboard">
-                    <a className="row dboard-icon mb-5 fc-white align-items-center" href="CustomerDashboard"><div className="m-2"><AiOutlineHome size={32}/></div>
+                    <a className="row dboard-icon mb-3 fc-white align-items-center" href="CustomerDashboard"><div className="m-2 border rounded-circle p-1"><AiOutlineHome size={30}/></div>
                         <div className="dboard-text ml-2 ">
                             Dashboard
                         </div>
@@ -68,7 +69,7 @@ const CustomerSidebar = (userData) => {
                     </Link>
 
                     <Link to="/customer/cart">
-                    <a className="row dboard-icon mb-5 fc-white align-items-center" href="CustomerDashboard"><div className="m-2"><TiShoppingCart size={35}/></div>
+                    <a className="row dboard-icon mb-3 fc-white align-items-center" href="CustomerDashboard"><div className="m-2 border rounded-circle p-1"><TiShoppingCart size={30}/></div>
                         <div className="dboard-text ml-2 ">
                             My Cart
                         </div>
@@ -76,7 +77,7 @@ const CustomerSidebar = (userData) => {
                     </Link>
 
                     <Link to="/customer/orderhistory">
-                        <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><AiOutlineInbox size={32}/></div>
+                        <a className="row dboard-icon mt-3 mb-3 fc-white align-items-center" href=""><div className="m-2 border rounded-circle p-1"><AiOutlineInbox size={30}/></div>
                             <div className="dboard-text ml-2 ">
                                 My Orders
                             </div>
@@ -84,7 +85,7 @@ const CustomerSidebar = (userData) => {
                     </Link>
 
                     <Link to="/customer/myreviews">
-                    <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><AiOutlineStar size={32}/></div>
+                    <a className="row dboard-icon mt-3 mb-3 fc-white align-items-center" href=""><div className="m-2 border rounded-circle p-1"><AiOutlineStar size={30}/></div>
                         <div className=" dboard-text ml-2 ">
                             My Ratings
                     </div>
@@ -92,7 +93,7 @@ const CustomerSidebar = (userData) => {
                     </Link>
 
                     <Link to="/customer/myreturns">
-                    <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2"><TiDeleteOutline size={35}/></div>
+                    <a className="row dboard-icon mt-3 mb-3 fc-white align-items-center" href=""><div className="m-2 border rounded-circle p-1"><TiDeleteOutline size={30}/></div>
                         <div className=" dboard-text ml-2 ">
                             My Returns
                     </div>
@@ -100,7 +101,7 @@ const CustomerSidebar = (userData) => {
                     </Link>
 
                     <Link to="/customer/settings">
-                    <a className="row dboard-icon mt-5 mb-5 fc-white align-items-center" href=""><div className="m-2 pl-1 "><AiOutlineSetting size={30}/></div>
+                    <a className="row dboard-icon mt-3 mb-3 fc-white align-items-center" href=""><div className="m-2 pl-1 border rounded-circle p-1"><AiOutlineSetting size={28}/></div>
                         <div className="dboard-text ml-2 ">
                             Settings
                     </div>

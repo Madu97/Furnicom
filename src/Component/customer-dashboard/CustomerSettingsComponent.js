@@ -6,7 +6,7 @@ import customer from '../../Assets/Images/customer.jpg';
 
 
 const CustomerSettings = (userData) => {
-   
+
     const [Info, setInfo] = useState({
         fname: userData.userData.firstname,
         lname: userData.userData.lastname,
@@ -14,32 +14,68 @@ const CustomerSettings = (userData) => {
         phone: userData.userData.phone_no,
         address: userData.userData.address
 
-      });
+    });
 
-      const handleChange = event => {
+    const handleChange = event => {
         setInfo({
-          ...Info,
-          [event.target.name]: event.target.value
+            ...Info,
+            [event.target.name]: event.target.value
         });
-      };
+    };
 
-      function updateCustomerInfo(id){
+    function updateCustomerInfo(id) {
         axios.get('http://localhost:3001/updatecustomerinfo', {
             params: {
-                fname: Info.fname ,
-                lname: Info.lname ,
-                email: Info.email ,
+                fname: Info.fname,
+                lname: Info.lname,
+                email: Info.email,
                 phone: Info.phone,
-                address: Info.address ,
+                address: Info.address,
                 cust_id: id
             }
         }).then((response) => {
             window.location.reload();
-            
+
         })
-      }
+    }
+
+    const [isOpened, setIsOpened] = useState(false);
+    function toggle() {
+        setIsOpened(wasOpened => !wasOpened);
+
+    }
+
+    const [imgdetails, setimgdetails] = useState([]);
+    const [imgFile, setImgFile] = useState('');
+
+    function uploadHandler(event) {
 
 
+        const data = new FormData();
+        data.append('file', event.target.files[0]);
+
+        axios.post('http://localhost:3001/uploadpp', data)
+            .then((res) => {
+
+                //setImgFile('http://localhost:3001/upl/' + res.data.filename)
+                setimgdetails(res.data.filename);
+
+                axios
+                .get("http://localhost:3001/updateprofilepic", {
+                    params: {
+                        name: res.data.filename,
+                        id: userData.userData.id
+                    },
+                })
+                .then((response) => {
+                    
+                });
+            });
+           
+
+    }
+
+    console.log(window.location.origin)
     return (
         <div className="col-12 pb-3 d-block border">
             <div className="row m-2 p-2 ">
@@ -47,18 +83,18 @@ const CustomerSettings = (userData) => {
             </div>
             <div className="d-block">
                 <div className="ml-5 font-weight-bold">
-                    <p>Peter</p>
+                    <p>{userData.userData.username}</p>
                 </div>
 
                 <div className="row align-items-center  ">
                     <div className="m-2 ml-4">
-                        <img src={customer} class="rounded-circle" width="100px" height="100px"></img>
+                        <img src={require('../../Assets/Images/'+ userData.userData.profile_picture).default}  class="rounded-circle" width="100px" height="100px"></img>
                     </div>
 
-                    <div className="">
-                        <button className="btn btn-sm btn-success m-2">Upload</button>
-
-                        <button className="btn btn-sm btn-danger m-2">Remove</button>
+                    <div className="row pl-4 align-items-center">
+                        <button style={(isOpened) ? ({ display: 'none' }) : ({ display: 'a' })} className="btn btn-sm btn-success m-2" onClick={() => toggle()}>Change</button>
+                        {(isOpened) && (<div className="border p-2"><input type="file" name="file" onChange={e => uploadHandler(e)} /><button onClick={() => window.location.reload()} className="btn btn-sm btn-primary">OK</button></div>)}
+                        <button className="btn btn-sm btn-danger ml-4 m-2">Remove</button>
                     </div>
                 </div>
             </div>
@@ -66,12 +102,12 @@ const CustomerSettings = (userData) => {
             <div className="row m-2">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
                     <label htmlFor="">First Name</label>
-                    <input type="text" className="form-control" name="fname" value={Info.fname} onChange={handleChange}  />
+                    <input type="text" className="form-control" name="fname" value={Info.fname} onChange={handleChange} />
                 </div>
 
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12">
                     <label htmlFor="">Last Name</label>
-                    <input type="text" className="form-control" name="lname"value={Info.lname} onChange={handleChange} />
+                    <input type="text" className="form-control" name="lname" value={Info.lname} onChange={handleChange} />
                 </div>
 
             </div>

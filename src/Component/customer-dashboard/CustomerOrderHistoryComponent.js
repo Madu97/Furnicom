@@ -37,7 +37,7 @@ const CustomerOrderHistory = (userData) => {
                 }
             });
 
-            setOrderdata(response.data);
+            setOrderdata(response.data);console.log('hello')
         };
         fetchData();
     }, [userid]);
@@ -106,7 +106,7 @@ const CustomerOrderHistory = (userData) => {
                                                     </div>
                                                     <div className="d-flex align-items-center">
                                                         <p className="d-flex font-weight-bold"><AiOutlineFieldNumber size={25} /><span>&nbsp;</span>Order ID :<span>&nbsp;&nbsp;&nbsp;</span></p>
-                                                        <p>{person.order_id}</p>
+                                                        <p>{person.order_id}</p>{console.log(person.date)}
                                                     </div>
                                                     <div className="d-flex align-items-center">
                                                         <p className="d-flex font-weight-bold"><MdDescription size={25} /><span>&nbsp;</span>Description :<span>&nbsp;&nbsp;&nbsp;</span></p>
@@ -159,6 +159,7 @@ const CustomerOrderHistory = (userData) => {
                     )}
                 </table>
             </div>
+            <Link to="/customer/customizedorder"><button className="btn btn-primary">Request Customized Order</button></Link>
         </div>
     );
 };
