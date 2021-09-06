@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 
 import { GrStar } from 'react-icons/gr'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch } from 'react-icons/ai'   
+import { GoSettings } from 'react-icons/go'
 const stylenone = { color: "grey", margin: "2px" }
 const stylegold = { color: "gold", margin: "2px" }
 
@@ -12,7 +13,18 @@ const stylegold = { color: "gold", margin: "2px" }
 const SearchProducts = () => {
 
     const [val, setVal] = useState();
+    const [minprice, setminprice] = useState();
+    const [maxprice, setmaxprice] = useState();
     const [persons, setpersons] = useState([]);
+    const [toggle1, settoggle1] = useState(true);
+
+    let min = React.createRef();
+    let max = React.createRef();
+    let wd = React.createRef();
+    let ratingfilter = React.createRef();
+
+    const [isOpened, setIsOpened] = useState(false);
+
 
     useEffect(() => {
 
@@ -25,19 +37,74 @@ const SearchProducts = () => {
         fetchData();
     }, []);
 
-    function searchit(e) {
+    function searchit() {
         //setVal(e.target.value);
 
         axios.get('http://localhost:3001/searchproducts', {
             params: {
-                word: e.target.value
+                word: wd.current.value
             }
         }).then((response) => {
-            //console.log(response);
             setpersons(response.data)
         })
 
-        setVal(e.target.value);
+        setVal(wd.current.value);
+
+    }
+
+    function test(){
+        //alert(min.current.value)
+        axios.get('http://localhost:3001/searchproducts', {
+            params: {
+                word: wd.current.value,
+                range1: min.current.value,
+                range2: max.current.value
+                
+            }
+        }).then((response) => {
+            setpersons(response.data)
+        })
+
+        setVal(wd.current.value);
+    }
+
+    function filterbyrating(){
+        settoggle1(wasOpened1 => !wasOpened1);
+
+        if(toggle1){
+            axios.get('http://localhost:3001/searchproducts', {
+                params: {
+                    word: wd.current.value,
+                    range1: min.current.value,
+                    range2: max.current.value,
+                    sortbyrating :true 
+                    
+                }
+            }).then((response) => {
+                setpersons(response.data)
+            })
+    
+            setVal(wd.current.value);
+        }
+        else{
+            axios.get('http://localhost:3001/searchproducts', {
+            params: {
+                word: wd.current.value,
+                range1: min.current.value,
+                range2: max.current.value
+                
+            }
+        }).then((response) => {
+            setpersons(response.data)
+        })
+
+        setVal(wd.current.value);
+        }
+        /**/
+    }
+
+    function toggle() {
+        setIsOpened(wasOpened => !wasOpened);
 
     }
 
@@ -73,12 +140,47 @@ const SearchProducts = () => {
                 <div className="col-4 d-flex ">
                     <input
                         className="form-control"
-                        onInput={e => searchit(e)}
+                        onInput={e => searchit()}
                         placeholder="Search"
+                        ref={wd}
                     />
-                    <button className="btn btn-primary d-flex ml-3">Search <div className="ml-2"><AiOutlineSearch size={22}/></div></button>
+                    <button className="btn theme-color d-flex ml-3">Search <div className="ml-2"><AiOutlineSearch size={22}/></div></button>
                 </div>
             </div>
+            <div className="m-2">
+            <button onClick={() => toggle()} className="btn d-flex theme-color fc-white"><GoSettings size={23}/><div className="ml-2">Filters</div></button>
+            </div>
+            {isOpened && (  <div>
+                            <div className="row d-flex justify-content-start">
+                            <div className="col-4 d-flex m-2 ">
+                                <div className="ml-2">
+                                <input
+                                    className="form-control"
+                                    placeholder="Minimum price"
+                                    ref={min}
+                                />
+                                </div>
+                                <div className="m-2 font-weight-bold">-</div>
+                                <div className="ml-2">
+                                <input
+                                    className="form-control"
+                                    placeholder="Maximum price"
+                                    ref={max}
+                                />
+                                </div>
+                                <button className="btn theme-color ml-2 d-flex ml-3" onClick={() =>test()}>Go</button>
+                            </div>
+
+                        </div>
+
+                        <div className="row m-2 ml-3 d-flex align-items-center">
+                            <input type="checkbox" value="val" ref={ratingfilter} onChange={() => filterbyrating()}/>
+                            <div className="ml-2"> Show top rated</div><br></br>
+                        </div>
+
+
+                        </div>
+            )}
            <div className="row d-flex mt-5 justify-content-center">
           {(val) ? ( <p>Showing results for "{val}"</p>) : ('')}
            </div>
@@ -86,7 +188,7 @@ const SearchProducts = () => {
 
                     {(persons[0]) ? (
                                                     <div className="container-fluid text-center ">
-                                                    <div className="row ml-5 pl-4 justify-content-start align-items-center   flex-row">
+                                                    <div className="row ml-5 justify-content-start align-items-center   flex-row">
                                         {persons.map(person =>
                                                 <div className="col-lg-2 col-md-4 col-sm-8 col-xs-12 m-5 justify-content-around align-items-center border rounded" key={person.id}>
                                                     <div className="d-flex pt-3 justify-content-center">

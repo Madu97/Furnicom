@@ -17,6 +17,7 @@ import CustomerMyReview from "./Pages/Customer/CustomerMyReviews";
 import CustomerMyReturn from "./Pages/Customer/CustomerMyReturns";
 import CustomerCart from "../Component/customer-dashboard/CustomerMyCart";
 import PoductDetails from "../Component/Products/ProductsDetails";
+import Customercustomizedorder from "../Component/customer-dashboard/CustomerCustomizedOrder";
 
 import Login from "./Pages/Login/Login";
 
@@ -50,7 +51,7 @@ const Customer = () => {
                 const element = (
 
                     <div className="row">
-                    <CustomerSidebar userData={response.data.user} />
+                    <CustomerSidebar userData={response1.data[0]} />
                         <div className="col-9 p-5">
                             <Switch>
                                 <Route path="/customer/dashboard">
@@ -67,6 +68,9 @@ const Customer = () => {
                                 </Route>
                                 <Route path="/customer/myreviews">
                                     <CustomerMyReview userData={response1.data[0]} />
+                                </Route>
+                                <Route path="/customer/customizedorder">
+                                    <Customercustomizedorder userData={response1.data[0]} />
                                 </Route>
                                 <Route path="/customer/myreturns">
                                     <CustomerMyReturn />
