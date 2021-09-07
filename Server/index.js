@@ -202,7 +202,7 @@ app.get('/customizedorder',(req, res) =>{
 })
 
 app.get('/changeorderstatus',(req, res) =>{
-     db.query("UPDATE customized_order SET status_code = ? WHERE supplier_id = ?;",[req.query.status , req.query.sid],(err, result)=>{
+     db.query("UPDATE customized_order SET status_code = ? WHERE supplier_id = ? AND order_id = ? ;",[req.query.status , req.query.sid, req.query.oid],(err, result)=>{
          console.log(result);
          res.send(result);
  

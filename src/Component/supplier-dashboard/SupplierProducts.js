@@ -7,8 +7,7 @@ import { AiOutlineFieldNumber } from 'react-icons/ai';
 import { MdDescription } from 'react-icons/md';
 import { MdGrade } from 'react-icons/md';
 import { GiCash } from 'react-icons/gi';
-import jsPDF from "jspdf";
-require("jspdf-autotable");
+
 
 
 

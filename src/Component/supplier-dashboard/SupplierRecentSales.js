@@ -40,12 +40,13 @@ const SupplierRecentSales = (userData) => {
 
     }
 
-    function UpdateStatus(status_code, supplier_id) {
+    function UpdateStatus(status_code, supplier_id,order_id) {
 
         axios.get('http://localhost:3001/changeorderstatus', {
             params: {
                 sid: supplier_id,
                 status: status_code,
+                oid:order_id,
             }
         }).then((response) => {
             window.location.reload();
@@ -132,7 +133,7 @@ const SupplierRecentSales = (userData) => {
                                                 </div>
                                                 <div class="container my-3 bg-light">
                                                     <div class="col-md-12 text-center">
-                                                        <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status, person.supplier_id)}>Save</button>
+                                                        <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status, person.supplier_id, person.order_id)}>Save</button>
                                                     </div>
                                                 </div>
 
