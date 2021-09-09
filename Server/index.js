@@ -176,6 +176,15 @@ app.get('/supplierproduct',(req, res) =>{
 
 })
 
+app.get('/updatesupplierinfo',(req, res) =>{
+    db.query("UPDATE supplier SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;",[req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.sup_id],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
 app.get('/getCustomOrder',(req, res) =>{
     db.query("SELECT * FROM customized_order WHERE supplier_id=? AND status_code = '4';",[req.query.id],(err, result)=>{
         console.log(result);
