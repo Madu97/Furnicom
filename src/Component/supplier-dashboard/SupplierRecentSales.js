@@ -40,13 +40,13 @@ const SupplierRecentSales = (userData) => {
 
     }
 
-    function UpdateStatus(status_code, supplier_id,order_id) {
+    function UpdateStatus(status_code, supplier_id, order_id) {
 
         axios.get('http://localhost:3001/changeorderstatus', {
             params: {
                 sid: supplier_id,
                 status: status_code,
-                oid:order_id,
+                oid: order_id,
             }
         }).then((response) => {
             window.location.reload();
@@ -75,15 +75,23 @@ const SupplierRecentSales = (userData) => {
                             <td>
                                 {(person.status_code == 1) ? (
                                     <div>
-                                        <p>Pending</p>
+                                        <p>Preparing</p>
                                     </div>) : ''}
                                 {(person.status_code == 2) ? (
                                     <div>
-                                        <p>Accepted</p>
+                                        <p>Hand over to the company</p>
                                     </div>) : ''}
                                 {(person.status_code == 3) ? (
                                     <div>
-                                        <p>Preparing</p>
+                                        <p>Order Dispatched</p>
+                                    </div>) : ''}
+                                {(person.status_code == 4) ? (
+                                    <div>
+                                        <p>On the way</p>
+                                    </div>) : ''}
+                                {(person.status_code == 5) ? (
+                                    <div>
+                                        <p>Delivered</p>
                                     </div>) : ''}
 
                             </td>
@@ -122,21 +130,24 @@ const SupplierRecentSales = (userData) => {
                                                     <p className="d-flex font-weight-bold"><MdGrade size={25} /><span>&nbsp;</span>Timber Quality :<span>&nbsp;&nbsp;&nbsp;</span></p>
                                                     <p>{person.timber_quality}</p>
                                                 </div>
-                                                <div className="d-flex align-items-center">
-                                                    <p className="d-flex font-weight-bold"><span>&nbsp;</span>Status:<span>&nbsp;&nbsp;&nbsp;</span></p>
 
-                                                    <select className="browser-default custom-select" onChange={e => setStatus(e.target.value)}>
-                                                        <option></option>
-                                                        <option value="2">Accepted</option>
-                                                        <option value="3">Preparing</option>
-                                                    </select>
-                                                </div>
-                                                <div class="container my-3 bg-light">
-                                                    <div class="col-md-12 text-center">
-                                                        <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status, person.supplier_id, person.order_id)}>Save</button>
+                                                {(person.status_code < 2) ? (
+                                                    <div className="d-flex align-items-center">
+                                                        <p className="d-flex font-weight-bold"><span>&nbsp;</span>Status:<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                        <select className="browser-default custom-select" onChange={e => setStatus(e.target.value)}>
+                                                            <option></option>
+                                                            <option value="1">Preparing</option>
+                                                            <option value="2">Hand over to the company</option>
+                                                        </select>
                                                     </div>
-                                                </div>
-
+                                                ) : ''}
+                                                {(person.status_code < 2) ? (
+                                                    <div class="container my-3 bg-light">
+                                                        <div class="col-md-12 text-center">
+                                                            <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status, person.supplier_id, person.order_id)}>Save</button>
+                                                        </div>
+                                                    </div>
+                                                ) : ''}
                                             </div>
 
                                         </div>

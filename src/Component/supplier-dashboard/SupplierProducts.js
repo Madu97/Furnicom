@@ -7,8 +7,10 @@ import { AiOutlineFieldNumber } from 'react-icons/ai';
 import { MdDescription } from 'react-icons/md';
 import { MdGrade } from 'react-icons/md';
 import { GiCash } from 'react-icons/gi';
+import { GrStar } from 'react-icons/gr'
 
-
+const stylenone = { color: "grey", margin: "2px" }
+const stylegold = { color: "gold", margin: "2px" }
 
 
 const SupplierProducts = (userData) => {
@@ -74,16 +76,22 @@ const SupplierProducts = (userData) => {
                                                     <p>{person.description}</p>
                                                 </div>
                                                 <div className="d-flex align-items-center">
-                                                    <p className="d-flex font-weight-bold"><GiCash size={25} /><span>&nbsp;</span>Price :<span>&nbsp;&nbsp;&nbsp;</span></p>
-                                                    <p>Rs.{person.price}</p>
+                                                    <p className="d-flex font-weight-bold"><GiCash size={25} /><span>&nbsp;</span>Timber Quality :<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                    <p>{person.timber_quality}</p>
                                                 </div>
                                                 <div className="d-flex align-items-center">
                                                     <p className="d-flex font-weight-bold"><AiOutlineBranches size={25} /><span>&nbsp;</span>Timber Type :<span>&nbsp;&nbsp;&nbsp;</span></p>
                                                     <p>{person.timber_type}</p>
                                                 </div>
                                                 <div className="d-flex align-items-center">
-                                                    <p className="d-flex font-weight-bold"><MdGrade size={25} /><span>&nbsp;</span>Timber Quality :<span>&nbsp;&nbsp;&nbsp;</span></p>
-                                                    <p>{person.timber_quality}</p>
+                                                    <p className="d-flex font-weight-bold"><MdGrade size={25} /><span>&nbsp;</span>Rating :<span>&nbsp;&nbsp;&nbsp;</span></p>
+                                                    <p>
+                                                        <GrStar size={25} style={(person.total_ratings / person.total_people_rated) > 0 ? (stylegold) : stylenone} />
+                                                        <GrStar size={25} style={(person.total_ratings / person.total_people_rated) - 1 > 0 ? (stylegold) : stylenone} />
+                                                        <GrStar size={25} style={(person.total_ratings / person.total_people_rated) - 2 > 0 ? (stylegold) : stylenone} />
+                                                        <GrStar size={25} style={(person.total_ratings / person.total_people_rated) - 3 > 0 ? (stylegold) : stylenone} />
+                                                        <GrStar size={25} style={(person.total_ratings / person.total_people_rated) - 4 > 0 ? (stylegold) : stylenone} />
+                                                    </p>
                                                 </div>
 
                                             </div>
@@ -99,7 +107,7 @@ const SupplierProducts = (userData) => {
                 )}
             </table>
         </div>
-        
+
     );
 };
 

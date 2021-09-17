@@ -1,5 +1,4 @@
 import SupplierDashboard from "./Pages/Supplier/SupplierDashboard";
-// import SupplierNotification from "./Pages/Supplier/SupplierNotification";
 import SupplierSalesHistory from "./Pages/Supplier/SupplierSalesHistory";
 import SupplierSettings from "./Pages/Supplier/SupplierSettings";
 
@@ -46,7 +45,7 @@ const Supplier = () => {
 
     const element = (
         <div className="row">
-                <SupplierSidebar userData={response.data.user} />
+                <SupplierSidebar userData={response1.data[0]}/>
             <div className="col-9 p-5">
                 <Switch>
                     <Route path="/supplier/dashboard">
@@ -56,10 +55,6 @@ const Supplier = () => {
                     <Route path="/supplier/products">
                         <SupplierProducts userData={response1.data[0]}/>
                     </Route>
-
-                    {/* <Route path="/supplier/notification">
-                        <SupplierNotification userData={response1.data[0]}/>
-                    </Route> */}
 
                     <Route path="/supplier/saleshistory">
                         <SupplierSalesHistory userData={response1.data[0]}/>

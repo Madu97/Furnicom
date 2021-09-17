@@ -9,8 +9,8 @@ const sidebar = () => {
     return (
         <div className="col-3 sidebar bg-side-bar">
 
-            <div className="row  d-flex p-3 justify-content-center mb-3 ">
-                <img src={admin} class="img-fluid imgstyle rounded-circle" width="200px" height="200px"></img>
+            <div className="row  d-flex p-4 justify-content-center mb-1 ">
+                <img src={admin} class="rounded-circle" width="150px" height="150px"></img>
 
             </div>
 
@@ -24,13 +24,13 @@ const sidebar = () => {
 
 
          <Link to="/admin/dashboard">
-                    <a className="row d-block mb-5 fc-white "><i class="fa fa-home m-2  fa-2x" ></i>Dashboard</a>
+                    <a className="row d-block mb-3 fc-white "><i class="fa fa-home m-2  fa-lg" ></i>Dashboard</a>
                 </Link>
-                <Link to="/admin/notification"><a className="row d-block mt-5 mb-5 fc-white" ><i class="fa fa-bell m-2 fa-2x" ></i>Notification</a></Link>
-                <Link to="/admin/customerlist"><a className="row d-block mt-5 mb-5 fc-white" ><i class="fa fa-user m-2 fa-2x" ></i>Customer</a></Link>
-                <Link to="/admin/supplierlist"><a className="row d-block mt-5 mb-5 fc-white" ><i class="fas fa-user-tie  m-2 fa-2x" ></i>Supplier</a></Link>
-                <Link to="/admin/deliverymanlist"><a className="row d-block mt-5 mb-5 fc-white" ><i class="fa fa-truck m-2 fa-2x" ></i>Deliver team</a></Link>
-                <Link to="/admin/settings"><a className="row d-block mt-5 fc-white" ><i class="fa fa-cog m-2 fa-2x" ></i>Settings</a></Link>
+                <Link to="/admin/notification"><a className="row d-block mb-3 fc-white" ><i class="fa fa-bell m-2 fa-lg" ></i>Notification</a></Link>
+                <Link to="/admin/customerlist"><a className="row d-block mb-3 fc-white" ><i class="fa fa-user m-2 fa-lg" ></i>Customer</a></Link>
+                <Link to="/admin/supplierlist"><a className="row d-block mb-3 fc-white" ><i class="fas fa-user-tie  m-2 fa-lg" ></i>Supplier</a></Link>
+                <Link to="/admin/deliverymanlist"><a className="row d-block mb-3 fc-white" ><i class="fa fa-truck m-1 fa-lg" ></i>Deliver team</a></Link>
+                <Link to="/admin/settings"><a className="row d-block mb-3 fc-white" ><i class="fa fa-cog m-2 fa-lg" ></i>Settings</a></Link>
 
             </div>
 

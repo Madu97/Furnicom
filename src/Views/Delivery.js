@@ -48,7 +48,7 @@ const Delivery = () => {
                 const element = (
 
                     <div className="row">
-                    <Sidebar userData={response.data.user} />
+                    <Sidebar userData={response1.data[0]} />
                         <div className="col-9 p-5">
                             <Switch>
                                 <Route path="/delivery/dashboard">

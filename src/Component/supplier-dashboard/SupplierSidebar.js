@@ -14,7 +14,7 @@ const SupplierSidebar = (userData) => {
     //console.log(userData.userData[0].username);
     //setUsernm(userData.userData[0].username)
 
-    const nm = userData.userData[0].username;
+    // const nm = userData.userData[0].username;
 
     const logout = () => {
 
@@ -26,29 +26,30 @@ const SupplierSidebar = (userData) => {
         })
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await Axios.get('http://localhost:3001/getsupplier', {
-                params: {
-                    name: nm
-                }
-            });
-            //console.log(response.data[0]);
-            setUser(response.data[0])
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await Axios.get('http://localhost:3001/getsupplier', {
+    //             params: {
+    //                 name: nm
+    //             }
+    //         });
+    //         //console.log(response.data[0]);
+    //         setUser(response.data[0])
 
-        };
-        fetchData();
-    }, [id]);
+    //     };
+    //     fetchData();
+    // }, [id]);
 
+    console.log(User.profile_picture);
     return (
         <div className="col-3 sidebar bg-side-bar">
-            <div className="d-flex p-3 justify-content-center mb-3 ">
-                <img src={supplier} class="img-fluid imgstyle rounded-circle " width="200px" height="200px"></img>
+            <div className="row  d-flex p-4 justify-content-center mb-1 ">
+                <img src={require('../../Assets/Images/'+ userData.userData.profile_picture).default} class="rounded-circle" width="150px" height="150px"></img>
 
             </div>
 
             <div className="p-2 row bgc-theme justify-content-center font-weight-bold fc-white ">
-                <h4>{User.firstname}</h4>
+                <h4>{userData.userData.firstname}</h4>
             </div>
 
             <div className="mt-2">
@@ -69,14 +70,6 @@ const SupplierSidebar = (userData) => {
                     </a>
                 </Link>
 
-                {/* <Link to="/supplier/notification">
-                        <a className="row dboard-icon mt-5 mb-5 fc-white" href="Customer_notification"><i class="fa fa-bell m-2 fa-2x" ></i>
-                            <div className="dboard-text pb-2">
-                                Notifications
-                            </div>
-                        </a>
-                    </Link> */}
-
                 <Link to="/supplier/saleshistory">
                     <a className="row dboard-icon mb-3 fc-white" href="Customer_order_history"><i class="fa fa-history m-2 fa-lg" ></i>
                         <div className=" dboard-text pb-2">
@@ -95,7 +88,7 @@ const SupplierSidebar = (userData) => {
 
             </div>
 
-            <div className="row bg-theme d-flex justify-content-center fc-white  bgc-theme p-2 mb-2">
+            <div className="row bg-theme d-flex justify-content-center fc-white  bgc-theme p-2 mb-3">
                 <button class="btn d-flex justify-content-center fc-white align-items-center bgc-theme font-weight-bold" onClick={function () { logout() }}><i class="fa fa-sign-out m-2  fa-lg" aria-hidden="true" ></i>
                     <div className="dboard-text">
                         Log Out

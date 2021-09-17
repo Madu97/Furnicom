@@ -138,7 +138,14 @@ app.get('/getdeliverynotification',(req, res) =>{
 
 })
 
+app.get('/updatedeliverinfo',(req, res) =>{
+    db.query("UPDATE delivery_person SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;",[req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.d_id],(err, result)=>{
+        console.log(result);
+        res.send(result);
 
+    })
+
+})
 
 app.get('/productcount',(req, res) =>{
     db.query("SELECT COUNT(*)AS rowcount FROM products WHERE supplier_id= ?",[req.query.id],(err, result)=>{
@@ -186,7 +193,7 @@ app.get('/updatesupplierinfo',(req, res) =>{
 })
 
 app.get('/getCustomOrder',(req, res) =>{
-    db.query("SELECT * FROM customized_order WHERE supplier_id=? AND status_code = '4';",[req.query.id],(err, result)=>{
+    db.query("SELECT * FROM customized_order WHERE supplier_id=? AND status_code = '5';",[req.query.id],(err, result)=>{
         console.log(result);
         res.send(result);
 
@@ -219,6 +226,76 @@ app.get('/changeorderstatus',(req, res) =>{
  
  })
 
+ app.get('/getallcustomizedorder',(req, res) =>{
+    db.query("SELECT * FROM customized_order JOIN customer ON customized_order.customer_id = customer.id;",[req.query.id],(err, result)=>{
+        console.log(result); 
+        res.send(result);
+
+    })
+})
+
+ app.get('/getallproductcount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS products FROM products",(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/getallcustomercount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS customer FROM customer",(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/getallsuppliercount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS supplier FROM supplier",(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/getalldeliverercount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS delivery FROM delivery_person",(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/getallordercount',(req, res) =>{
+    db.query("SELECT COUNT(*)AS orders FROM orders",(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+app.get('/gettotalsales',(req, res) =>{
+    db.query("SELECT * FROM order_items JOIN products ON order_items.product_id = products.id",(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
+app.get('/changestatus',(req, res) =>{
+    db.query("UPDATE orders SET status_code = ? WHERE order_id = ? ;",[req.query.status , req.query.oid],(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+
+})
+
 app.get('/getproducts',(req, res) =>{
     const sqlInsert = "SELECT * FROM products;"
     db.query(sqlInsert,(err, result)=>{
@@ -228,6 +305,24 @@ app.get('/getproducts',(req, res) =>{
     })
 })
 
+app.get('/getorders',(req, res) =>{
+    db.query("SELECT * FROM orders JOIN customer ON orders.customer_id = customer.id JOIN order_items ON orders.order_id = order_items.order_id JOIN products ON order_items.product_id = products.id",(err, result)=>{
+        console.log(result);
+        res.send(result); 
+
+    })
+
+})
+
+
+app.get('/getproducts',(req, res) =>{
+    const sqlInsert = "SELECT * FROM products;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
 
 
 app.get('/productsdetails',(req, res) =>{
@@ -443,6 +538,25 @@ app.get('/updatecustomerinfo',(req, res) =>{
         })
     
     })
+
+    app.get('/updatepropicture',(req, res) =>{
+        db.query("UPDATE supplier SET profile_picture=? WHERE id=?;",[req.query.name, req.query.id],(err, result)=>{
+            console.log(result);
+            res.send(result);
+    
+        })
+    
+    })
+
+    app.get('/updatepicture',(req, res) =>{
+        db.query("UPDATE delivery_person SET profile_picture=? WHERE id=?;",[req.query.name, req.query.id],(err, result)=>{
+            console.log(result);
+            res.send(result);
+    
+        })
+    
+    })
+
 
  app.post('/reg',(req,res)=>{
 
