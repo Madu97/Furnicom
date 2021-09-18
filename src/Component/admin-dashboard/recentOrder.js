@@ -116,21 +116,25 @@ const RecentOrders = (userData) => {
                           <p className="d-flex font-weight-bold"><MdGrade size={25} /><span>&nbsp;</span>Timber Quality :<span>&nbsp;&nbsp;&nbsp;</span></p>
                           <p>{person.timber_quality}</p>
                         </div>
-                        <div className="d-flex align-items-center">
-                          <p className="d-flex font-weight-bold"><span>&nbsp;</span>Status:<span>&nbsp;&nbsp;&nbsp;</span></p>
 
-                          <select className="browser-default custom-select" onChange={e => setStatus(e.target.value)}>
-                            <option></option>
-                            <option value="1">Preparing</option>
-                            <option value="3">Order Dispatched</option>
-                          </select>
-                        </div>
-                        <div class="container my-3 bg-light">
-                          <div class="col-md-12 text-center">
-                            <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status, person.order_id)}>Save</button>
+                        {(person.status_code < 3) ? (
+                          <div className="d-flex align-items-center">
+                            <p className="d-flex font-weight-bold"><span>&nbsp;</span>Status:<span>&nbsp;&nbsp;&nbsp;</span></p>
+                            <select className="browser-default custom-select" onChange={e => setStatus(e.target.value)}>
+                              <option></option>
+                              <option value="1">Preparing</option>
+                              <option value="3">Order Dispatched</option>
+                            </select>
                           </div>
-                        </div>
+                        ) : ''}
 
+                        {(person.status_code < 3) ? (
+                          <div class="container my-3 bg-light">
+                            <div class="col-md-12 text-center">
+                              <button type="button" class="btn btn-success mx-1" onClick={() => UpdateStatus(status, person.order_id)}>Save</button>
+                            </div>
+                          </div>
+                        ) : ''}
                       </div>
 
                     </div>

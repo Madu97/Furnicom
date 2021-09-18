@@ -547,7 +547,7 @@ app.get('/suppliersales',(req, res) =>{
 })
 
 app.get('/customizedorder',(req, res) =>{
-    db.query("SELECT * FROM customized_order JOIN customer ON customized_order.customer_id = customer.id WHERE customized_order.supplier_id=?;",[req.query.id],(err, result)=>{
+    db.query("SELECT * FROM customized_order JOIN customer ON customized_order.customer_id = customer.id WHERE customized_order.supplier_id=? ORDER BY order_id DESC;",[req.query.id],(err, result)=>{
         console.log(result); 
         res.send(result);
 
