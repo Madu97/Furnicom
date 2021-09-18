@@ -57,6 +57,343 @@ app.get('/getit',(req, res) =>{
     })
 })
 
+app.get('/getsup',(req, res) =>{
+    const sqlInsert = "SELECT * FROM supplier;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
+app.get('/getdeli',(req, res) =>{
+    const sqlInsert = "SELECT * FROM delivery_person;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
+app.get('/getprod',(req, res) =>{
+    const sqlInsert = "SELECT * FROM products;"
+    db.query(sqlInsert,(err, result)=>{
+        console.log(result);
+        res.send(result);
+
+    })
+})
+
+app.post('/addcus',(req,res)=>{
+
+        const username = req.body.username
+        const password = req.body.password
+        const firstname = req.body.firstname
+        const lastname = req.body.lastname
+        const address = req.body.address
+        const ic = req.body.ic
+        const phone = req.body.phone
+        const email = req.body.email
+       
+    
+        bcrypt.hash(password,saltRounds,(err,hash)=>{
+           
+            if(err){
+                console.log(err);
+               
+            }
+           
+            db.query("INSERT INTO `customer`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
+                console.log(err);
+    
+                if(result){
+                    res.send({message: "Customer Added..."});
+                }
+               
+            })
+        })
+    })
+
+app.get('/updatecustomer',(req, res) =>{
+
+         db.query("UPDATE customer SET firstname=?, lastname=?, ic_no=?, phone_no=?, email=?, username=?, password=?, address=?  WHERE id = ?;",[req.query.firstname , req.query.lastname, req.query.ic_no, req.query.phone_no, req.query.email, req.query.username, req.query.password, req.query.address, req.query.id],(err, result)=>{
+             console.log(result);
+             res.send(result);
+     
+         })
+     
+     })
+
+     app.get("/salesReport", (req, res) => {
+        let monthReport = [
+            {
+                id: 1,
+                name: "January",
+                income: 0,
+            },
+            {
+                id: 2,
+                name: "February",
+                income: 0,
+            },
+            {
+                id: 3,
+                name: "March",
+                income: 0,
+            },
+            {
+                id: 4,
+                name: "April",
+                income: 0,
+            },
+            {
+                id: 5,
+                name: "May",
+                income: 0,
+            },
+            {
+                id: 6,
+                name: "June",
+                income: 0,
+            },
+            {
+                id: 7,
+                name: "July",
+                income: 0,
+            },
+            {
+                id: 8,
+                name: "August",
+                income: 0,
+            },
+            {
+                id: 9,
+                name: "September",
+                income: 0,
+            },
+            {
+                id: 10,
+                name: "October",
+                income: 0,
+            },
+            {
+                id: 11,
+                name: "November",
+                income: 0,
+            },
+            {
+                id: 12,
+                name: "December",
+                income: 0,
+            },
+        ];
+        db.query(
+            "SELECT MONTH(orders.date) As Month, products.price, order_items.quantity FROM order_items JOIN products ON order_items.product_id = products.id  JOIN orders ON orders.order_id = order_items.order_id;",
+    
+            (err, result) => {
+                result.forEach((x) => {
+                    let income = x.price * x.quantity;
+                    monthReport.forEach((y) => {
+                        y.id == x.Month && (y.income += income);
+                    });
+                });
+    
+                if (result.length > 0) {
+                    res.send({
+                        message: "Successfully fetched monthly sales report.",
+                        data: monthReport,
+                    });
+                    return;
+                }
+    
+                if (err) {
+                    res.send({
+                        message: "failed to fetch monthly sales report.",
+                        err: err,
+                    });
+                }
+            }
+        );
+    });
+
+app.get('/deletecustomer',(req, res) =>{    
+         db.query("DELETE FROM customer WHERE id = ?;",[req.query.id],(err, result)=>{
+             console.log(result);
+             res.send(result);    
+         })    
+     })
+
+ app.get('/deletesupplier',(req, res) =>{    
+        db.query("DELETE FROM supplier WHERE id = ?;",[req.query.id],(err, result)=>{
+            console.log(result);
+            res.send(result);    
+        })    
+    })
+
+    app.get('/deleteproduct',(req, res) =>{    
+        db.query("DELETE FROM products WHERE id = ?;",[req.query.id],(err, result)=>{
+            console.log(result);
+            res.send(result);    
+        })    
+    })
+
+    app.get('/deletedeliver',(req, res) =>{    
+        db.query("DELETE FROM delivery_person WHERE id = ?;",[req.query.id],(err, result)=>{
+            console.log(result);
+            res.send(result);    
+        })    
+    })
+
+ app.post('/addsup',(req,res)=>{
+
+        const username = req.body.username
+        const password = req.body.password
+        const firstname = req.body.firstname
+        const lastname = req.body.lastname
+        const address = req.body.address
+        const ic = req.body.ic
+        const phone = req.body.phone
+        const email = req.body.email
+       
+    
+        bcrypt.hash(password,saltRounds,(err,hash)=>{
+           
+            if(err){
+                console.log(err);
+            }
+           
+            db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');",[firstname,lastname,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
+                console.log(err);
+    
+                if(result){
+                    res.send({message: "Supplier Added..."});
+                }
+               
+            })
+        })
+    
+    
+    
+    
+    })
+
+    app.post('/adddel',(req,res)=>{
+
+        const username = req.body.username
+        const password = req.body.password
+        const firstname = req.body.firstname
+        const lastname = req.body.lastname
+        const availability = req.body.availability
+        const ic = req.body.ic
+        const phone = req.body.phone
+        const email = req.body.email
+       
+    
+        bcrypt.hash(password,saltRounds,(err,hash)=>{
+           
+            if(err){
+                console.log(err);
+            }
+           
+            db.query("INSERT INTO `delivery_person`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `availability) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'deliver');",[firstname,lastname,ic,phone,email, username, hash,availability,username,hash],(err,result)=>{
+                console.log(err);
+    
+                if(result){
+                    res.send({message: "Deliver Added..."});
+                }
+               
+            })
+        })
+    
+    
+    
+    
+    })
+
+    app.post('/addprod',(req,res)=>{
+
+        // const image = req.body.image
+        const name = req.body.name
+        const description = req.body.description
+        const timber_type = req.body.timber_type
+        const timber_quality = req.body.timber_quality
+        const price = req.body.price
+        const available_quantity = req.body.available_quantity
+        const currency = req.body.currency
+        const thumb = req.body.thumb
+       
+        
+    
+        bcrypt.hash(saltRounds,(err,hash)=>{
+           
+            if(err){
+                console.log(err);
+            }
+           
+            db.query("INSERT INTO `products`(`thumb`, `name`, `description`, `timber_type`, `timber_quality`, `price`, `available_quantity`, `currency`) VALUES (?,?,?,?,?,?,?,?);",[name,description,timber_type,timber_quality,price, available_quantity,currency,thumb],(err,result)=>{
+                console.log(err);
+    
+                if(result){
+                    res.send({message: "Product Added..."});
+                }
+               
+            })
+        })
+    
+    })
+
+    app.post('/imageupload', async (req, res) => {	
+        try {
+            // 'avatar' is the name of our file input field in the HTML form
+    
+            let upload = multer({ storage: storage}).single('avatar');
+    
+            upload(req, res, function(err) {
+                // req.file contains information of uploaded file
+                // req.body contains information of text fields
+    
+                if (!req.file) {
+                    return res.send('Please select an image to upload');
+                }
+                else if (err instanceof multer.MulterError) {
+                    return res.send(err);
+                }
+                else if (err) {
+                    return res.send(err);
+                }
+    
+                const classifiedsadd = {
+                    image: req.file.filename
+                };
+                const sql = "INSERT INTO products SET ?";
+                db.query(sql, classifiedsadd, (err, results) => {  if (err) throw err;
+                    res.json({ success: 1 })      
+    
+                });  
+    
+            }); 
+    
+        }catch (err) {console.log(err)}
+    })
+
+    db.getConnection((err, connection) => {
+        if (err) {
+          if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            console.error('Database connection was closed.');
+          }
+          if (err.code === 'ER_CON_COUNT_ERROR') {
+            console.error('Database has too many connections.');
+          }
+          if (err.code === 'ECONNREFUSED') {
+            console.error('Database connection was refused.');
+          }
+        }
+      
+        if (connection) connection.release();
+      
+        return;
+      });
+
 app.get('/getsupplier',(req, res) =>{
     db.query("SELECT * FROM supplier WHERE username=?",[req.query.name],(err, result)=>{
         console.log(result);

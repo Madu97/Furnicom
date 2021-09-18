@@ -30,13 +30,13 @@ const sidebar = () => {
                 <Link to="/admin/customerlist"><a className="row d-block mb-3 fc-white" ><i class="fa fa-user m-2 fa-lg" ></i>Customer</a></Link>
                 <Link to="/admin/supplierlist"><a className="row d-block mb-3 fc-white" ><i class="fas fa-user-tie  m-2 fa-lg" ></i>Supplier</a></Link>
                 <Link to="/admin/deliverymanlist"><a className="row d-block mb-3 fc-white" ><i class="fa fa-truck m-1 fa-lg" ></i>Deliver team</a></Link>
-                <Link to="/admin/settings"><a className="row d-block mb-3 fc-white" ><i class="fa fa-cog m-2 fa-lg" ></i>Settings</a></Link>
+                <Link to="/admin/products"><a className="row d-block mt-3 fc-white" ><i class="fa fa-suitcase m-2 fa-lg" ></i>Products</a></Link>
 
             </div>
 
 
             <div className="row bg-theme d-flex justify-content-center fc-white  bgc-theme p-2 mb-2">
-                <button class="btn d-flex justify-content-center fc-white align-items-center bgc-theme font-weight-bold"><i class="fa fa-sign-out m-2  fa-2x" aria-hidden="true" ></i>
+                <button class="btn d-flex justify-content-center fc-white align-items-center bgc-theme font-weight-bold"><i class="fa fa-sign-out m-2  fa-lg" aria-hidden="true" ></i>
                     <div className="dboard-text">
                         Log Out
                     </div>

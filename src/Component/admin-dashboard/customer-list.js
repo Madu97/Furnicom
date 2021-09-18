@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+/*import { Link } from "react-router-dom";*/
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
+
 
 const CustomerList = () => {
   const [customer, setCustomer] = useState([]);
@@ -16,10 +18,26 @@ const CustomerList = () => {
     setCustomer(result.data.reverse());
   };
 
-  const deleteCustomer = async id => {
-    await axios.delete(`http://localhost:3001/customer/${id}`);
-    loadCustomer();
-  };
+
+  /*const response5 = axios.get("http://localhost:3001/deletecustomer", {
+      params: {
+        id : customer.id
+      },
+    });*/
+
+    function deleteCustomer(id) {
+      axios
+        .get("http://localhost:3001/deletecustomer", {
+          params: {
+            id: id,
+            
+          },
+        })
+        .then((response) => {
+          window.location.reload();
+        });
+    }
+
 
   return (
     
@@ -55,7 +73,7 @@ const CustomerList = () => {
                 
                 <td>
                   <Link class="btn btn-outline-primary mr-2" to={`/admin/editcustomer/${customer.id}`}>Edit</Link>
-                  <Link class="btn btn-danger" onClick={() => deleteCustomer(customer.id)}>Delete</Link>
+                  <button class="btn btn-danger delete" onClick={() => deleteCustomer(customer.id)}>Delete</button>  
                 </td>
               </tr>
             ))}

@@ -1,64 +1,64 @@
-import React from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import {
-  PieChart,
-  Pie,
-  Tooltip,
-  BarChart,
-  XAxis,
-  YAxis,
-  Legend,
-  CartesianGrid,
-  Bar,
+    Tooltip,
+    BarChart,
+    XAxis,
+    YAxis,
+    Legend,
+    CartesianGrid,
+    Bar,
 } from "recharts";
 
-const Barchart = () => {
-  const data = [
-    { name: "Jan", users: 175000 },
-    { name: "Feb", users: 185000 },
-    { name: "Mar", users: 95000 },
-    { name: "Apr", users: 110000 },
-    { name: "May", users: 140000 },
-    { name: "Jun", users: 80000 },
-    { name: "Jul", users: 110000 },
-    { name: "Aug", users: 180000 },
-    { name: "Sep", users: 70000 },
-    { name: "Oct", users: 110000 },
-    { name: "Nov", users: 80000 },
-    { name: "Dec", users: 160000 },
-  ];
+export default function Barchart() {
+    const [monthlyReport, setMonthlyReport] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(
+                "http://localhost:3001/salesReport"
+            );
 
-  return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Sales Statistics</h1>
-      <div className="App">
+            setMonthlyReport(response.data.data);
+        };
+        fetchData();
+    }, []);
 
-        <BarChart
-          width={1000}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 50,
-            left: 50,
-            bottom: 5,
-          }}
-          barSize={40}
-        >
-          <XAxis
-            dataKey="name"
-            scale="point"
-            padding={{ left: 20, right: 20 }}
-          />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey="users" fill="#8884d8" background={{ fill: "#eee" }} />
-        </BarChart>
-      </div>
-    </div>
-  );
-};
-
-export default Barchart;
+    return (
+        <div className="col-12 justify-content-center align-items-center border mt-4 mx-3">
+            <div className="d-flex justify-content-center py-2">
+                <h3>Sales Statistics</h3>
+            </div>
+            <div className="App">
+                <BarChart
+                    width={900}
+                    height={300}
+                    data={monthlyReport}
+                    margin={{
+                        top: 5,
+                        right: 50,
+                        left: 50,
+                        bottom: 5,
+                    }}
+                    barSize={40}
+                >
+                    <XAxis
+                        dataKey="name"
+                        scale="point"
+                        padding={{ left: 20, right: 20 }}
+                    />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Bar
+                        dataKey="income"
+                        fill="#8884d8"
+                        background={{ fill: "#eee" }}
+                    />
+                </BarChart>
+            </div>
+        </div>
+    );
+}

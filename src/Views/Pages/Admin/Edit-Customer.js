@@ -1,15 +1,15 @@
 import React from "react";
 
-import CustomerList from "../../../Component/admin-dashboard/customer-list";
 import CustomerHead from "../../../Component/admin-dashboard/customer-head";
+import EditCustomer from "../../../Component/admin-dashboard/EditCustomer";
 
-const AdminCustomer = () => {
+const EdittCustomer = () => {
     return (
         <div>
             <div className="row justify-content-center"><CustomerHead/></div>
-                <div className="row"><CustomerList/></div>
+                <div className="row"><EditCustomer/></div>
         </div>
     );
 };
 
-export default AdminCustomer;
+export default EdittCustomer;

@@ -6,11 +6,15 @@ import AdminNotification from "../Views/Pages/Admin/AdminNotification"
 import AdminCustomer from "../Views/Pages/Admin/AdminCustomer"
 import AdminSupplier from "../Views/Pages/Admin/AdminSupplier"
 import AdminDelivery from "../Views/Pages/Admin/AdminDelivery"
-import AdminSettings from "../Views/Pages/Admin/AdminSettings"
+import AdminProduct from "../Views/Pages/Admin/AdminProducts"
 
 
+import AdddCustomer from "../Views/Pages/Admin/Add-Customer"
+import AdddSupplier from "../Views/Pages/Admin/Add-Supplier"
+import AdddProduct from "../Views/Pages/Admin/Add-Product"
+import AdddDeliver from "../Views/Pages/Admin/Add-Delivery"
 
-
+import EdittCustomer from "../Views/Pages/Admin/Edit-Customer"
 
 const Admin = () => {
     return (
@@ -33,9 +37,27 @@ const Admin = () => {
                     <Route path="/admin/deliverymanlist">
                         <AdminDelivery/>
                     </Route>
-                    <Route path="/admin/settings">
-                        <AdminSettings/>
+                    <Route path="/admin/products">
+                        <AdminProduct/>
                     </Route>
+
+                    <Route path="/admin/addcustomer">
+                        <AdddCustomer/>
+                    </Route>
+                    <Route path="/admin/addsupplier">
+                        <AdddSupplier/>
+                    </Route>
+                    <Route path="/admin/addproduct">
+                        <AdddProduct/>
+                    </Route>
+                    <Route path="/admin/adddeliver">
+                        <AdddDeliver/>
+                    </Route>
+
+                    <Route path="/admin/editcustomer">
+                        <EdittCustomer/>
+                    </Route>
+
                 </Switch>
             </div>
         </div>
