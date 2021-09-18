@@ -30,7 +30,7 @@ const sidebar = () => {
                 <Link to="/admin/customerlist"><a className="row d-block mt-5 mb-5 fc-white" ><i class="fa fa-user m-2 fa-2x" ></i>Customer</a></Link>
                 <Link to="/admin/supplierlist"><a className="row d-block mt-5 mb-5 fc-white" ><i class="fas fa-user-tie  m-2 fa-2x" ></i>Supplier</a></Link>
                 <Link to="/admin/deliverymanlist"><a className="row d-block mt-5 mb-5 fc-white" ><i class="fa fa-truck m-2 fa-2x" ></i>Deliver team</a></Link>
-                <Link to="/admin/settings"><a className="row d-block mt-5 fc-white" ><i class="fa fa-cog m-2 fa-2x" ></i>Settings</a></Link>
+                <Link to="/admin/products"><a className="row d-block mt-5 fc-white" ><i class="fa fa-suitcase m-2 fa-2x" ></i>Products</a></Link>
 
             </div>
 

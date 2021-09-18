@@ -1,172 +1,77 @@
-import React from 'react';
-//import './main.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const DeliverList = ({ contact, handleEditClick, handleDeleteClick }) => {
-    return (
-        
-      
-        <div className="fc-white justify-content-center align-items-center border rounded">
-<table class="table table-striped text-left ">
-  <thead className="fs-30">
-    <tr>
-      <th scope="col">Id Number</th>
-      <th scope="col">Name</th>
-      <th scope="col">Address</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone No</th>
-      <th scope="col">Update</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">01</th>
-      <td>Amal</td>
-      <td>colombo</td>
-      <td>amal123@gmail.com</td>
-      <td>0112245789</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">02</th>
-      <td>Kamal</td>
-      <td>Gall</td>
-      <td>kamal178@gmail.com</td>
-      <td>0771245963</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">03</th>
-      <td>Saman</td>
-      <td>Kandy</td>
-      <td>saman356@gmail.com</td>
-      <td>0701542896</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">04</th>
-      <td>Nuwan</td>
-      <td>Gampaha</td>
-      <td>nuwan890@gmail.com</td>
-      <td>0716354912</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">05</th>
-      <td>Nimal</td>
-      <td>Mathara</td>
-      <td>nimal984@gmail.com</td>
-      <td>0724569852</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-        
-    </tr>
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
+const DeliverList = () => {
+  const [delivery_person, setDelivery_person] = useState([]);
 
-    <tr>
-      <th scope="row">06</th>
-      <td>Amal</td>
-      <td>colombo</td>
-      <td>amal123@gmail.com</td>
-      <td>0112245789</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">07</th>
-      <td>Kamal</td>
-      <td>Gall</td>
-      <td>kamal178@gmail.com</td>
-      <td>0771245963</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">08</th>
-      <td>Saman</td>
-      <td>Kandy</td>
-      <td>saman356@gmail.com</td>
-      <td>0701542896</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">09</th>
-      <td>Nuwan</td>
-      <td>Gampaha</td>
-      <td>nuwan890@gmail.com</td>
-      <td>0716354912</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">10</th>
-      <td>Nimal</td>
-      <td>Mathara</td>
-      <td>nimal984@gmail.com</td>
-      <td>0724569852</td>
-      <td>
-        <input type="submit" value="Update" class="btn btn-primary btn-block btn-lg" />
-      </td>
-      <td>
-        <input type="submit" value="Delete" class="btn btn-primary btn-block btn-lg" />
-      </td>
+  useEffect(() => {
+    loadDelivery_person();
+  }, []);
+
+  const loadDelivery_person = async () => {
+    const result = await axios.get("http://localhost:3001/getdeli");
+    setDelivery_person(result.data.reverse());
+  };
+
+  const response5 = axios.get("http://localhost:3001/deletedeliver", {
+      params: {
+        id : delivery_person.id
+      },
+    });
+
+    function deleteDeliver(id) {
+      axios
+        .get("http://localhost:3001/deletedeliver", {
+          params: {
+            id: id,
+            
+          },
+        })
+        .then((response) => {
+          window.location.reload();
+        });
+    }
+
+  return (
+    <div className="container">
+      <Link class="btn btn-primary" to={`/admin/adddeliver/`}>Add Deliver</Link>           
+      <div className="py-4">
         
-    </tr>
-  </tbody>
-</table>
-        </div>
-        
-        
-    )
-}
+        <table class="table border shadow">
+          <thead class="thead-dark">
+            <tr>
+            <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">IC</th>
+              <th scope="col">Phone No</th>
+              <th scope="col">Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {delivery_person.map((delivery_person) => (
+              <tr>
+                <th scope="row">{delivery_person.id}</th>
+                <td>{delivery_person.firstname}</td>
+                <td>{delivery_person.lastname}</td>
+                <td>{delivery_person.ic_no}</td>
+                <td>{delivery_person.phone_no}</td>
+                <td>{delivery_person.email}</td>
+                <td>
+                  
+                  <Link class="btn btn-outline-primary mr-2" to={`/deliver/edit/${delivery_person.id}`}>Edit</Link>
+                  <button class="btn btn-danger delete" onClick={() => deleteDeliver(delivery_person.id)}>Delete</button> 
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
 
 export default DeliverList;
