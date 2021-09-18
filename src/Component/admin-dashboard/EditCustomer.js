@@ -29,7 +29,7 @@ const EditCustomer = (userData) => {
 
       function updateCustomer(id) {
         axios
-          .get("http://localhost:3001/updatecus", {
+          .get("http://localhost:3001/selectcus", {
             params: {
               id: id,
               

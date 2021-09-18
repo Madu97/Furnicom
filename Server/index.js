@@ -537,8 +537,8 @@ app.get('/decreasequantity',(req, res) =>{
         );
       });*/
 
-      app.get('/updatecus',(req, res) =>{    
-        db.query("UPDATE FROM customer SET id = ?;",[req.query.id],(err, result)=>{
+      app.get('/selectcus',(req, res) =>{    
+        db.query("SELECT * FROM customer WHERE id = ?;",[req.query.id],(err, result)=>{
             console.log(result);
             res.send(result);    
         })    
