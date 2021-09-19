@@ -26,9 +26,9 @@ const CustomerSidebar = (userData) => {
         
         Axios.post("http://localhost:3001/logout").then((response)=>{
             //console.log(response.data.info);
-            /*if(response.data.info == 'success'){
+            if(response.data.info == 'success'){
                 window.location.href = "/login";
-            }*/
+            }
         })
     }
 
@@ -92,14 +92,6 @@ const CustomerSidebar = (userData) => {
                     </a>
                     </Link>
 
-                    <Link to="/customer/myreturns">
-                    <a className="row dboard-icon mt-3 mb-3 fc-white align-items-center" href=""><div className="m-2 border rounded-circle p-1"><TiDeleteOutline size={30}/></div>
-                        <div className=" dboard-text ml-2 ">
-                            My Returns
-                    </div>
-                    </a>
-                    </Link>
-
                     <Link to="/customer/settings">
                     <a className="row dboard-icon mt-3 mb-3 fc-white align-items-center" href=""><div className="m-2 pl-1 border rounded-circle p-1"><AiOutlineSetting size={28}/></div>
                         <div className="dboard-text ml-2 ">
@@ -123,3 +115,16 @@ const CustomerSidebar = (userData) => {
 };
 
 export default CustomerSidebar;
+
+
+/*
+
+                    <Link to="/customer/myreturns">
+                    <a className="row dboard-icon mt-3 mb-3 fc-white align-items-center" href=""><div className="m-2 border rounded-circle p-1"><TiDeleteOutline size={30}/></div>
+                        <div className=" dboard-text ml-2 ">
+                            My Returns
+                    </div>
+                    </a>
+                    </Link>
+
+*/

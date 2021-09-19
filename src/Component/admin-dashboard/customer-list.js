@@ -71,7 +71,7 @@ const CustomerList = () => {
                 <td>{customer.email}</td>
                 <td>{customer.address}</td>
                 
-                <td>
+                <td className="d-flex">
                   <Link class="btn btn-outline-primary mr-2" to={`/admin/editcustomer/${customer.id}`}>Edit</Link>
                   <button class="btn btn-danger delete" onClick={() => deleteCustomer(customer.id)}>Delete</button>  
                 </td>

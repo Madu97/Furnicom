@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { BrowserRouter as Router, Route, Switch, Link, useParams } from "react-router-dom";
+
 import '../../Assets/CSS/signup.css';
 
 
@@ -13,7 +15,10 @@ const schema = yup.object().shape({
     username: yup.string().required(),
     email: yup.string().email().required(),
     //gender: yup.string().required(),
-    address: yup.string().required(),
+    //address: yup.string().required(),
+    street: yup.string().required(),
+    city: yup.string().required(),
+    district: yup.string().required(),
     ic: yup.string().max(10, "Must be 10 Characters.").min(10, "Must be 10 Characters."),
     phone: yup.string().max(10, "Must be 10 Digits.").min(10, "Must be 10 Digits."),
 
@@ -34,25 +39,29 @@ function Signup() {
         resolver: yupResolver(schema),
     });
 
-
+    
     const registerform = (data) => {
-
+        
         Axios.get('http://localhost:3001/checkusername', {
             params: {
                 username: data.username,
             }
         }).then((response1) => {
-            if (response1.data[0]) {
+           
+            if (response1.data[0]) { console.log('2')
                 setusernamemsg("Username Already taken...");
             }
-            else {
+            else { 
                 setusernamemsg("");
                 Axios.post('http://localhost:3001/reg', {
                     username: data.username,
                     password: data.password,
                     firstname: data.firstname,
                     lastname: data.lastname,
-                    address: data.address,
+                    //address: data.address,
+                    street: data.street,
+                    city: data.city,
+                    district: data.district,
                     ic: data.ic,
                     phone: data.phone,
                     email: data.email,
@@ -63,7 +72,7 @@ function Signup() {
                         document.getElementById("custmer-signup").reset();
                     }
                 })
-                // console.log(data)
+                //console.log(data)
 
             }
         })
@@ -96,8 +105,15 @@ function Signup() {
                                 </div>
                             </div>
 
-                            <label>Address<span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="Address..." name="address" {...register('address')} /><br />
-                            {errors.address?.message && <p className=" errormessage" >{errors.address?.message}</p>}
+
+                            <label>Street<span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="Street..." name="street" {...register('street')} /><br />
+                            {errors.street?.message && <p className=" errormessage" >{errors.street?.message}</p>}
+
+                            <label>City<span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="City..." name="city" {...register('city')} /><br />
+                            {errors.city?.message && <p className=" errormessage" >{errors.city?.message}</p>}
+
+                            <label>District<span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="District..." name="district" {...register('district')} /><br />
+                            {errors.district?.message && <p className=" errormessage" >{errors.district?.message}</p>}
 
                             <label>Id Number<span style={{ color: "red", fontSize: "20px" }}>&nbsp;*</span> :</label> <input type="text" className="form-control" placeholder="Id Number..." name="ic"  {...register('ic')} /><br />
                             {errors.ic?.message && <p className=" errormessage" >{errors.ic?.message}</p>}
@@ -125,6 +141,13 @@ function Signup() {
                             <div className="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-lg btn-primary">Submit</button>
                             </div>
+                            <h5 style={{backgroundColor:'wheat',color: 'green',borderRadius:4}} className="d-flex m-2 font-weight-bold  justify-content-center">{LoginStatus}</h5>
+                            {(LoginStatus) ? (
+                                <div className="row d-flex justify-content-center">
+                                    <p>Click here to <span>&nbsp;&nbsp;&nbsp;</span></p>
+                                    <Link to="/login"><div className="row d-flex justify-content-center"><a>login</a></div></Link>
+                                </div>
+                            ) : (' ')}
                         </form>
                     </div>
                 </div>

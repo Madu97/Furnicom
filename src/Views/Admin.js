@@ -7,6 +7,7 @@ import AdminCustomer from "../Views/Pages/Admin/AdminCustomer"
 import AdminSupplier from "../Views/Pages/Admin/AdminSupplier"
 import AdminDelivery from "../Views/Pages/Admin/AdminDelivery"
 import AdminProduct from "../Views/Pages/Admin/AdminProducts"
+import AdminOrdersCmp from "../Component/admin-dashboard/AdminOrderComponent" 
 
 
 import AdddCustomer from "../Views/Pages/Admin/Add-Customer"
@@ -56,6 +57,10 @@ const Admin = () => {
 
                     <Route path="/admin/editcustomer/:id">
                         <EdittCustomer/>
+                    </Route>
+
+                    <Route path="/admin/orders">
+                        <AdminOrdersCmp/>
                     </Route>
 
                 </Switch>

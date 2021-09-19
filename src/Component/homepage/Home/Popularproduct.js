@@ -11,7 +11,7 @@ import { GrStar } from 'react-icons/gr'
 const stylenone = { color: "grey", margin: "2px" }
 const stylegold = { color: "gold", margin: "2px" }
 
-export default function NewArrival() {
+export default function Popularproducts() {
 
     const [persons, setpersons] = useState([]);
     const { addItem } = useCart();
@@ -22,7 +22,7 @@ export default function NewArrival() {
     useEffect(() => {
 
         const fetchData = async () => {
-            const response = await axios.get('http://localhost:3001/getproductsnew');
+            const response = await axios.get('http://localhost:3001/getproductspopular');
 
             setpersons(response.data);
 
