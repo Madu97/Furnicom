@@ -11,7 +11,10 @@ const SupplierSettings = (userData) => {
         lname: userData.userData.lastname,
         email: userData.userData.email,
         phone: userData.userData.phone_no,
-        address: userData.userData.address
+        // address: userData.userData.address
+        street: userData.userData.street,
+        city: userData.userData.city,
+        district: userData.userData.district
 
     });
 
@@ -29,7 +32,9 @@ const SupplierSettings = (userData) => {
                 lname: Info.lname,
                 email: Info.email,
                 phone: Info.phone,
-                address: Info.address,
+                street: Info.street,
+                city: Info.city,
+                district: Info.district,
                 sup_id: id
             }
         }).then((response) => {
@@ -122,8 +127,24 @@ const SupplierSettings = (userData) => {
 
             <div className="row m-2 mt-4">
                 <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
-                    <label htmlFor="">Address</label>
-                    <input type="text" className="form-control justify-content-start align-items-start" name="address" value={Info.address} onChange={handleChange} />
+                    <label htmlFor="">Street</label>
+                    <input type="text" className="form-control justify-content-start align-items-start" name="street" value={Info.street} onChange={handleChange} />
+                </div>
+
+            </div>
+
+            <div className="row m-2 mt-4">
+                <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
+                    <label htmlFor="">City</label>
+                    <input type="text" className="form-control justify-content-start align-items-start" name="city" value={Info.city} onChange={handleChange} />
+                </div>
+
+            </div>
+
+            <div className="row m-2 mt-4">
+                <div className="col-lg-5 col-md-10 col-sm-12 col-xs-12 d-block">
+                    <label htmlFor="">District</label>
+                    <input type="text" className="form-control justify-content-start align-items-start" name="district" value={Info.district} onChange={handleChange} />
                 </div>
 
             </div>

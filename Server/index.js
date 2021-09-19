@@ -540,7 +540,7 @@ app.get('/getdeliverynotification', (req, res) => {
 })
 
 app.get('/updatedeliverinfo', (req, res) => {
-    db.query("UPDATE delivery_person SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;", [req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.d_id], (err, result) => {
+    db.query("UPDATE delivery_person SET firstname=?,lastname=?,email=?,phone_no=?,street=?,city=?,district=? WHERE id=?;", [req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.street, req.query.city, req.query.district, req.query.d_id], (err, result) => {
         console.log(result);
         res.send(result);
 
@@ -585,7 +585,7 @@ app.get('/supplierproduct', (req, res) => {
 })
 
 app.get('/updatesupplierinfo', (req, res) => {
-    db.query("UPDATE supplier SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;", [req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.sup_id], (err, result) => {
+    db.query("UPDATE supplier SET firstname=?,lastname=?,email=?,phone_no=?,street=?,city=?,district=? WHERE id=?;", [req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.street, req.query.city, req.query.district, req.query.sup_id], (err, result) => {
         console.log(result);
         res.send(result);
 
@@ -858,7 +858,7 @@ app.get('/deletecart', (req, res) => {
 })
 
 app.get('/updatecustomerinfo', (req, res) => {
-    db.query("UPDATE customer SET firstname=?,lastname=?,email=?,phone_no=?,address=? WHERE id=?;", [req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.address, req.query.cust_id], (err, result) => {
+    db.query("UPDATE customer SET firstname=?,lastname=?,email=?,phone_no=?,street=?,city=?,district=? WHERE id=?;", [req.query.fname, req.query.lname, req.query.email, req.query.phone, req.query.street, req.query.city, req.query.district, req.query.cust_id], (err, result) => {
         console.log(result);
         res.send(result);
 
