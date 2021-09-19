@@ -13,6 +13,8 @@ function EditCustomer() {
   // const [Info, setInfo] = useState([]);
   const { id } = useParams(); console.log(id)
 
+
+  const [Info, setInfo] = useState([]);
   useEffect(() => {
 
     const fetchData = async () => {
@@ -23,20 +25,25 @@ function EditCustomer() {
       });
 
       setCustomerdata(response.data[0]);
+      setInfo({
+        fname: response.data[0].firstname,
+        lname: response.data[0].lastname,
+        email: response.data[0].email,
+        phone: response.data[0].phone_no,
+        address: response.data[0].address,
+        ic_no:response.data[0].ic_no,
+    
+      });
 
     };
     fetchData();
+
+    
   }, [id]);
 
-  const [Info, setInfo] = useState({
-    fname: Customerdata.firstname,
-    lname: Customerdata.lastname,
-    email: Customerdata.email,
-    phone: Customerdata.phone_no,
-    address: Customerdata.address,
-    ic_no:Customerdata.ic_no,
 
-  });
+
+  console.log(Info)
 
   const handleChange = event => {
     setInfo({
@@ -76,27 +83,27 @@ function EditCustomer() {
       <div className="ui">
         <div className="col-lg-12 col-md-10 col-sm-12 col-xs-12 d-block">
           <label htmlFor="">First Name</label>
-          <input type="text" className="form-control" name="fname" value={Customerdata.firstname} onChange={handleChange} />
+          <input type="text" className="form-control" name="fname" value={Info.fname} onChange={handleChange} />
           <br></br>
 
           <label htmlFor="">Last Name</label>
-          <input type="text" className="form-control" name="lname" value={Customerdata.lastname} onChange={handleChange} />
+          <input type="text" className="form-control" name="lname" value={Info.lname} onChange={handleChange} />
           <br></br>
 
           <label htmlFor="">NIC Number</label>
-          <input type="text" className="form-control" name="ic_no" value={Customerdata.ic_no} onChange={handleChange} />
+          <input type="text" className="form-control" name="ic_no" value={Info.ic_no} onChange={handleChange} />
           <br></br>
 
           <label htmlFor="">Phone Number</label>
-          <input type="text" className="form-control" name="phone" value={Customerdata.phone_no} onChange={handleChange} />
+          <input type="text" className="form-control" name="phone" value={Info.phone} onChange={handleChange} />
           <br></br>
 
           <label htmlFor="">Email</label>
-          <input type="text" className="form-control" name="email" value={Customerdata.email} onChange={handleChange} />
+          <input type="text" className="form-control" name="email" value={Info.email} onChange={handleChange} />
           <br></br>
 
           <label htmlFor="">Address</label>
-          <input type="text" className="form-control " name="address" value={Customerdata.address} onChange={handleChange} />
+          <input type="text" className="form-control " name="address" value={Info.address} onChange={handleChange} />
           <br></br>
 
           <div className="row m-2 mt-5 justify-content-end">

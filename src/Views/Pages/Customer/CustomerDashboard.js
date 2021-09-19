@@ -11,13 +11,13 @@ const CustomerDashboard = (userData) => {
     return (
         <div>
 
-            <div className="row rounded" style={{border: 'solid',borderWidth: '2px',borderColor: 'grey'}}>
+            <div className="row border ">
                 <div className="col">
                     <CustomerRecentOrdersComponent userData={data} />
                 </div>
             </div>
             
-            <div className="row rounded mt-5 " style={{border: 'solid',borderWidth: '2px',borderColor: 'grey'}}>
+            <div className="row border mt-5 ">
                 <div className="col">
                     <CustomerRecentReviews userData={data} />
                 </div>

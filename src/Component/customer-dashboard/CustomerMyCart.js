@@ -162,6 +162,8 @@ const CustomerMyCart = (userData) => {
   var totalprice = 0;
   var totalitems = 0;
   var cart = 0;
+  var deliverycharge = 0;
+  var totalwithoutdel = 0;
 
   Cartdata.map(function (a) {
     return (totalprice += a.price * a.quantity);
@@ -173,6 +175,33 @@ const CustomerMyCart = (userData) => {
     return (cart += 1);
   }, 0);
 
+
+  if (totalprice) {
+    totalwithoutdel = totalprice;
+    if (totalprice < 10000) {
+      deliverycharge = 3000;
+    }
+    else if ((totalprice >= 10000) && (totalprice < 20000)) {
+      deliverycharge = 2000;
+    }
+    else if ((totalprice >= 20000) && (totalprice < 30000)) {
+      deliverycharge = 1000;
+    }
+    else if ((totalprice >= 30000) && (totalprice < 40000)) {
+      deliverycharge = 500;
+    }
+    else if ((totalprice >= 40000) && (totalprice < 50000)) {
+      deliverycharge = 300;
+    }
+    else {
+      deliverycharge = 0;
+    }
+
+    totalprice = totalprice + deliverycharge;
+  }
+
+
+
   return (
     <div>
       <div className="bg-palegreen font-weight-bold pl-3  fs-22 d-flex d-block justify-content-start pt-2 align-items-center mb-2 ">
@@ -182,7 +211,7 @@ const CustomerMyCart = (userData) => {
         </p>
       </div>
       <table className="table table-light table-hover m-0">
-        {(Cartdata.length) ? '' : (<div style={{fontSize:'30px',backgroundColor: ''}} className="row d-flex justify-content-center">No Items in the Cart.</div>)}
+        {(Cartdata.length) ? '' : (<div style={{ fontSize: '30px', backgroundColor: '' }} className="row d-flex justify-content-center">No Items in the Cart.</div>)}
         {Cartdata.map((person, index) => (
           <tbody>
             <tr>
@@ -246,30 +275,46 @@ const CustomerMyCart = (userData) => {
         ))}
       </table>
       <div className="container-fluid mt-2  bg-warning mb-1 font-weight-bold p-1 d-flex mr-5 justify-content-end">
-        <p className="fs-30">
-          Total Price: Rs.
-          {totalprice
-            .toString()
-            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+        <div className="d-block">
+          <p className="fs-30">
+            Sub Total<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>: Rs.
+          {totalwithoutdel
+              .toString()
+              .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
           .00
         </p>
+          <p className="fs-30">
+            Delivery Charge<span>&nbsp;&nbsp;</span>: Rs.
+          {deliverycharge
+              .toString()
+              .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+          .00
+        </p>
+          <p className="fs-30">
+            Total Amount<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>: Rs.
+          {totalprice
+              .toString()
+              .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+          .00
+        </p>
+        </div>
       </div>
 
       {/* <div className="d-flex mr-5 m-2 justify-content-end"> */}
       <div className="d-flex justify-content-end">
-      <div style={{ width: "50%"}} >
-        {/* {true && ( */}
-        <ListGroup.Item>
-          {!sdkReady ? null : (
-            //   <Loader />
-            <PayPalButton
-              amount={totalprice}
-              onSuccess={successPaymentHandler}
-            //   onClick={() => setPayment(true)}
-            />
-          )}
-        </ListGroup.Item>
-      </div>
+        <div style={{ width: "50%" }} >
+          {/* {true && ( */}
+          <ListGroup.Item>
+            {!sdkReady ? null : (
+              //   <Loader />
+              <PayPalButton
+                amount={totalprice}
+                onSuccess={successPaymentHandler}
+              //   onClick={() => setPayment(true)}
+              />
+            )}
+          </ListGroup.Item>
+        </div>
       </div>
       {/* <button
           className="btn btn-lg btn-primary rounded-pill pl-5 pr-5 font-weight-bold"

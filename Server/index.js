@@ -115,7 +115,7 @@ app.post('/addcus',(req,res)=>{
     })
 
 app.get('/updatecustomer',(req, res) =>{
-         db.query("UPDATE customer SET firstname=?, lastname=?, ic_no=?, phone_no=?, email=?, address=?  WHERE id = ?;",[req.query.firstname , req.query.lastname, req.query.ic_no, req.query.phone_no, req.query.email, req.query.address, req.query.id],(err, result)=>{
+         db.query("UPDATE customer SET firstname=?, lastname=?, ic_no=?, phone_no=?, email=?, address=?  WHERE id = ?;",[req.query.fname , req.query.lname, req.query.ic_no, req.query.phone, req.query.email, req.query.address, req.query.id],(err, result)=>{
              console.log(result);
              res.send(result);
      
@@ -812,7 +812,7 @@ app.get('/updatecustomerinfo',(req, res) =>{
 
  app.get('/checkusername',(req, res) =>{
 
-       db.query("SELECT username FROM users WHERE username=?;",[req.query.username],(err, result)=>{
+       db.query("SELECT * FROM users WHERE username=?;",[req.query.username],(err, result)=>{
     
            res.send(result);
     
@@ -903,34 +903,112 @@ app.get('/updatecustomerinfo',(req, res) =>{
     })
 
 
- app.post('/reg',(req,res)=>{
+    app.get('/allorders',(req, res) =>{
+        db.query("SELECT *,orders.order_id AS o_id FROM orders JOIN order_items ON orders.payment_id = order_items.payment_id JOIN products ON order_items.product_id = products.id;",(err, result)=>{
+            res.send(result);
+     
+        })
+     
+     })
+    
+     app.get('/getavailabledelivery',(req, res) =>{
+        db.query("SELECT * FROM delivery_person WHERE availability =1;",(err, result)=>{
+            res.send(result);
+     
+        })
+     
+     })
+    
+     app.get('/getcustumizedorders',(req, res) =>{
+        db.query("SELECT * FROM customized_order;",(err, result)=>{
+            res.send(result);
+     
+        })
+     
+     })
+    
+     app.get('/getallsuppliers',(req, res) =>{
+        db.query("SELECT * FROM supplier;",(err, result)=>{
+            res.send(result);
+     
+        })
+     
+     })
+    
+     app.get('/assigndeliveryperson',(req, res) =>{
+        db.query("UPDATE orders SET delivery_person_id=? WHERE order_id=?;UPDATE delivery_person SET availability=0 WHERE id=?",[req.query.d_id,req.query.o_id,req.query.d_id],(err, result)=>{
+            res.send(result);
+     
+        })
+     
+     })
+    
+     app.get('/assignsupplier',(req, res) =>{
+        db.query("UPDATE customized_order SET status_code='Accepted' WHERE order_id=?;",[req.query.o_id],(err, result)=>{
+            res.send(result);
+     
+        })
+     
+     })
 
-        const username = req.body.username
-        const password = req.body.password
-        const firstname = req.body.firstname
-        const lastname = req.body.lastname
-        const address = req.body.address
-        const ic = req.body.ic
-        const phone = req.body.phone
-        const email = req.body.email
-       
+     app.get('/insertcust_order',(req, res) =>{
+        db.query("INSERT INTO `customized_order`(`name`, `customer_id`, `supplier_id`, `timber_type`, `timber_quality`, `features`, `status_code`, `thumb`) VALUES (?,?,?,?,?,?,'Preparing',?);",[req.query.name, req.query.c_id,req.query.suppliers,req.query.timber,req.query.quality,req.query.feature,req.query.img],(err, result)=>{
+            console.log(result);
+            res.send(result);
     
-        bcrypt.hash(password,saltRounds,(err,hash)=>{
-           
-            if(err){
-                console.log(err);
+        })
+    
+    })
+
+    app.get('/getproductsnew',(req, res) =>{
+        const sqlInsert = "SELECT * FROM products LIMIT 8;"
+        db.query(sqlInsert,(err, result)=>{
+            console.log(result);
+            res.send(result);
+    
+        })
+    })
+    
+    app.get('/getproductspopular',(req, res) =>{
+        const sqlInsert = "SELECT * FROM products ORDER BY (total_ratings / total_people_rated) DESC LIMIT 8;"
+        db.query(sqlInsert,(err, result)=>{
+            console.log(result);
+            res.send(result);
+    
+        })
+    })
+
+
+     app.post('/reg',(req,res)=>{
+
+        const username = req.body.username
+        const password = req.body.password
+        const firstname = req.body.firstname
+        const lastname = req.body.lastname
+        const street = req.body.street
+        const city = req.body.city
+        const district = req.body.district
+        const ic = req.body.ic
+        const phone = req.body.phone
+        const email = req.body.email
+        
+        const address = street+','+city+','+district
+    
+        bcrypt.hash(password,saltRounds,(err,hash)=>{
+            
+            if(err){
+                console.log(err);
+            }
+            
+            db.query("INSERT INTO `customer`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`,`street`,`city`,`district`,`profile_picture`) VALUES (?,?,?,?,?,?,?,?,?,?,?,'userimg.png');INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,ic,phone,email, username, hash,address,street,city,district,username,hash],(err,result)=>{
+                console.log(err);
+    
+                if(result){
+                    res.send({message: "Successfully Registered..."});
+                }
                
-            }
-           
-            db.query("INSERT INTO `customer`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');",[firstname,lastname,ic,phone,email, username, hash,address,username,hash],(err,result)=>{
-                console.log(err);
-    
-                if(result){
-                    res.send({message: "Successfully Registered..."});
-                }
-               
-            })
-        })
+            })
+        })
     
     
     

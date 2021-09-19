@@ -25,6 +25,9 @@ const SearchProducts = () => {
 
     const [isOpened, setIsOpened] = useState(false);
 
+    const [user, setUser] = useState([]);
+    const [loggedIn, setloggedIn] = useState(false);
+
 
     useEffect(() => {
 
@@ -34,7 +37,20 @@ const SearchProducts = () => {
             setpersons(response.data);
 
         };
+
+        const fetchData1 = async () => {
+            const response1 = await axios.get('http://localhost:3001/login');
+            setloggedIn(response1.data.loggedIn);
+
+            if (response1.data.loggedIn) {
+                setUser(response1.data.user[0].userrole);//console.log(response1.data.user[0].userrole)
+            }
+
+
+        };
+
         fetchData();
+        fetchData1();
     }, []);
 
     function searchit() {
@@ -206,10 +222,17 @@ const SearchProducts = () => {
                                                             <GrStar size={25} style={(person.total_ratings / person.total_people_rated) - 3 > 0 ? (stylegold) : stylenone} />
                                                             <GrStar size={25} style={(person.total_ratings / person.total_people_rated) - 4 > 0 ? (stylegold) : stylenone} />
                                                         </p>
-                                                        <Link to={location => `/product/${person.id}`}><div /*onClick = {() =>addItem(person)}*/ className="row font-weight-bold d-flex btn btn-warning justify-content-center align-items-center">
+                                                        {(loggedIn) ? ((user == 'customer') ? (
+                                                                                            <Link to={location => `/product/${person.id}`}><div /*onClick = {() =>addItem(person)}*/ className="row font-weight-bold d-flex btn btn-warning justify-content-center align-items-center">
+                                                                                            BUY NOW
+                                                            
+                                                                                                </div></Link>
+                            ) : (' ')) : (
+                                                            <Link to={location => `/product/${person.id}`}><div /*onClick = {() =>addItem(person)}*/ className="row font-weight-bold d-flex btn btn-warning justify-content-center align-items-center">
                                                             BUY NOW
-                        
-                                                            </div></Link>
+                            
+                                                                </div></Link>
+                            )}
                                                     </div>
                                                 </div>
                                             )}

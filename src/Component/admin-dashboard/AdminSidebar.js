@@ -27,6 +27,7 @@ const sidebar = () => {
                     <a className="row d-block mb-3 fc-white "><i class="fa fa-home m-2  fa-lg" ></i>Dashboard</a>
                 </Link>
                 <Link to="/admin/notification"><a className="row d-block mb-3 fc-white" ><i class="fa fa-bell m-2 fa-lg" ></i>Notification</a></Link>
+                <Link to="/admin/orders"><a className="row d-block mb-3 fc-white" ><i class="fa fa-box m-2 fa-lg" ></i>Orders</a></Link>
                 <Link to="/admin/customerlist"><a className="row d-block mb-3 fc-white" ><i class="fa fa-user m-2 fa-lg" ></i>Customer</a></Link>
                 <Link to="/admin/supplierlist"><a className="row d-block mb-3 fc-white" ><i class="fas fa-user-tie  m-2 fa-lg" ></i>Supplier</a></Link>
                 <Link to="/admin/deliverymanlist"><a className="row d-block mb-3 fc-white" ><i class="fa fa-truck m-1 fa-lg" ></i>Deliver team</a></Link>
