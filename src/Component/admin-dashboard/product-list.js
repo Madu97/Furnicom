@@ -45,7 +45,6 @@ const ProductList = () => {
             <tr>
               
               <th scope="col">ID</th>
-              <th scope="col">Image</th>
               <th scope="col">Name</th>              
               <th scope="col">Timber Type</th>
               <th scope="col">Timber Quality</th>
@@ -58,14 +57,13 @@ const ProductList = () => {
               <tr>
                 
                 <th scope="row">{products.id}</th>
-                <td>{products.image}</td>
                 <td>{products.name}</td>
                 <td>{products.timber_type}</td>
                 <td>{products.timber_quality}</td>
-                <td>{products.price}</td>
+                <td>Rs.{products.price}</td>
                 <td>
                   
-                  <Link class="btn btn-outline-primary mr-2" to={`/products/edit/${products.id}`}>Edit</Link>
+                  <Link class="btn btn-outline-primary mr-2" to={`/admin/editproduct/${products.id}`}>Edit</Link>
                   <button class="btn btn-danger delete" onClick={() => deleteProduct(products.id)}>Delete</button>
                 </td>
               </tr>

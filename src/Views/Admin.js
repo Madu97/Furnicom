@@ -16,6 +16,10 @@ import AdddProduct from "../Views/Pages/Admin/Add-Product"
 import AdddDeliver from "../Views/Pages/Admin/Add-Delivery"
 
 import EdittCustomer from "../Views/Pages/Admin/Edit-Customer"
+import EditSupplier from "../Views/Pages/Admin/Edit-Supplier"
+import EditDeliver from "../Views/Pages/Admin/Edit-deliver"
+import EditProduct from "../Views/Pages/Admin/Edit-product"
+
 
 const Admin = () => {
     return (
@@ -57,6 +61,15 @@ const Admin = () => {
 
                     <Route path="/admin/editcustomer/:id">
                         <EdittCustomer/>
+                    </Route>
+                    <Route path="/admin/editsupplier/:id">
+                        <EditSupplier/>
+                    </Route>
+                    <Route path="/admin/edit/:id">
+                        <EditDeliver/>
+                    </Route>
+                    <Route path="/admin/editproduct/:id">
+                        <EditProduct/>
                     </Route>
 
                     <Route path="/admin/orders">

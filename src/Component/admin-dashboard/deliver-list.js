@@ -62,7 +62,7 @@ const DeliverList = () => {
                 <td>{delivery_person.email}</td>
                 <td>
                   
-                  <Link class="btn btn-outline-primary mr-2" to={`/deliver/edit/${delivery_person.id}`}>Edit</Link>
+                  <Link class="btn btn-outline-primary mr-2" to={`/admin/edit/${delivery_person.id}`}>Edit</Link>
                   <button class="btn btn-danger delete" onClick={() => deleteDeliver(delivery_person.id)}>Delete</button> 
                 </td>
               </tr>

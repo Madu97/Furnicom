@@ -4,12 +4,13 @@ import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import customer from '../../Assets/Images/customer.jpg';
 import { useHistory, useParams } from 'react-router-dom';
+import EditDeliver from '../../Views/Pages/Admin/Edit-deliver';
 
 
 
-function EditCustomer() {
+function Editdeliver() {
 
-  const [Customerdata, setCustomerdata] = useState([]);
+  const [Deliverdata, setDeliverdata] = useState([]);
   // const [Info, setInfo] = useState([]);
   const { id } = useParams(); console.log(id)
 
@@ -18,13 +19,13 @@ function EditCustomer() {
   useEffect(() => {
 
     const fetchData = async () => {
-      const response = await axios.get('http://localhost:3001/getcustomer', {
+      const response = await axios.get('http://localhost:3001/getdeliverbyid', {
         params: {
           id: id
         }
       });
 
-      setCustomerdata(response.data[0]);
+      setDeliverdata(response.data[0]);
       setInfo({
         fname: response.data[0].firstname,
         lname: response.data[0].lastname,
@@ -52,9 +53,9 @@ function EditCustomer() {
     });
   };
 
-  function updateCustomer(id) {
+  function updateDeliver(id) {
 
-    axios.get('http://localhost:3001/updatecustomer', {
+    axios.get('http://localhost:3001/updatedeliver', {
       params: {
         fname: Info.fname,
         lname: Info.lname,
@@ -77,7 +78,7 @@ function EditCustomer() {
   return (
     <div className="w-50 mx-auto shadow-lg p-5">
       <div className="row m-2 p-2 ">
-        <h3>Customer Edit</h3>
+        <h3>Delivery Person Edit</h3>
       </div>
 
       <div className="ui">
@@ -107,7 +108,7 @@ function EditCustomer() {
           <br></br>
 
           <div className="row m-2 mt-5 justify-content-end">
-            <button className="btn btn-primary" onClick={() => updateCustomer(id)}>Save Changes</button>
+            <button className="btn btn-primary" onClick={() => updateDeliver(id)}>Save Changes</button>
           </div>
         </div>
       </div>
@@ -118,4 +119,14 @@ function EditCustomer() {
   );
 };
 
-export default EditCustomer;
+export default Editdeliver;
+
+
+
+
+
+
+
+
+
+
