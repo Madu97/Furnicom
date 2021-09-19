@@ -7,139 +7,108 @@ import { useHistory, useParams } from 'react-router-dom';
 
 
 
-const EditCustomer = (userData) => {
-   
-    const [Info, setInfo] = useState({
-        firstname: userData.userData.userfirstname,
-        lastname: userData.userData.lastname,
-        ic_no: userData.userData.ic_no,
-        phone_no: userData.userData.phone_no,
-        email: userData.userData.email,
-        username: userData.userData.username,
-        password: userData.userData.password,
-        address: userData.userData.address
+function EditCustomer() {
+
+  const [Customerdata, setCustomerdata] = useState([]);
+  // const [Info, setInfo] = useState([]);
+  const { id } = useParams(); console.log(id)
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      const response = await axios.get('http://localhost:3001/getcustomer', {
+        params: {
+          id: id
+        }
       });
 
-      const handleChange = event => {
-        setInfo({
-          ...Info,
-          [event.target.name]: event.target.value
-        });
-      };
+      setCustomerdata(response.data[0]);
 
-      function updateCustomer(id) {
-        axios
-          .get("http://localhost:3001/updatecus", {
-            params: {
-              id: id,
-              
-            },
-          })
-          .then((response) => {
-            window.location.reload();
-          });
+    };
+    fetchData();
+  }, [id]);
+
+  const [Info, setInfo] = useState({
+    fname: Customerdata.firstname,
+    lname: Customerdata.lastname,
+    email: Customerdata.email,
+    phone: Customerdata.phone_no,
+    address: Customerdata.address,
+    ic_no:Customerdata.ic_no,
+
+  });
+
+  const handleChange = event => {
+    setInfo({
+      ...Info,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  function updateCustomer(id) {
+
+    axios.get('http://localhost:3001/updatecustomer', {
+      params: {
+        fname: Info.fname,
+        lname: Info.lname,
+        email: Info.email,
+        phone: Info.phone,
+        address: Info.address,
+        ic_no:Info.ic_no,
+        address:Info.address,
+        id: id
       }
+    }).then((response) => {
+      window.location.reload();
 
-
-      function updateCustomer(id){
-
-        axios.get('http://localhost:3001/updatecustomer', {
-            params: {
-                firstname: Info.firstname ,
-                lastname: Info.lastname ,
-                ic_no: Info.ic_no ,
-                phone_no: Info.phone_no ,
-                email: Info.email ,
-                username: Info.username,
-                password: Info.password ,
-                address: Info.address,
-                id: id
-            }
-        }).then((response) => {
-            window.location.reload();
-            
-        })
-      }
-
-    
-      const [isOpened, setIsOpened] = useState(false);
-    function toggle() {
-        setIsOpened(wasOpened => !wasOpened);
-
-    }
-
-    const [imgdetails, setimgdetails] = useState([]);
-    const [imgFile, setImgFile] = useState('');
-
-    function uploadHandler(event) {
-
-
-      const data = new FormData();
-      data.append('file', event.target.files[0]);
-
-      axios.post('http://localhost:3001/uploadpp', data)
-          .then((res) => {
-
-              //setImgFile('http://localhost:3001/upl/' + res.data.filename)
-              setimgdetails(res.data.filename);
-
-              axios
-              .get("http://localhost:3001/updateprofilepic", {
-                  params: {
-                      name: res.data.filename,
-                      
-                  },
-              })
-              .then((response) => {
-                  
-              });
-          });
-         
-
+    })
   }
+
+
   console.log(window.location.origin)
 
-    return (
-        <div className="w-50 mx-auto shadow-lg p-5">
-            <div className="row m-2 p-2 ">
-                <h3>Customer Edit</h3>
-            </div>
-            
+  return (
+    <div className="w-50 mx-auto shadow-lg p-5">
+      <div className="row m-2 p-2 ">
+        <h3>Customer Edit</h3>
+      </div>
 
-            <div className="ui">
-                <div className="col-lg-12 col-md-10 col-sm-12 col-xs-12 d-block">
-                    <label htmlFor="">First Name</label>
-                    <input type="text" className="form-control" name="firstname" value={Info.firstname} onChange={handleChange}  />
+      <div className="ui">
+        <div className="col-lg-12 col-md-10 col-sm-12 col-xs-12 d-block">
+          <label htmlFor="">First Name</label>
+          <input type="text" className="form-control" name="fname" value={Customerdata.firstname} onChange={handleChange} />
+          <br></br>
 
-                    <label htmlFor="">Last Name</label>
-                    <input type="text" className="form-control" name="lastname"value={Info.lastname} onChange={handleChange} />
+          <label htmlFor="">Last Name</label>
+          <input type="text" className="form-control" name="lname" value={Customerdata.lastname} onChange={handleChange} />
+          <br></br>
 
-                    <label htmlFor="">Ic</label>
-                    <input type="text" className="form-control" name="ic_no" value={Info.ic_no} onChange={handleChange} />
+          <label htmlFor="">NIC Number</label>
+          <input type="text" className="form-control" name="ic_no" value={Customerdata.ic_no} onChange={handleChange} />
+          <br></br>
 
-                    <label htmlFor="">Phone Number</label>
-                    <input type="text" className="form-control" name="phone_no" value={Info.phone_no} onChange={handleChange} />
+          <label htmlFor="">Phone Number</label>
+          <input type="text" className="form-control" name="phone" value={Customerdata.phone_no} onChange={handleChange} />
+          <br></br>
 
-                    <label htmlFor="">Email</label>
-                    <input type="text" className="form-control" name="email" value={Info.email} onChange={handleChange} />
+          <label htmlFor="">Email</label>
+          <input type="text" className="form-control" name="email" value={Customerdata.email} onChange={handleChange} />
+          <br></br>
 
-                    <label htmlFor="">Username</label>
-                    <input type="text" className="form-control" name="username" value={Info.username} onChange={handleChange} />
+          <label htmlFor="">Address</label>
+          <input type="text" className="form-control " name="address" value={Customerdata.address} onChange={handleChange} />
+          <br></br>
 
-                    <label htmlFor="">Password</label>
-                    <input type="text" className="form-control" name="password" value={Info.password} onChange={handleChange} />
-
-                    <label htmlFor="">Address</label>
-                    <input type="text" className="form-control " name="address" value={Info.address} onChange={handleChange} />
-                </div>
-            </div>
-
-            <div className="row m-2 mt-5 justify-content-end">
-                <button className="btn btn-primary" onClick={() => updateCustomer(customer.id)}>Save Changes</button>
-            </div>
-
+          <div className="row m-2 mt-5 justify-content-end">
+            <button className="btn btn-primary" onClick={() => updateCustomer(id)}>Save Changes</button>
+          </div>
         </div>
-    );
+      </div>
+
+
+
+    </div>
+  );
 };
 
 export default EditCustomer;
@@ -271,10 +240,10 @@ function EditCustomer() {
             setAddress(event.target.value);
           }}
         />
-        
+
       </div>
       <div className="employees">
-        
+
 
         {customerList.map((val, key) => {
           return (
@@ -297,7 +266,7 @@ function EditCustomer() {
                     setNewPhone_no(event.target.value);
                   }}
                 />
-                
+
                 <button
                   onClick={() => {
                     updateCustomer(val.id);
@@ -342,7 +311,7 @@ const schema = yup.object().shape({
     phone: yup.string().max(10, "Must be 10 Digits.").min(10, "Must be 10 Digits."),
 
     password: yup.string().required().min(8).max(15),
-    
+
 })
 
 function EditCustomer() {
@@ -389,7 +358,7 @@ function EditCustomer() {
             }
         })
 
-        
+
 
     }
 
@@ -408,37 +377,37 @@ function EditCustomer() {
                             <div className="row">
                                 <div className="col-lg-6">
                                     <label>FirstName<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control"  name="firstname" onChange={handleChange} /><br />
-                                    
+
 
                                 </div>
                                 <div className="col-lg-6">
                                     <label>LastName :</label> <input type="text" className="form-control"  name="lastname" onChange={handleChange} /><br />
-                                    
+
                                 </div>
                             </div>
 
                             <label>Address<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" name="address" onChange={handleChange} /><br />
-                            
+
 
                             <label>Id Number<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control"  name="ic"  onChange={handleChange} /><br />
-                            
+
 
                             <label>Phone No<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control"  name="phone" onChange={handleChange} o /><br />
-                            
+
 
                             <label>Email<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" name="email"  onChange={handleChange} /><br />
-                            
+
 
                             <label>Username<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" name="username"  onChange={handleChange} /><br />
-                            
+
                             {(usernamemsg) ? (<p className="errormessage">{usernamemsg}</p>) : ('')}
 
                             <div className="row">
                                 <div className="col-lg-6">
                                     <label>Password<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="password" className="form-control" name="password" onChange={handleChange}  /><br />
-                                    
+
                                 </div>
-                                
+
                             </div>
                             <div className="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-lg btn-primary">Edit Customer</button>
@@ -458,7 +427,7 @@ export default EditCustomer*/
 
 
 
-  
+
 /*import React, {useState,useEffect} from "react";
 //import styles from '../../css/customer/customer_edit_profile.css';
 import '../../Assets/CSS/signup.css';
@@ -484,7 +453,7 @@ export default function EditCustomer (){
     const [newusername,SetNewUsername] = useState("");
     const [newpassword,SetNewPassword] = useState("");
     const [newaddress,SetNewAddress] = useState("");
-  
+
     Axios.defaults.withCredentials = true;
     useEffect(() => {
       Axios.get("http://localhost:3001/updatecustomer").then((response) => {
@@ -500,8 +469,8 @@ export default function EditCustomer (){
           setAddress(response.data.user[0].address);
         }
       });
-    }, []); 
-    
+    }, []);
+
         return (
 
 
@@ -548,7 +517,7 @@ export default function EditCustomer (){
 
         );
 
-   
+
 }*/
 
 

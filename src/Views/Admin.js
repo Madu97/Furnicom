@@ -54,7 +54,7 @@ const Admin = () => {
                         <AdddDeliver/>
                     </Route>
 
-                    <Route path="/admin/editcustomer">
+                    <Route path="/admin/editcustomer/:id">
                         <EdittCustomer/>
                     </Route>
 

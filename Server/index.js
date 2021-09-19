@@ -115,8 +115,7 @@ app.post('/addcus',(req,res)=>{
     })
 
 app.get('/updatecustomer',(req, res) =>{
-
-         db.query("UPDATE customer SET firstname=?, lastname=?, ic_no=?, phone_no=?, email=?, username=?, password=?, address=?  WHERE id = ?;",[req.query.firstname , req.query.lastname, req.query.ic_no, req.query.phone_no, req.query.email, req.query.username, req.query.password, req.query.address, req.query.id],(err, result)=>{
+         db.query("UPDATE customer SET firstname=?, lastname=?, ic_no=?, phone_no=?, email=?, address=?  WHERE id = ?;",[req.query.firstname , req.query.lastname, req.query.ic_no, req.query.phone_no, req.query.email, req.query.address, req.query.id],(err, result)=>{
              console.log(result);
              res.send(result);
      
@@ -393,6 +392,15 @@ app.get('/deletecustomer',(req, res) =>{
       
         return;
       });
+
+app.get('/getcustomer',(req, res) =>{
+        db.query("SELECT * FROM customer WHERE id=?",[req.query.id],(err, result)=>{
+            console.log(req.query.id);
+            res.send(result);
+    
+        })
+    
+    })
 
 app.get('/getsupplier',(req, res) =>{
     db.query("SELECT * FROM supplier WHERE username=?",[req.query.name],(err, result)=>{

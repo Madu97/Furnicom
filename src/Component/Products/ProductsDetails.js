@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react'
 import axios from 'axios';
 import { TiShoppingCart } from 'react-icons/ti';
-import {BiCube} from 'react-icons/bi'
+import { BiCube } from 'react-icons/bi'
 import { CartProvider, useCart } from "react-use-cart"
 import Dviewer from '../Products/3Dviewer'
 
@@ -14,7 +14,7 @@ function ProductDetails() {
 
     const [Dt, setDt] = useState([])
 
-    const { id } = useParams();console.log(id)
+    const { id } = useParams(); console.log(id)
 
     const { addItem } = useCart();
 
@@ -98,7 +98,7 @@ function ProductDetails() {
                 <div className="d-block pt-3 pb-3 justify-content-center">
                     <img src={Dt.thumb} className="imgstyle2 img-fluid border p-2" />
                     <div className="row m-1 p-1 d-flex justify-content-center">
-                        <button onClick={() => toggle()} className="row btn btn-sm m-0 btn-primary align-items-center font-weight-bold "><BiCube size={30}/><span>&nbsp;</span>3D VIEW</button>
+                        <button onClick={() => toggle()} className="row btn btn-sm m-0 btn-primary align-items-center font-weight-bold "><BiCube size={30} /><span>&nbsp;</span>3D VIEW</button>
                     </div>
                 </div>
 
@@ -130,9 +130,9 @@ function ProductDetails() {
             {isOpened && (
                 <div className="border">
                     <div className="d-flex justify-content-center align-items-center fs-30 bgc-theme fc-white font-weight-bold">
-                    View in 3D
+                        View in 3D
                     </div>
-                    <Dviewer/>
+                    <Dviewer />
                 </div>
 
             )}
