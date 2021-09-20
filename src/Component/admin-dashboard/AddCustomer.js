@@ -12,7 +12,9 @@ const schema = yup.object().shape({
     lastname: yup.string(),
     username: yup.string().required(),
     email: yup.string().email().required(),
-    address: yup.string().required(),
+    street: yup.string().required(),
+    city: yup.string().required(),
+    district: yup.string().required(),
     ic: yup.string().max(10, "Must be 10 Characters.").min(10, "Must be 10 Characters."),
     phone: yup.string().max(10, "Must be 10 Digits.").min(10, "Must be 10 Digits."),
 
@@ -51,7 +53,10 @@ function AddCustomer() {
                     password: data.password,
                     firstname: data.firstname,
                     lastname: data.lastname,
-                    address: data.address,
+                    // address: data.address,
+                    street: data.street,
+                    city: data.city,
+                    district: data.district,
                     ic: data.ic,
                     phone: data.phone,
                     email: data.email,
@@ -95,8 +100,14 @@ function AddCustomer() {
                                 </div>
                             </div>
 
-                            <label>Address<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="Address..." name="address" {...register('address')} /><br />
-                            {errors.address?.message && <p className=" errormessage" >{errors.address?.message}</p>}
+                            <label>Street<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="Street..." name="street" {...register('street')} /><br />
+                            {errors.street?.message && <p className=" errormessage" >{errors.street?.message}</p>}
+
+                            <label>City<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="City..." name="city" {...register('city')} /><br />
+                            {errors.city?.message && <p className=" errormessage" >{errors.city?.message}</p>}
+
+                            <label>District<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="District..." name="district" {...register('district')} /><br />
+                            {errors.district?.message && <p className=" errormessage" >{errors.district?.message}</p>}
 
                             <label>Id Number<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="Id Number..." name="ic"  {...register('ic')} /><br />
                             {errors.ic?.message && <p className=" errormessage" >{errors.ic?.message}</p>}

@@ -90,20 +90,22 @@ app.post('/addcus', (req, res) => {
     const password = req.body.password
     const firstname = req.body.firstname
     const lastname = req.body.lastname
-    const address = req.body.address
+    const street = req.body.street
+    const city = req.body.city
+    const district = req.body.district
     const ic = req.body.ic
     const phone = req.body.phone
     const email = req.body.email
 
+    const address = street + ',' + city + ',' + district
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
 
         if (err) {
             console.log(err);
-
         }
 
-        db.query("INSERT INTO `customer`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');", [firstname, lastname, ic, phone, email, username, hash, address, username, hash], (err, result) => {
+        db.query("INSERT INTO `customer`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`,`street`,`city`,`district`,`profile_picture`) VALUES (?,?,?,?,?,?,?,?,?,?,?,'userimg.png');INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'customer');", [firstname, lastname, ic, phone, email, username, hash, address, street, city, district, username, hash], (err, result) => {
             console.log(err);
 
             if (result) {
@@ -112,6 +114,10 @@ app.post('/addcus', (req, res) => {
 
         })
     })
+
+
+
+
 })
 
 app.get('/updatecustomer', (req, res) => {
@@ -276,11 +282,14 @@ app.post('/addsup', (req, res) => {
     const password = req.body.password
     const firstname = req.body.firstname
     const lastname = req.body.lastname
-    const address = req.body.address
+    const street = req.body.street
+    const city = req.body.city
+    const district = req.body.district
     const ic = req.body.ic
     const phone = req.body.phone
     const email = req.body.email
 
+    const address = street + ',' + city + ',' + district
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
 
@@ -288,11 +297,11 @@ app.post('/addsup', (req, res) => {
             console.log(err);
         }
 
-        db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');", [firstname, lastname, ic, phone, email, username, hash, address, username, hash], (err, result) => {
+        db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`,`street`,`city`,`district`,`profile_picture`) VALUES (?,?,?,?,?,?,?,?,?,?,?,'userimg.png');INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');", [firstname, lastname, ic, phone, email, username, hash, address, street, city, district, username, hash], (err, result) => {
             console.log(err);
 
             if (result) {
-                res.send({ message: "Supplier Added..." });
+                res.send({ message: "Successfully Registered..." });
             }
 
         })
@@ -309,11 +318,14 @@ app.post('/adddel', (req, res) => {
     const password = req.body.password
     const firstname = req.body.firstname
     const lastname = req.body.lastname
+    const street = req.body.street
+    const city = req.body.city
+    const district = req.body.district
     const availability = req.body.availability
     const ic = req.body.ic
     const phone = req.body.phone
     const email = req.body.email
-
+    const address = street + ',' + city + ',' + district
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
 
@@ -321,7 +333,7 @@ app.post('/adddel', (req, res) => {
             console.log(err);
         }
 
-        db.query("INSERT INTO `delivery_person`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `availability) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'deliver');", [firstname, lastname, ic, phone, email, username, hash, availability, username, hash], (err, result) => {
+        db.query("INSERT INTO `delivery_person`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`,`street`,`city`,`district`,`profile_picture`,`availability) VALUES (?,?,?,?,?,?,?,?,?,?,?,'userimg.png,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'deliveryman');", [firstname, lastname, ic, phone, email, username, hash, address, street, city, district, availability, username, hash], (err, result) => {
             console.log(err);
 
             if (result) {
@@ -1078,11 +1090,14 @@ app.post('/supreg', (req, res) => {
     const password = req.body.password
     const firstname = req.body.firstname
     const lastname = req.body.lastname
-    const address = req.body.address
+    const street = req.body.street
+    const city = req.body.city
+    const district = req.body.district
     const ic = req.body.ic
     const phone = req.body.phone
     const email = req.body.email
 
+    const address = street + ',' + city + ',' + district
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
 
@@ -1090,7 +1105,7 @@ app.post('/supreg', (req, res) => {
             console.log(err);
         }
 
-        db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`) VALUES (?,?,?,?,?,?,?,?);INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');", [firstname, lastname, ic, phone, email, username, hash, address, username, hash], (err, result) => {
+        db.query("INSERT INTO `supplier`(`firstname`, `lastname`, `ic_no`, `phone_no`, `email`, `username`, `password`, `address`,`street`,`city`,`district`,`profile_picture`) VALUES (?,?,?,?,?,?,?,?,?,?,?,'userimg.png');INSERT INTO `users` (`username`, `password`, `userrole`) VALUES (?,?,'supplier');", [firstname, lastname, ic, phone, email, username, hash, address, street, city, district, username, hash], (err, result) => {
             console.log(err);
 
             if (result) {

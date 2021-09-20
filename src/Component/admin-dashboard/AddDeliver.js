@@ -1,72 +1,3 @@
-/*import React, { useState } from "react";
-import axios from 'axios'
-import { useHistory } from "react-router-dom";
-
-const AddDelivers = () => {
-  let history = useHistory();
-  const [delivery_person, setDelivery_person] = useState({
-    firstname: "",
-    address: "",
-    email: ""
-  });
-
-  const { firstname, address, email } = delivery_person;
-  const onInputChange = e => {
-    setDelivery_person({ ...delivery_person, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    await axios.post("http://localhost:3001/adddeli", delivery_person);
-    history.push("/");
-  };
-  return (
-    <div className="container">
-      <div className="w-75 mx-auto shadow p-5">
-        <h2 className="text-center mb-4">Add A Deliver</h2>
-        <form onSubmit={e => onSubmit(e)}>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Your Name"
-              name="firstname"
-              value={firstname}
-              onChange={e => onInputChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Your Address"
-              name="address"
-              value={address}
-              onChange={e => onInputChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control form-control-lg"
-              placeholder="Enter Your E-mail Address"
-              name="email"
-              value={email}
-              onChange={e => onInputChange(e)}
-            />
-          </div>
-          
-          <button className="btn btn-primary btn-block">Add Deliver</button>
-        </form>
-      </div>
-    </div>
-  );
-};
-
-export default AddDelivers;*/
-
-
-
 
 import React, { Component, useState } from 'react';
 import Axios from 'axios';
@@ -82,6 +13,9 @@ const schema = yup.object().shape({
     lastname: yup.string(),
     username: yup.string().required(),
     email: yup.string().email().required(),
+    street: yup.string().required(),
+    city: yup.string().required(),
+    district: yup.string().required(),
     availability: yup.string().required(),
     ic: yup.string().max(10, "Must be 10 Characters.").min(10, "Must be 10 Characters."),
     phone: yup.string().max(10, "Must be 10 Digits.").min(10, "Must be 10 Digits."),
@@ -121,6 +55,9 @@ function AddDelivers() {
                     password: data.password,
                     firstname: data.firstname,
                     lastname: data.lastname,
+                    street: data.street,
+                    city: data.city,
+                    district: data.district,
                     availability: data.availability,
                     ic: data.ic,
                     phone: data.phone,
@@ -165,7 +102,14 @@ function AddDelivers() {
                                 </div>
                             </div>
 
-                            
+                            <label>Street<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="Street..." name="street" {...register('street')} /><br />
+                            {errors.street?.message && <p className=" errormessage" >{errors.street?.message}</p>}
+
+                            <label>City<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="City..." name="city" {...register('city')} /><br />
+                            {errors.city?.message && <p className=" errormessage" >{errors.city?.message}</p>}
+
+                            <label>District<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="District..." name="district" {...register('district')} /><br />
+                            {errors.district?.message && <p className=" errormessage" >{errors.district?.message}</p>}
 
                             <label>Id Number<span style={{ color: "red", fontSize: "20px" }}></span> :</label> <input type="text" className="form-control" placeholder="Id Number..." name="ic"  {...register('ic')} /><br />
                             {errors.ic?.message && <p className=" errormessage" >{errors.ic?.message}</p>}
