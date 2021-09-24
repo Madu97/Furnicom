@@ -30,9 +30,6 @@ const Admin = () => {
                 <Route path="/admin/dashboard">
                         <AdminDashboard/>
                     </Route>
-                    <Route path="/admin/notification">
-                        <AdminNotification/>
-                    </Route>
                     <Route path="/admin/customerlist">
                         <AdminCustomer/>
                     </Route>

@@ -55,7 +55,6 @@ const RecentDeliveryComponent = (userData) => {
                             <th scope="col">Buyer</th>
                             <th scope="col">Address</th>
                             <th scope="col">Delivered Date</th>
-                            <th scope="col">Delivery Charges</th>
                             <th scope="col">Delivery Status</th>
                         </tr>
                     </thead>
@@ -73,7 +72,6 @@ const RecentDeliveryComponent = (userData) => {
                                 <td className=" align-middle">{person.customer_name}</td>
                                 <td className=" align-middle">{person.address}</td>
                                 <td className=" align-middle">{person.date}</td>
-                                <td className=" align-middle">Rs: {person.delivery_charges}</td>
                                  <td className=" align-middle">{person.status}</td>
                                {/* <td className=" align-middle"><FaEye size={16} /><button onClick={() => toggle(person.deliver_id)} className="btn btn-primary fc-white font-weight-bold">More Details</button></td>  */} 
                             </tr>

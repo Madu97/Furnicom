@@ -54,7 +54,7 @@ const Delivery = () => {
                                 <Route path="/delivery/dashboard">
                                     <DeliveryDashboard userData={response1.data[0]}/>
                                 </Route>
-                                <Route path="/delivery/notification">
+                                <Route path="/delivery/notifications">
                                     <DeliveryNotification userData={response1.data[0]}/>
                                 </Route>
                                 <Route path="/delivery/history">
